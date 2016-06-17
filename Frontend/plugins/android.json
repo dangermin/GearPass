@@ -1,0 +1,23 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "phonegap-facebook-plugin": {
+            "APP_ID": "284143441935321",
+            "APP_NAME": "GearPass",
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        }
+    },
+    "dependent_plugins": {}
+}
