@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "ngCordova": "^0.1.26-alpha",
-    "parse": "^1.8.5"
+    "parse": "^1.8.5",
+    "ng-cordova-oauth": "^0.2.8"
   }
 }
