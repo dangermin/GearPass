@@ -8,6 +8,7 @@
   "dependencies": {
     "ngCordova": "^0.1.26-alpha",
     "parse": "^1.8.5",
-    "ng-cordova-oauth": "^0.2.8"
+    "ng-cordova-oauth": "^0.2.8",
+    "ion-google-place": "^0.0.1"
   }
 }

@@ -4,12 +4,12 @@
             <p>Welcome, {{session.email}}</p>
             <ion-pane>
                 <ion-header-bar class="bar-stable">
+                    <button class="button button-block button-positive" ng-click="logout()">Logout</button>
                 </ion-header-bar>
                 <ion-content>
+                    <ion-google-place placeholder="Enter an address, Apt# and ZIP" ng-model="location" current-location="true" />
                     <div id="map_canvas"></div>
-                
-                <button class="button button-block button-positive" ng-click="logout()">Logout</button>
-                <button class="button button-block button-positive" ng-click="addAShopToCurrentUser()">Add shit!</button>
+                    <button class="button button-block button-positive" ng-click="addAShopToCurrentUser()">Add shit!</button>
                 </ion-content>
             </ion-pane>
         </div>
