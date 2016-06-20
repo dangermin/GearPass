@@ -9,6 +9,8 @@ angular.module('starter.controllers', [])
 
     $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
 
+
+
         var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         console.log(latLng);
         var mapOptions = {
@@ -22,25 +24,40 @@ angular.module('starter.controllers', [])
         var marker = new google.maps.Marker({
             position: latLng,
             map: $scope.map,
-            title: 'Hello World!'
+            title: 'Your location'
         });
 
-        var request = {
-            location: latLng,
-            radius: '500',
-            types: ['surf']
-        };
+        // var request = {
+        //     location: latLng,
+        //     radius: '500',
+        //     types: ['food']
+        // };
 
-        service = new google.maps.places.PlacesService($scope.map);
-        service.nearbySearch(request, callback);
+        // service = new google.maps.places.PlacesService($scope.map);
+        // service.nearbySearch(request, callback);
 
-        function callback(results, status) {
-            if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                    var place = results[i];
-                    createMarker(results[i]);
-                }
-            }
+
+        // function callback(results, status) {
+        //     if (status === google.maps.places.PlacesServiceStatus.OK) {
+        //         for (var i = 0; i < results.length; i++) {
+        //             createMarker(results[i]);
+        //         }
+        //     }
+        // }
+
+        function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+                map: $scope.map,
+                position: place.geometry.location
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open($scope.map, this);
+            });
         }
 
 
@@ -220,6 +237,9 @@ angular.module('starter.controllers', [])
     $scope.ContactName = { contactName: "" };
     $scope.Phone = { phone: "" };
     $scope.Boards = { boards: "" };
+    $scope.Location = { location: "" };
+    $scope.WebAddress = { webAddress: "" };
+
 
     $scope.addAShopToCurrentUser = function() {
         var ShopSchema = Parse.Object.extend('Shop');
@@ -231,9 +251,10 @@ angular.module('starter.controllers', [])
         shop.set('Hours', $scope.Open.open + "-" + $scope.Close.close);
         shop.set('ContactName', $scope.ContactName.contactName);
         shop.set('PhoneNumber', $scope.Phone.phone);
-
-        shop.set('Location', $scope.Location.location);
-
+        shop.set('WebAddress', $scope.WebAddress.webAddress);
+        shop.set('Location', $scope.Location.location.formatted_address);
+        shop.set('Lat', parseInt($scope.Location.location.geometry.location.lat()));
+        shop.set('Lng', parseInt($scope.Location.location.geometry.location.lng()));
 
         shop.save().then(
             function(newShop) {
@@ -244,7 +265,8 @@ angular.module('starter.controllers', [])
 
                     var gear = new GearSchema();
 
-                    gear.set('name', 'Surfboard #' + (i + 1));
+                    gear.set('Name', 'Surfboard #' + (i + 1));
+                    gear.set('Shop', $scope.ShopName.shopName + Parse.User.current().id);
 
                     promises.push(gear.save());
                 }

@@ -10,7 +10,7 @@ angular.module('ion-google-place', [])
             return {
                 require: '?ngModel',
                 restrict: 'E',
-                template: '<input type="text" readonly="readonly" class="ion-google-place" autocomplete="off">',
+                template: '<input type="text" readonly="readonly" class="ion-google-place" autocomplete="on">',
                 replace: true,
                 link: function(scope, element, attrs, ngModel) {
                     scope.locations = [];
