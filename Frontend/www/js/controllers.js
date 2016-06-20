@@ -4,6 +4,7 @@ angular.module('starter.controllers', [])
 // HOME PAGE CONTROLLER
 .controller('DashCtrl', function($scope, IonicLogin, $state, $cordovaGeolocation) {
 
+
     var options = { timeout: 10000, enableHighAccuracy: true };
 
     $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
@@ -18,6 +19,34 @@ angular.module('starter.controllers', [])
 
         $scope.map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: $scope.map,
+            title: 'Hello World!'
+        });
+
+        var request = {
+            location: latLng,
+            radius: '500',
+            types: ['surf']
+        };
+
+        service = new google.maps.places.PlacesService($scope.map);
+        service.nearbySearch(request, callback);
+
+        function callback(results, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    var place = results[i];
+                    createMarker(results[i]);
+                }
+            }
+        }
+
+
+
+
+
     }, function(error) {
         console.log("Could not get location");
     });
@@ -30,38 +59,7 @@ angular.module('starter.controllers', [])
         });
     }
 
-    $scope.addAShopToCurrentUser = function() {
-        var ShopSchema = Parse.Object.extend('Shop');
 
-        var shop = new ShopSchema();
-
-        shop.set('user', Parse.User.current());
-        shop.set('name', 'Hey look a shop!');
-        shop.set('openingHours', '9am to 5pm');
-
-        shop.save().then(
-            function(newShop) {
-                var promises = [];
-
-                for (var i = 0; i < 10; i++) {
-                    var GearSchema = Parse.Object.extend('Gear');
-
-                    var gear = new GearSchema();
-
-                    gear.set('name', 'Surfboard #' + (i + 1));
-
-                    promises.push(gear.save());
-                }
-
-                Promise.all(promises).then(function() {
-                    alert('All done!');
-                });
-            },
-            function(err) {
-
-            }
-        );
-    }
 })
 
 .controller('SplashController', function($scope, $state, $window, $http) {
@@ -216,4 +214,48 @@ angular.module('starter.controllers', [])
 // ACCOUNT SETTINGS CONTROLLER
 .controller('AccountCtrl', function($scope) {
 
+    $scope.ShopName = { shopName: "" };
+    $scope.Open = { open: "" };
+    $scope.Close = { close: "" };
+    $scope.ContactName = { contactName: "" };
+    $scope.Phone = { phone: "" };
+    $scope.Boards = { boards: "" };
+
+    $scope.addAShopToCurrentUser = function() {
+        var ShopSchema = Parse.Object.extend('Shop');
+
+        var shop = new ShopSchema();
+
+        shop.set('User', Parse.User.current());
+        shop.set('ShopName', $scope.ShopName.shopName);
+        shop.set('Hours', $scope.Open.open + "-" + $scope.Close.close);
+        shop.set('ContactName', $scope.ContactName.contactName);
+        shop.set('PhoneNumber', $scope.Phone.phone);
+
+        shop.set('Location', $scope.Location.location);
+
+
+        shop.save().then(
+            function(newShop) {
+                var promises = [];
+
+                for (var i = 0; i < $scope.Boards.boards; i++) {
+                    var GearSchema = Parse.Object.extend('Gear');
+
+                    var gear = new GearSchema();
+
+                    gear.set('name', 'Surfboard #' + (i + 1));
+
+                    promises.push(gear.save());
+                }
+
+                Promise.all(promises).then(function() {
+                    alert('All done!');
+                });
+            },
+            function(err) {
+
+            }
+        );
+    }
 });
