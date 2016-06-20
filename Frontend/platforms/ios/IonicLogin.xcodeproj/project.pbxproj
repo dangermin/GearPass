@@ -22,6 +22,8 @@
 		D1C6CC4CDD34428B8CF8C3A0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50007E757E1A4ACB89C62A5F /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4347482885D242FD85801A0D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5342C7D2192F43AF91F83F2D /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		48763081DD3640CFBD779B4B /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE873C7BAF7A4E10867C977D /* CDVInAppBrowser.m */; };
+		F84E724C0A8B441A8BA5AE79 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C70A291E852E4645BE333A9E /* CDVLocation.m */; };
+		B975C1C41F92459F86093287 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B444F8077AD54283940495D8 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,9 @@
 		5342C7D2192F43AF91F83F2D /* Security.framework */ = {isa = PBXFileReference; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		CE873C7BAF7A4E10867C977D /* CDVInAppBrowser.m */ = {isa = PBXFileReference; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		6483237D6CD049138629F600 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		C70A291E852E4645BE333A9E /* CDVLocation.m */ = {isa = PBXFileReference; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		182A542A036C4B69A7492A00 /* CDVLocation.h */ = {isa = PBXFileReference; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		B444F8077AD54283940495D8 /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +88,7 @@
 				3426CCB86F5A49738BCF8926 /* Social.framework in Frameworks */,
 				D1C6CC4CDD34428B8CF8C3A0 /* Accounts.framework in Frameworks */,
 				4347482885D242FD85801A0D /* Security.framework in Frameworks */,
+				B975C1C41F92459F86093287 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +163,7 @@
 				4A31F754D3434E6496583D18 /* Social.framework */,
 				50007E757E1A4ACB89C62A5F /* Accounts.framework */,
 				5342C7D2192F43AF91F83F2D /* Security.framework */,
+				B444F8077AD54283940495D8 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -186,6 +193,8 @@
 				0A12C989C4BF47A1AE334F22 /* FacebookConnectPlugin.h */,
 				CE873C7BAF7A4E10867C977D /* CDVInAppBrowser.m */,
 				6483237D6CD049138629F600 /* CDVInAppBrowser.h */,
+				C70A291E852E4645BE333A9E /* CDVLocation.m */,
+				182A542A036C4B69A7492A00 /* CDVLocation.h */,
 			);
 			name = Plugins;
 			path = "IonicLogin/Plugins";
@@ -302,6 +311,7 @@
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				61880EE3871B4B9CB46302B7 /* FacebookConnectPlugin.m in Sources */,
 				48763081DD3640CFBD779B4B /* CDVInAppBrowser.m in Sources */,
+				F84E724C0A8B441A8BA5AE79 /* CDVLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

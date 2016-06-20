@@ -39,6 +39,10 @@
                         {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.Geolocation\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -68,6 +72,16 @@
                             "xml": "<activity android:label=\"@string/fb_app_name\" android:name=\"com.facebook.LoginActivity\" android:theme=\"@android:style/Theme.Translucent.NoTitleBar\" />",
                             "count": 1
                         }
+                    ],
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -83,6 +97,12 @@
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
         "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         }
     },
@@ -102,11 +122,25 @@
                 "cordova.InAppBrowser.open",
                 "window.open"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+            "id": "cordova-plugin-geolocation.geolocation",
+            "clobbers": [
+                "navigator.geolocation"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+            "id": "cordova-plugin-geolocation.PositionError",
+            "runs": true
         }
     ],
     "plugin_metadata": {
         "phonegap-facebook-plugin": "0.12.0",
         "cordova-plugin-whitelist": "1.2.2",
-        "cordova-plugin-inappbrowser": "1.4.0"
+        "cordova-plugin-inappbrowser": "1.4.0",
+        "cordova-plugin-compat": "1.0.0",
+        "cordova-plugin-geolocation": "2.2.0"
     }
 }

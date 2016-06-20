@@ -2,11 +2,30 @@ angular.module('starter.controllers', [])
 
 
 // HOME PAGE CONTROLLER
-.controller('DashCtrl', function($scope, IonicLogin, $state) {
+.controller('DashCtrl', function($scope, IonicLogin, $state, $cordovaGeolocation) {
+
+    var options = { timeout: 10000, enableHighAccuracy: true };
+
+    $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
+
+        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        var mapOptions = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    }, function(error) {
+        console.log("Could not get location");
+    });
 
     $scope.logout = function() {
         console.log('DashCtrl - logout');
         Parse.User.logOut().then(function() {
+            window.localStorage['session'] = "";
             $state.go('login');
         });
     }
@@ -61,20 +80,12 @@ angular.module('starter.controllers', [])
 })
 
 // LOGIN PAGE CONTROLLER
-.controller('IonicLogin', function($scope, IonicLogin, $ionicLoading, $http, $cordovaFacebook, $state) {
+.controller('IonicLogin', function($scope, IonicLogin, $ionicLoading, $http, $cordovaFacebook, $state, $cordovaOauth) {
 
     // REMOVE THE USER LOGIN INFORMATION WHEN RETURNING TO LOGIN SCREEN
     $scope.$on('$ionicView.enter', function(e) {
         $scope.data = {};
     });
-
-    // LOGOUT FUNCTION
-    $scope.logout = function() {
-        console.log('IonicLogin - logout');
-        Parse.User.logOut().then(function() {
-            $state.go('login');
-        });
-    }
 
     // LOGIN FUNCTION
     $scope.login = function() {
@@ -124,23 +135,35 @@ angular.module('starter.controllers', [])
     // GOOGLE PLUS LOGIN
     $scope.googleLogin = function() {
 
-        // CREATE A PROJECT ON GOOGLE DEVELOPER CONSOLE AND PUT YOUR CLIENT ID HERE
-        // GOOGLE OAUTH DOES NOT GIVE US EMAIL RIGHT AWAY SO WE HAVE TO MAKE 2 API CALLS
-        $cordovaOauth.google("584540832467-tv8i4a8utt7tk5aih3ej8a6gc65sjk87.apps.googleusercontent.com", ["email"], { redirect_uri: "http://localhost/callback" }).then(function(result) {
-            //   alert("Response Object -> " + JSON.stringify(result));
+        var clientId = "354997883795-kmlif1hd8unv62bl3afhi9mj4fv77ere.apps.googleusercontent.com";
 
-            $http.get("https://www.googleapis.com/plus/v1/people/me", // TO GET THE USER'S EMAIL
-                    {
-                        params: {
-                            access_token: result.access_token,
-                            key: "584540832467-tv8i4a8utt7tk5aih3ej8a6gc65sjk87.apps.googleusercontent.com"
-                        }
-                    })
-                .then(function(user) {
-                    //      alert(JSON.stringify(user));
-                    IonicLogin.socialLogin(user.data.emails[0].value, result.access_token); // USING ID TO GENERATE A HASH PASSWORD
-                });
+
+
+        $cordovaOauth.google(clientId, ["email"]).then(function(result) {
+            console.log("Response Object ->" + JSON.stringify(result));
+            $state.go('tab.dash');
+        }, function(error) {
+            console.log("Error ->" + error);
         });
+
+
+        // // CREATE A PROJECT ON GOOGLE DEVELOPER CONSOLE AND PUT YOUR CLIENT ID HERE
+        // // GOOGLE OAUTH DOES NOT GIVE US EMAIL RIGHT AWAY SO WE HAVE TO MAKE 2 API CALLS
+        // $cordovaOauth.google("584540832467-tv8i4a8utt7tk5aih3ej8a6gc65sjk87.apps.googleusercontent.com", ["email"], { redirect_uri: "http://localhost/callback" }).then(function(result) {
+        //     //   alert("Response Object -> " + JSON.stringify(result));
+
+        //     $http.get("https://www.googleapis.com/plus/v1/people/me", // TO GET THE USER'S EMAIL
+        //             {
+        //                 params: {
+        //                     access_token: result.access_token,
+        //                     key: "584540832467-tv8i4a8utt7tk5aih3ej8a6gc65sjk87.apps.googleusercontent.com"
+        //                 }
+        //             })
+        //         .then(function(user) {
+        //             //      alert(JSON.stringify(user));
+        //             IonicLogin.socialLogin(user.data.emails[0].value, result.access_token); // USING ID TO GENERATE A HASH PASSWORD
+        //         });
+        // });
     }
 
     // // TWITTER LOGIN

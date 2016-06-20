@@ -2,7 +2,25 @@ angular.module('starter.controllers', [])
 
 
 // HOME PAGE CONTROLLER
-.controller('DashCtrl', function($scope, IonicLogin, $state) {
+.controller('DashCtrl', function($scope, IonicLogin, $state, $cordovaGeolocation) {
+
+    var options = { timeout: 10000, enableHighAccuracy: true };
+
+    $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
+
+        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        var mapOptions = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        $scope.map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+    }, function(error) {
+        console.log("Could not get location");
+    });
 
     $scope.logout = function() {
         console.log('DashCtrl - logout');
