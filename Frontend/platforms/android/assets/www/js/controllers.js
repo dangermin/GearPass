@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
     $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
 
         var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
+        console.log(latLng);
         var mapOptions = {
             center: latLng,
             zoom: 15,
