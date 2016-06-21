@@ -68,15 +68,6 @@ angular.module('starter.controllers', [])
         console.log("Could not get location");
     });
 
-    $scope.logout = function() {
-        console.log('DashCtrl - logout');
-        Parse.User.logOut().then(function() {
-            window.localStorage['session'] = "";
-            $state.go('login');
-        });
-    }
-
-
 })
 
 .controller('SplashController', function($scope, $state, $window, $http) {
@@ -229,7 +220,70 @@ angular.module('starter.controllers', [])
 })
 
 // ACCOUNT SETTINGS CONTROLLER
-.controller('AccountCtrl', function($scope) {
+.controller('ProfileCtrl', function($scope, $ionicModal, IonicLogin, $state) {
+
+    function activate() {
+        var currentUser = Parse.User.current().id;
+
+        var query = new Parse.Query(Parse.Role);
+        query.get('DCb5bDvloZ', {
+            success: function(role) {
+                var users = role.getUsers().query().find({
+                    success: function(result) {
+                        for (var i = 0; i < result.length; i++) {
+                            if (result[i].id == currentUser) {
+                                $scope.Partner = { "value": true };
+                            } else {
+                                $scope.User = { "value": true };
+                            }
+                        }
+                    },
+                    error: function(result) {
+
+                    }
+                });
+                console.log(users);
+            },
+
+            error: function(role, error) {
+                // error is an instance of Parse.Error.
+            }
+        });
+
+        var emailQuery = new Parse.Query('User');
+        emailQuery.get(currentUser, {
+            success: function(object) {
+                $scope.displayEmail = { "email": object.get('email') };
+            },
+
+            error: function(object, error) {
+                // error is an instance of Parse.Error.
+            }
+        });
+
+    };
+
+    activate();
+
+    $scope.logout = function() {
+        console.log('DashCtrl - logout');
+        Parse.User.logOut().then(function() {
+            window.localStorage['session'] = "";
+            $state.go('login');
+        });
+    }
+
+    $ionicModal.fromTemplateUrl('templates/modal.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+
+    $ionicModal.fromTemplateUrl('templates/profileModal.html', {
+        scope: $scope
+    }).then(function(profileModal) {
+        $scope.profileModal = profileModal;
+    });
 
     $scope.ShopName = { shopName: "" };
     $scope.Open = { open: "" };
@@ -242,6 +296,19 @@ angular.module('starter.controllers', [])
 
 
     $scope.addAShopToCurrentUser = function() {
+
+        query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Partner");
+        query.first({
+            success: function(role) {
+                role.getUsers().add(Parse.User.current());
+                role.save();
+            },
+            error: function(error) {
+                throw "Got an error " + error.code + " : " + error.message;
+            }
+        });
+
         var ShopSchema = Parse.Object.extend('Shop');
 
         var shop = new ShopSchema();
@@ -279,5 +346,26 @@ angular.module('starter.controllers', [])
 
             }
         );
+
+
+        $scope.modal.hide();
+    }
+
+    $scope.ppFirstName = {"value": ""};
+
+    $scope.addPublicProfileToCurrentUser = function() {
+
+        var PublicProfileSchema = Parse.Object.extend('PublicProfile');
+
+        var pp = new PublicProfileSchema();
+
+        pp.set('User', Parse.User.current());
+        pp.set('FirstName', $scope.ppFirstName.value);
+
+
+        pp.save();
+
+
+        $scope.profileModal.hide();
     }
 });

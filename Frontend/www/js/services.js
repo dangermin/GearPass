@@ -23,13 +23,13 @@ angular.module('starter.services', [])
                 }
 
 
-                function logout(email) {
+                function logout() {
 
                     $ionicLoading.show({
                         template: 'Logging Out...'
                     });
 
-                    Parse.User.logOut({ params: { "email": email } }).then(
+                    Parse.User.logOut().then(
                         function(user) {
                             $ionicLoading.hide();
                             window.localStorage['session'] = "";
@@ -66,7 +66,7 @@ angular.module('starter.services', [])
                 function socialLogin(email, password) {
 
                     $ionicLoading.show({
-                        template: 'Loggin In...'
+                        template: 'Logging In...'
                     });
 
                     $http.post("http://localhost:3000/socialLogin", {
