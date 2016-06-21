@@ -1,16 +1,7 @@
 <ion-view view-title="Profile">
     <ion-content>
-        <div ng-hide="hasProfile" class="list">
             <h2>Welcome, <span ng-bind ="firstName.value || displayEmail.email"></span></h2>
-            <button class="button button-block button-positive" ng-click="profileModal.show()">Create Profile</button>
-        </div>
-        <div ng-show="hasProfile" class="list">
-            <h2>Welcome, <span ng-bind ="firstName.value || displayEmail.email"></span></h2>
-            <h2>Welcome, <span ng-bind ="firstName.value || displayEmail.email"></span></h2>
-            <h2>Welcome, <span ng-bind ="firstName.value || displayEmail.email"></span></h2>
-            <h2>Welcome, <span ng-bind ="firstName.value || displayEmail.email"></span></h2>
-            <button class="button button-block button-positive" ng-click="profileModal.show()">Create Profile</button>
-        </div>
+        <button ng-hide="Partner.value" class="button button-block button-positive" ng-click="modal.show()">Become a partner</button>
     </ion-content>
     <script id="templates/modal.html" type="text/ng-template">
         <ion-modal-view>
@@ -54,31 +45,6 @@
                     </label>
                 </div>
                 <button class="button button-block button-positive" ng-click="addAShopToCurrentUser()">Register</button>
-            </ion-content>
-        </ion-modal-view>
-    </script>
-    <script id="templates/profileModal.html" type="text/ng-template">
-        <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
-                <h1 class="title">Public Profile</h1>
-                <button class="button button-clear button-primary" ng-click="profileModal.hide()">Cancel</button>
-            </ion-header-bar>
-            <ion-content class="padding">
-                <div class="list">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">First Name</span>
-                        <input type="text" ng-model="ppFirstName.value">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Last name</span>
-                        <input type="text" ng-model="ppLastName.value">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">One Adjective to Describe you</span>
-                        <input type="text" ng-model="ppAdjective.value" placeholder="Awesome...">
-                    </label>
-                </div>
-                <button class="button button-block button-positive" ng-click="addPublicProfileToCurrentUser()">Update</button>
             </ion-content>
         </ion-modal-view>
     </script>

@@ -51,7 +51,8 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
     .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'app/Tab/tabs.html'
+        templateUrl: 'app/Tab/tab.html',
+        controller: 'TabController'
     })
 
     .state('tab.dash', {
@@ -79,6 +80,16 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
             'tab-profile': {
                 templateUrl: 'app/Tab-Profile/tab-profile.html',
                 controller: 'ProfileController'
+            }
+        }
+    })
+
+    .state('tab.partner', {
+        url: '/partner',
+        views: {
+            'tab-partner': {
+                templateUrl: 'app/Tab-Partner/tab-partner.html',
+                controller: 'PartnerController'
             }
         }
     });
