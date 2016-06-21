@@ -222,9 +222,37 @@ angular.module('starter.controllers', [])
 // ACCOUNT SETTINGS CONTROLLER
 .controller('ProfileCtrl', function($scope, $ionicModal, IonicLogin, $state) {
 
+    activate();
+
+
     function activate() {
         var currentUser = Parse.User.current().id;
 
+        var emailQuery = new Parse.Query('User');
+        emailQuery.get(currentUser, {
+            success: function(object) {
+                $scope.displayEmail = { "email": object.get('email') };
+            },
+
+            error: function(object, error) {
+                // error is an instance of Parse.Error.
+            }
+        });
+
+        var profileQuery = new Parse.Query('PublicProfile');
+        profileQuery.get(currentUser, {
+            success: function(object) {
+                $scope.ppFirstName = { "value": object.get('FirstName') };
+                $scope.ppLastName = { "value": object.get('LastName') };
+                $scope.ppAdjective = { "value": object.get('Adjective') };
+            },
+
+            error: function(object, error) {
+                // error is an instance of Parse.Error.
+            }
+        });
+
+        
         var query = new Parse.Query(Parse.Role);
         query.get('DCb5bDvloZ', {
             success: function(role) {
@@ -250,21 +278,7 @@ angular.module('starter.controllers', [])
             }
         });
 
-        var emailQuery = new Parse.Query('User');
-        emailQuery.get(currentUser, {
-            success: function(object) {
-                $scope.displayEmail = { "email": object.get('email') };
-            },
-
-            error: function(object, error) {
-                // error is an instance of Parse.Error.
-            }
-        });
-
     };
-
-    activate();
-
     $scope.logout = function() {
         console.log('DashCtrl - logout');
         Parse.User.logOut().then(function() {
@@ -351,7 +365,9 @@ angular.module('starter.controllers', [])
         $scope.modal.hide();
     }
 
-    $scope.ppFirstName = {"value": ""};
+    $scope.ppFirstName = { "value": "" };
+    $scope.ppLastName = { "value": "" };
+    $scope.ppAdjective = { "value": "" };
 
     $scope.addPublicProfileToCurrentUser = function() {
 
@@ -361,6 +377,8 @@ angular.module('starter.controllers', [])
 
         pp.set('User', Parse.User.current());
         pp.set('FirstName', $scope.ppFirstName.value);
+        pp.set('LastName', $scope.ppLastName.value);
+        pp.set('Adjective', $scope.ppAdjective.value);
 
 
         pp.save();
