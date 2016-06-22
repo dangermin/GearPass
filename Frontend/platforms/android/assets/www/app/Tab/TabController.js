@@ -19,6 +19,11 @@ angular.module('starter')
     function activate() {
         $scope.currentUser = { "id": Parse.User.current().id };
 
+
+        var test = Parse.User.current().relation('Shop');
+
+        console.log(test);
+
         //always get email of current user 
         var emailQuery = new Parse.Query('User');
         emailQuery.get($scope.currentUser.id, {
