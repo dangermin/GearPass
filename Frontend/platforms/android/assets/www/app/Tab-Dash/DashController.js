@@ -49,24 +49,23 @@ angular.module('starter')
             Parse.GeoPoint.current({
                 success: function(point) {
                     var shopList = [];
+                    var LatLng = [];
                     var query = new Parse.Query(Parse.Object.extend("Shop"));
-                    return query.each(function(shop) {
+                    // query.setLimit(3);
+                    query.each(function(shop) {
                         var Name = shop.get('ShopName');
                         var Location = shop.get('Location');
-                        shopList.push({"Name":Name, "Location": Location});
-                        console.log(shopList);
+                        var Lat = Location._latitude;
+                        var Lng = Location._longitude;
+                        var LatLng = { lat: Lat, lng: Lng };
+
+                        shopList.push({ "Name": Name, "Location": Location });
+
+                        var marker = new google.maps.Marker({
+                            map: $scope.map,
+                            position: LatLng,
+                        });
                     });
-                    query.whereNear('location', point);
-                    query.setLimit(20);
-                    query.find().then(
-                        function(shops) {
-                            // shops will represent the shops matching query
-                            console.log(shops)
-                        },
-                        function(err) {
-                            console.log(err);
-                        }
-                    );
                 },
                 error: function(err) {
                     console.log(err);

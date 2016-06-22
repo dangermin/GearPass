@@ -1,19 +1,14 @@
 <ion-view view-title="Profile">
     <ion-content>
-        <div ng-hide="hasProfile.value" class="list">
-            <h2>Welcome, <span ng-bind ="displayEmail.email"></span></h2>
-            <button class="button button-block button-positive" ng-click="profileModal.show()">Create Profile</button>
-        </div>
-        <div ng-show="hasProfile.value" class="card">
+        <div class="card">
             <div id="profileCard" class="item item-thumbnail-left">
                 <img src="app/img/surf.gif">
-                <h2><span ng-bind="publicFirstName.value"></span> <span ng-bind="publicLastName.value"></span></h2>
-                <p><span ng-bind="publicLocation.value.formatted_address"></span></p>
+                <h2><span ng-bind="profile.FirstName"></span> <span ng-bind="profile.LastName"></span></h2>
+                <p><span ng-bind="profile.Location"></span></p>
             </div>
             <div id="profileCard">
                 <div class="item item-divider">Contact Information:</div>
-                <div class="item">Phone Number:<span ng-bind="publicPhoneNumber.value"></span></div>
-                <div class="item">Email:<span ng-bind="publicEmail.value"></span></div>
+                <div class="item">Email:<span ng-bind="profile.Email"></span></div>
             </div>
             <button class="button button-block button-positive" ng-click="profileModal.show()">Update Profile</button>
         </div>
@@ -40,7 +35,8 @@
                         <ion-google-place ng-click="profileModal.hide()" placeholder="Enter an address or city!" ng-model="publicLocation.value" />
                     </label>
                 </div>
-                <button class="button button-block button-positive" ng-click="addPublicProfileToCurrentUser()">Update</button>
+                <button ng-hide="profile.value" class="button button-block button-positive" ng-click="createProfile()">Create</button>
+                <button ng-show="profile.value" class="button button-block button-positive" ng-click="updateProfile()">Update</button>
             </ion-content>
         </ion-modal-view>
     </script>
