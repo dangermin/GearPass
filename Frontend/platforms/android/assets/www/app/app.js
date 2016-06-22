@@ -47,14 +47,13 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
         templateUrl: 'app/Login/login.html',
         controller: 'LoginController'
     })
-    // setup an abstract state for the tabs directive
+
     .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'app/Tab/tabs.html'
+        templateUrl: 'app/Tab/tab.html',
+        controller: 'TabController'
     })
-
-    // Each tab has its own nav history stack:
 
     .state('tab.dash', {
         url: '/dash',
@@ -81,6 +80,16 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
             'tab-profile': {
                 templateUrl: 'app/Tab-Profile/tab-profile.html',
                 controller: 'ProfileController'
+            }
+        }
+    })
+
+    .state('tab.partner', {
+        url: '/partner',
+        views: {
+            'tab-partner': {
+                templateUrl: 'app/Tab-Partner/tab-partner.html',
+                controller: 'PartnerController'
             }
         }
     });

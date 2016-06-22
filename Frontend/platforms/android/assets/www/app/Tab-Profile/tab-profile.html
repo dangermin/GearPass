@@ -1,61 +1,24 @@
 <ion-view view-title="Profile">
     <ion-content>
-        <div class="list">
-            <h2>Welcome, <span ng-bind ="firstName.value || displayEmail.email"></span></h2>
+        <div ng-hide="hasProfile.value" class="list">
+            <h2>Welcome, <span ng-bind ="displayEmail.email"></span></h2>
+            <button class="button button-block button-positive" ng-click="profileModal.show()">Create Profile</button>
+        </div>
+        <div ng-show="hasProfile.value" class="card">
+            <div id="profileCard" class="item item-thumbnail-left">
+                <img src="app/img/surf.gif">
+                <h2><span ng-bind="publicFirstName.value"></span> <span ng-bind="publicLastName.value"></span></h2>
+                <p><span ng-bind="publicLocation.value.formatted_address"></span></p>
+            </div>
+            <div id="profileCard">
+                <div class="item item-divider">Contact Information:</div>
+                <div class="item">Phone Number:<span ng-bind="publicPhoneNumber.value"></span></div>
+                <div class="item">Email:<span ng-bind="publicEmail.value"></span></div>
+            </div>
             <button class="button button-block button-positive" ng-click="profileModal.show()">Update Profile</button>
-            <h2><span ng-bind="firstname.value"></span> <span ng-bind="lastname.value"></span></h2>
-            <h3><span ng-bind="adjective.value"></span></h3>
         </div>
-        <button ng-hide="Partner.value" class="button button-block button-positive" ng-click="modal.show()">Become a partner</button>
-        <div class="bar bar-footer">
-            <button class="button button-block button-positive" ng-click="logout()">Logout</button>
-        </div>
+        <button class="button button-block button-positive" ng-click="logout()">Logout</button>
     </ion-content>
-    <script id="templates/modal.html" type="text/ng-template">
-        <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
-                <h1 class="title">Partner Application</h1>
-                <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-            </ion-header-bar>
-            <ion-content class="padding">
-                <div class="list">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Shop Name</span>
-                        <input type="text" ng-model="ShopName.shopName" placeholder="Rocky's Surf Shop...">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Shop Location</span>
-                        <ion-google-place ng-click="modal.hide()" placeholder="Enter an address, Apt# and ZIP" ng-model="Location.location" />
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Contact Name</span>
-                        <input type="text" ng-model="ContactName.contactName" placeholder="Bob...">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Phone Number</span>
-                        <input type="tel" ng-model="Phone.phone" placeholder="555-555-5555">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Web Address</span>
-                        <input type="text" ng-model="WebAddress.webAddress" placeholder="www.bob.com">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Opening Hour</span>
-                        <input type="text" ng-model="Open.open" placeholder="9am">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Closing Hour</span>
-                        <input type="text" ng-model="Close.close" placeholder="5pm">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Number of boards</span>
-                        <input type="num" ng-model="Boards.boards" placeholder="18">
-                    </label>
-                </div>
-                <button class="button button-block button-positive" ng-click="addAShopToCurrentUser()">Register</button>
-            </ion-content>
-        </ion-modal-view>
-    </script>
     <script id="templates/profileModal.html" type="text/ng-template">
         <ion-modal-view>
             <ion-header-bar class="bar bar-header bar-positive">
@@ -66,15 +29,15 @@
                 <div class="list">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">First Name</span>
-                        <input type="text" ng-model="ppFirstName.value">
+                        <input type="text" ng-model="publicFirstName.value">
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Last name</span>
-                        <input type="text" ng-model="ppLastName.value">
+                        <input type="text" ng-model="publicLastName.value">
                     </label>
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">One Adjective to Describe you</span>
-                        <input type="text" ng-model="ppAdjective.value" placeholder="Awesome...">
+                        <span class="input-label">Location</span>
+                        <ion-google-place ng-click="profileModal.hide()" placeholder="Enter an address or city!" ng-model="publicLocation.value" />
                     </label>
                 </div>
                 <button class="button button-block button-positive" ng-click="addPublicProfileToCurrentUser()">Update</button>
