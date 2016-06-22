@@ -2,13 +2,14 @@ angular.module('starter')
 
 .controller('PartnerController', function($scope, $ionicModal, IonicLogin, $state) {
 
+    //tell modal how to be
     $ionicModal.fromTemplateUrl('templates/modal.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.modal = modal;
     });
 
-
+    //define variables for this scope
     $scope.ShopName = { value: "" };
     $scope.Open = { value: "" };
     $scope.Close = { value: "" };
@@ -18,40 +19,51 @@ angular.module('starter')
     $scope.Location = { value: "" };
     $scope.WebAddress = { value: "" };
 
+    //function to update partner profile, currently you need to retype all fields
+    $scope.updatePartner = function() {
 
-    $scope.addAShopToCurrentUser = function() {
+        console.log($scope.thisShop.value);
 
-        query = new Parse.Query(Parse.Role);
-        query.equalTo("name", "Partner");
-        query.first({
-            success: function(role) {
-                role.getUsers().add(Parse.User.current());
-                role.save();
-            },
-            error: function(error) {
-                throw "Got an error " + error.code + " : " + error.message;
-            }
-        });
+        updateShop = $scope.thisShop.value;
+
+        updateShop.set('ShopName', $scope.ShopName.value);
+        updateShop.set('Hours', $scope.Open.open + "-" + $scope.Close.value);
+        updateShop.set('ContactName', $scope.ContactName.value);
+        updateShop.set('PhoneNumber', $scope.Phone.value);
+        updateShop.set('WebAddress', $scope.WebAddress.value);
+        updateShop.set('Address', $scope.Location.value.formatted_address);
+        updateShop.set('Location', location);
+
+
+        updateShop.save();
+        alert('All done!');
+
+        $scope.modal.hide();
+
+    }
+
+    //create new partner function, only shows if user is not a partner
+    $scope.createPartner = function() {
 
         var ShopSchema = Parse.Object.extend('Shop');
 
         var shop = new ShopSchema();
 
-        shop.set('User', Parse.User.current());
+        var location = new Parse.GeoPoint($scope.Location.value.geometry.location.lat(), $scope.Location.value.geometry.location.lng())
+
         shop.set('ShopName', $scope.ShopName.value);
         shop.set('Hours', $scope.Open.open + "-" + $scope.Close.value);
         shop.set('ContactName', $scope.ContactName.value);
         shop.set('PhoneNumber', $scope.Phone.value);
         shop.set('WebAddress', $scope.WebAddress.value);
-        shop.set('Location', $scope.Location.value.formatted_address);
-        shop.set('Lat', parseInt($scope.Location.value.geometry.location.lat()));
-        shop.set('Lng', parseInt($scope.Location.value.geometry.location.lng()));
+        shop.set('Address', $scope.Location.value.formatted_address);
+        shop.set('Location', location);
 
         shop.save().then(
             function(newShop) {
                 var promises = [];
 
-                for (var i = 0; i < $scope.Boards.boards; i++) {
+                for (var i = 0; i < $scope.Boards.value; i++) {
                     var GearSchema = Parse.Object.extend('Gear');
 
                     var gear = new GearSchema();
@@ -67,13 +79,32 @@ angular.module('starter')
                 });
             },
             function(err) {
-
+                console.log("could not add shop");
             }
         );
 
-        $scope.Partner = { "value": true }
-
         $scope.modal.hide();
     }
+
+    //always check if user is a partner first
+    //if true, set display values to match partner profile
+    //set partner variable to true so the user sees appropriate content
+    // var query = new Parse.Query(Parse.Object.extend("Shop"));
+    // return query.each(function(shop) {
+    //     var user = shop.get('User');
+    //     if (user.id == $scope.currentUser.id) {
+    //         var shopName = shop.get('ShopName');
+    //         var location = shop.get('Address');
+    //         var phone = shop.get('PhoneNumber');
+    //         $scope.thisShop = { "value": shop };
+    //         $scope.$apply(function() {
+    //             $scope.partner = { "ShopName": shopName, "Location": location, "PhoneNumber": phone, "value": true };
+    //         });
+    //         console.log($scope.partner);
+    //     } else {
+    //         console.log("attempting to find partner profile");
+    //     }
+
+    // });
 
 });

@@ -1,21 +1,8 @@
 <ion-view view-title="Partner">
     <ion-content>
-        <div ng-hide="Partner.value" class="list">
+        <div class="list">
             <h2>Welcome, <span ng-bind ="displayEmail.email"></span></h2>
-            <button class="button button-block button-positive" ng-click="modal.show()">Partner Application</button>
-        </div>
-        <div ng-show="Partner.value" class="card">
-            <div id="profileCard" class="item item-thumbnail-right">
-                <img src="app/img/surf.gif">
-                <h2><span ng-bind="ShopName.value"></h2>
-                <p><span ng-bind="Location.value.formatted_address"></span></p>
-            </div>
-            <div id="profileCard">
-                <div class="item item-divider">Contact Information:</div>
-                <div class="item">Phone Number:<span ng-bind="PhoneNumber.value"></span></div>
-                <div class="item">Email:<span ng-bind="WebAddress.value"></span></div>
-            </div>
-            <button class="button button-block button-positive" ng-click="modal.show()">Update Profile</button>
+            <button class="button button-block button-positive" ng-click="modal.show()">Add a partner</button>
         </div>
         <button class="button button-block button-positive" ng-click="logout()">Logout</button>
     </ion-content>
@@ -60,7 +47,8 @@
                         <input type="num" ng-model="Boards.value" placeholder="18">
                     </label>
                 </div>
-                <button class="button button-block button-positive" ng-click="addAShopToCurrentUser()">Register</button>
+                <button ng-hide="partner.value" class="button button-block button-positive" ng-click="createPartner()">Register</button>
+                <button ng-show="partner.value" class="button button-block button-positive" ng-click="updatePartner()">Update</button>
             </ion-content>
         </ion-modal-view>
     </script>
