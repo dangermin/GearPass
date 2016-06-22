@@ -2,14 +2,6 @@ angular.module('starter')
 
 .controller('ProfileController', function($scope, $ionicModal, IonicLogin, $state) {
 
-    // Logout function
-    $scope.logout = function() {
-        console.log('DashCtrl - logout');
-        Parse.User.logOut().then(function() {
-            window.localStorage['session'] = "";
-            $state.go('login');
-        });
-    }
 
     $ionicModal.fromTemplateUrl('templates/profileModal.html', {
         scope: $scope
@@ -17,24 +9,26 @@ angular.module('starter')
         $scope.profileModal = profileModal;
     });
 
-    $scope.ppFirstName = { "value": "" };
-    $scope.ppLastName = { "value": "" };
-    $scope.ppAdjective = { "value": "" };
+    $scope.publicFirstName = { "value": "" };
+    $scope.publicLastName = { "value": "" };
+    $scope.publicLocation = { "value": "" };
 
     $scope.addPublicProfileToCurrentUser = function() {
 
         var PublicProfileSchema = Parse.Object.extend('PublicProfile');
 
-        var pp = new PublicProfileSchema();
+        var public = new PublicProfileSchema();
 
-        pp.set('User', Parse.User.current());
-        pp.set('FirstName', $scope.ppFirstName.value);
-        pp.set('LastName', $scope.ppLastName.value);
-        pp.set('Adjective', $scope.ppAdjective.value);
+        public.set('User', Parse.User.current());
+        public.set('Email', $scope.displayEmail.email);
+        public.set('FirstName', $scope.publicFirstName.value);
+        public.set('LastName', $scope.publicLastName.value);
+        public.set('Location', $scope.publicLocation.value.formatted_address);
 
 
-        pp.save();
+        public.save();
 
+        $scope.hasProfile = { "value": true }
 
         $scope.profileModal.hide();
     }

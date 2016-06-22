@@ -65,3 +65,7 @@ Tab-Dash
 /********************************
 Tab-Profile
 *********************************/
+
+#profileCard {
+	border-style: none;
+}

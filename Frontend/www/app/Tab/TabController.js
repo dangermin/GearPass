@@ -5,36 +5,45 @@ angular.module('starter')
 
     activate();
 
+    $scope.logout = function() {
+        Parse.User.logOut().then(function() {
+            $state.go('login');
+            $scope.displayEmail = { "email": "" };
+        });
+    };
+
+    $scope.getProfile = function() {
+        console.log("heck yeah!");
+    };
 
     function activate() {
-        var currentUser = Parse.User.current().id;
+        $scope.currentUser = { "id": Parse.User.current().id };
 
+        //always get email of current user 
         var emailQuery = new Parse.Query('User');
-        emailQuery.get(currentUser, {
+        emailQuery.get($scope.currentUser.id, {
             success: function(object) {
                 $scope.displayEmail = { "email": object.get('email') };
-                $apply();
             },
 
             error: function(object, error) {
-                // error is an instance of Parse.Error.
+                console.log(error);
             }
         });
 
-        var profileQuery = new Parse.Query("PublicProfile");
-        profileQuery.get(currentUser, {
-            success: function(object) {
-                console.log(object);
-                $scope.firstName = { "value": object.get('FirstName') };
-                $scope.lastName = { "value": object.get('LastName') };
-                $scope.adjective = { "value": object.get('Adjective') };
-                $apply();
+        query = new Parse.Query(Parse.Role);
+        query.equalTo("name", "Member");
+        query.first({
+            success: function(role) {
+                role.getUsers().add(Parse.User.current());
+                role.save();
+                console.log("member added");
             },
-
-            error: function(object, error) {
-                // error is an instance of Parse.Error.
+            error: function(error) {
+                throw "Got an error " + error.code + " : " + error.message;
             }
         });
+
 
 
         var query = new Parse.Query(Parse.Role);
@@ -43,11 +52,10 @@ angular.module('starter')
                 var users = role.getUsers().query().find({
                     success: function(result) {
                         for (var i = 0; i < result.length; i++) {
-                            if (result[i].id == currentUser) {
+                            if (result[i].id == $scope.currentUser.id) {
                                 $scope.Partner = { "value": true };
-                                $apply();
                             } else {
-                                $scope.User = { "value": true };
+                                console.log("attempt" + i);
                             }
                         }
                     },
@@ -55,11 +63,10 @@ angular.module('starter')
 
                     }
                 });
-                console.log(users);
             },
 
             error: function(role, error) {
-                // error is an instance of Parse.Error.
+                console.log(error);
             }
         });
 

@@ -1,7 +1,23 @@
-<ion-view view-title="Profile">
+<ion-view view-title="Partner">
     <ion-content>
-            <h2>Welcome, <span ng-bind ="firstName.value || displayEmail.email"></span></h2>
-        <button ng-hide="Partner.value" class="button button-block button-positive" ng-click="modal.show()">Become a partner</button>
+        <div ng-hide="Partner.value" class="list">
+            <h2>Welcome, <span ng-bind ="displayEmail.email"></span></h2>
+            <button class="button button-block button-positive" ng-click="modal.show()">Partner Application</button>
+        </div>
+        <div ng-show="Partner.value" class="card">
+            <div id="profileCard" class="item item-thumbnail-right">
+                <img src="app/img/surf.gif">
+                <h2><span ng-bind="ShopName.value"></h2>
+                <p><span ng-bind="Location.value.formatted_address"></span></p>
+            </div>
+            <div id="profileCard">
+                <div class="item item-divider">Contact Information:</div>
+                <div class="item">Phone Number:<span ng-bind="PhoneNumber.value"></span></div>
+                <div class="item">Email:<span ng-bind="WebAddress.value"></span></div>
+            </div>
+            <button class="button button-block button-positive" ng-click="modal.show()">Update Profile</button>
+        </div>
+        <button class="button button-block button-positive" ng-click="logout()">Logout</button>
     </ion-content>
     <script id="templates/modal.html" type="text/ng-template">
         <ion-modal-view>
@@ -13,35 +29,35 @@
                 <div class="list">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Shop Name</span>
-                        <input type="text" ng-model="ShopName.shopName" placeholder="Rocky's Surf Shop...">
+                        <input type="text" ng-model="ShopName.value" placeholder="Rocky's Surf Shop...">
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Shop Location</span>
-                        <ion-google-place ng-click="modal.hide()" placeholder="Enter an address, Apt# and ZIP" ng-model="Location.location" />
+                        <ion-google-place ng-click="modal.hide()" placeholder="Enter an address, Apt# and ZIP" ng-model="Location.value" />
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Contact Name</span>
-                        <input type="text" ng-model="ContactName.contactName" placeholder="Bob...">
+                        <input type="text" ng-model="ContactName.value" placeholder="Bob...">
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Phone Number</span>
-                        <input type="tel" ng-model="Phone.phone" placeholder="555-555-5555">
+                        <input type="tel" ng-model="Phone.value" placeholder="555-555-5555">
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Web Address</span>
-                        <input type="text" ng-model="WebAddress.webAddress" placeholder="www.bob.com">
+                        <input type="text" ng-model="WebAddress.value" placeholder="www.bob.com">
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Opening Hour</span>
-                        <input type="text" ng-model="Open.open" placeholder="9am">
+                        <input type="text" ng-model="Open.value" placeholder="9am">
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Closing Hour</span>
-                        <input type="text" ng-model="Close.close" placeholder="5pm">
+                        <input type="text" ng-model="Close.value" placeholder="5pm">
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Number of boards</span>
-                        <input type="num" ng-model="Boards.boards" placeholder="18">
+                        <input type="num" ng-model="Boards.value" placeholder="18">
                     </label>
                 </div>
                 <button class="button button-block button-positive" ng-click="addAShopToCurrentUser()">Register</button>
