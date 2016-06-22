@@ -52,11 +52,7 @@ angular.module('ion-google-place', [])
                             ngModel.$render();
                             el.element.css('display', 'none');
                             $ionicBackdrop.release();
-                            if (scope.modal){
-                                scope.modal.show();
-                            } else {
-                                scope.profileModal.show();
-                            }
+                            scope.modal.show();
                         };
 
                         scope.$watch('searchQuery', function(query){
