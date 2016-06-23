@@ -1,7 +1,15 @@
 angular.module('starter')
 
 // LOGIN PAGE CONTROLLER
-.controller('LoginController', function($scope, IonicLogin, $ionicLoading, $http, $cordovaFacebook, $state, $cordovaOauth) {
+.controller('LoginController', function($scope, $ionicModal, IonicLogin, $ionicLoading, $http, $state, $cordovaOauth) {
+
+
+    //tell modal how to be
+    $ionicModal.fromTemplateUrl('templates/applicationModal.html', {
+        scope: $scope
+    }).then(function(applicationModal) {
+        $scope.applicationModal = applicationModal;
+    });
 
     // REMOVE THE USER LOGIN INFORMATION WHEN RETURNING TO LOGIN SCREEN
     $scope.$on('$ionicView.enter', function(e) {

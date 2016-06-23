@@ -1,32 +1,74 @@
 <ion-view view-title="Gear Pass" hide-back-button="true" can-swipe-back="false">
-  <ion-content class="padding login-page">
-
-  <div class="login-div">
-  <img src="app/img/surf.png" alt="Logo" class="Logo">
-  <form name="loginForm">
-      <div class="list list-inset">
-              <label class="item item-input">
-                  <input required type="text" placeholder="Email" ng-model="data.email">
-              </label>
-              <label class="item item-input">
-                  <input required type="password" placeholder="Password" ng-model="data.password">
-              </label>
-      </div>
-   </form>
-      <button class="button button-block button-calm" ng-disabled="!loginForm.$valid" ng-click="login()">Login</button>
- 	    <button class="button button-block button-dark" ng-disabled="!loginForm.$valid" ng-click="signUp()">Create Account</button>
-
-    <div class="centerDiv">
-      <button class="button button-positive buttonFullwidth" ng-click="facebookLogin()">Facebook</button>
-      <button class="button button-assertive buttonFullwidth" ng-click="googleLogin()">Google+</button>
-    </div>
-
-     <!-- <div class="centerDiv">
+    <ion-content class="padding login-page">
+        <div class="login-div">
+            <img id="loginLogo" src="app/img/surf.png" alt="Logo" class="Logo">
+            <button id="loginButtons" ng-hide="loggingIn" class="button button-block button-calm" ng-click="loggingIn=true">Member Login</button>
+            <form ng-show="loggingIn" name="loginForm">
+                <div class="list">
+                    <label id="loginInput" class="item item-input item-stacked-label text-left">
+                        <span id="loginContainer" class="input-label ">  Membership Number:</span>
+                        <input required type="text" placeholder="  x-xxx" ng-model="data.email">
+                    </label>
+                    <label id="loginInput" class="item item-input item-stacked-label text-left ">
+                        <span id="loginContainer" class="input-label">  Password:</span>
+                        <input required type="password" placeholder="  Password" ng-model="data.password">
+                    </label>
+                    <button id="loginButtons" class="button button-calm" ng-click="login()">Login</button>
+                    <button id="loginButtons" class="button button-calm" ng-click="loggingIn=false">Back</button>
+                </div>
+            </form>
+            <button id="loginButtons" ng-hide="loggingIn" class="button button-block button-dark" ng-click="applicationModal.show()">Apply Now!</button>
+            <!--             <div class="centerDiv">
+                <button class="button button-positive buttonFullwidth" ng-click="facebookLogin()">Facebook</button>
+                <button class="button button-assertive buttonFullwidth" ng-click="googleLogin()">Google+</button>
+            </div> -->
+            <!-- <div class="centerDiv">
       <button class="button button-energized buttonFullwidth" ng-click="instagramLogin()">Instagram</button>
       <button class="button button-calm buttonFullwidth" ng-click="twitterLogin()">Twitter</button>
     </div> -->
-
-    </div>
-
-  </ion-content>
+        </div>
+    </ion-content>
+    <script id="templates/applicationModal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Membership Application</h1>
+                <button class="button button-clear button-primary" ng-click="applicationModal.hide()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <div class="card">
+                    <div ng-show="chooseClub" class="item item-divider">
+                        I'm a Header in a Card!
+                    </div>
+                    <div id="membershipSignUpClub" ng-click="chooseClub=true" class="item item-text-wrap text-center">
+                        CLUB
+                    </div>
+                    <div ng-show="chooseClub" class="item item-divider">
+                        I'm a Footer in a Card!
+                    </div>
+                </div>
+                <div class="card">
+                    <div ng-show="chooseSport" class="item item-divider">
+                        I'm a Header in a Card!
+                    </div>
+                    <div id="membershipSignUpSport" ng-click="chooseSport=true" class="item item-text-wrap text-center">
+                        SPORT
+                    </div>
+                    <div ng-show="chooseSport" class="item item-divider">
+                        I'm a Footer in a Card!
+                    </div>
+                </div>
+                <div class="card">
+                    <div ng-show="choosePremium" class="item item-divider">
+                        I'm a Header in a Card!
+                    </div>
+                    <div id="membershipSignUpPremium" ng-click="choosePremium=true" class="item item-text-wrap text-center">
+                        Premium
+                    </div>
+                    <div ng-show="choosePremium" class="item item-divider">
+                        I'm a Footer in a Card!
+                    </div>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
 </ion-view>

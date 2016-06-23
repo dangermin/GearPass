@@ -1,32 +1,44 @@
-.centerDiv{
-  display: inline-block; width:100%; margin: 0 auto; padding: 6px; text-align: center;
-}
-
-.buttonFullwidth{
-  width: 46% ;
-}
-
-.scroll {
-    height: 100%;
-}
-
-
-
 /********************************
 Login
 *********************************/
 
 .login-page {
-    background: url(../img/giphy.gif);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url(../img/giphy.gif);
     background-size: cover;
 }
 
+#loginInput {
+    border-style: none;
+}
+
 .login-div {
-  opacity: 0.93 ;
-  padding: 30px;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.login-div img {
+    display: block;
+    margin: auto auto 35% auto;
+}
+
+#loginButtons {
+    border-radius: 50%;
 }
 
 
+#membershipSignUpSport {
+	font-family: 'Shadows Into Light', cursive;
+	font-size: 2em;
+}
+
+#membershipSignUpPremium {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2em;
+}
+
+#loginContainer {
+	color:white;
+}
 
 
 
@@ -36,19 +48,14 @@ Splash
 *********************************/
 
 
-
 /********************************
 Tab
 *********************************/
 
 
-
-
 /********************************
 Tab-Chats
 *********************************/
-
-
 
 
 /********************************
@@ -61,11 +68,10 @@ Tab-Dash
 }
 
 
-
 /********************************
 Tab-Profile
 *********************************/
 
 #profileCard {
-	border-style: none;
+    border-style: none;
 }
