@@ -1,6 +1,37 @@
 angular.module('starter')
 
-.factory('IonicLogin', function($http, $state, $ionicPopup, $ionicLoading) {
+.factory('IonicLogin', function($http, $q, $log, $state, $ionicPopup, $ionicLoading) {
+
+
+
+    function signUp(email, password) {
+
+        $ionicLoading.show({
+            template: 'Creating Account...'
+        });
+
+        Parse.User.signUp(email, password, { email: email }).then(
+            function(user) {
+                $ionicLoading.hide();
+                Parse.User.logIn(email, password).then(
+                    function(user) {
+                        $state.go('splash');
+                    },
+                    function() {
+                        console.log("couldn't log in new users");
+                    }
+                );
+            },
+            function() {
+                $ionicLoading.hide();
+                $ionicPopup.alert({
+                    title: 'Username Taken',
+                    template: 'Username taken, try another one.'
+                });
+            }
+        );
+    }
+
 
     function login(email, password) {
 
@@ -15,6 +46,7 @@ angular.module('starter')
                 $state.go('splash');
             },
             error: function(user, error) {
+                $ionicLoading.hide();
                 $ionicPopup.alert({
                     title: 'Login',
                     template: 'Wrong User or Password'
@@ -36,32 +68,6 @@ angular.module('starter')
                 $state.go('splash');
             });
     }
-
-
-    // function signUp(email, password) {
-
-    //     $ionicLoading.show({
-    //         template: 'Creating Account...'
-    //     });
-
-    //     Parse.User.signUp(email, password, { email: email }).then(
-    //         function(user) {
-    //             $ionicLoading.hide();
-    //             Parse.User.logIn(email, password).then(
-    //                 function() {
-    //                     $state.transitionTo('splash');
-    //                 }
-    //             );
-    //         },
-    //         function() {
-    //             $ionicPopup.alert({
-    //                 title: 'Username Taken',
-    //                 template: 'Username taken, try another one.'
-    //             });
-    //         }
-    //     );
-    // }
-
 
     // function socialLogin(email, password) {
 
@@ -96,9 +102,9 @@ angular.module('starter')
     return {
 
         login: login,
-        // signUp: signUp,
+        signUp: signUp,
         logout: logout
-        // socialLogin: socialLogin
+            // socialLogin: socialLogin
 
     };
 });

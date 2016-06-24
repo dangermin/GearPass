@@ -31,41 +31,53 @@
     <script id="templates/applicationModal.html" type="text/ng-template">
         <ion-modal-view>
             <ion-header-bar class="bar bar-header bar-positive">
-                <h1 class="title">Membership Application</h1>
+                <h1 class="title">Membership</h1>
                 <button class="button button-clear button-primary" ng-click="applicationModal.hide()">Cancel</button>
             </ion-header-bar>
             <ion-content class="padding">
                 <div class="card">
                     <div ng-show="chooseClub" class="item item-divider">
-                        I'm a Header in a Card!
+                        <p id="memberApplyPrice">$29.99/mo.</p>
+                        <span ng-click="chooseClub=false" id="memberApplyClose" class="ion-close-circled"></span>
                     </div>
                     <div id="membershipSignUpClub" ng-click="chooseClub=true" class="item item-text-wrap text-center">
-                        CLUB
+                        CLUB MEMBERSHIP
+                        <div ng-show="chooseClub">
+                        <!-- Membership tier description goes here -->
+                        </div>
                     </div>
-                    <div ng-show="chooseClub" class="item item-divider">
-                        I'm a Footer in a Card!
+                    <div ng-show="chooseClub" class="item item-divider text-right">
+                        <button class="button button-clear button-primary" ng-click="goToPayment(club)">Checkout</button>
                     </div>
                 </div>
                 <div class="card">
                     <div ng-show="chooseSport" class="item item-divider">
-                        I'm a Header in a Card!
+                        <p id="memberApplyPrice">$29.99/mo.</p>
+                        <span ng-click="chooseSport=false" id="memberApplyClose" class="ion-close-circled"></span>
                     </div>
                     <div id="membershipSignUpSport" ng-click="chooseSport=true" class="item item-text-wrap text-center">
-                        SPORT
+                        SPORT MEMBERSHIP
+                        <div ng-show="chooseClub">
+                        <!-- Membership tier description goes here -->
+                        </div>
                     </div>
-                    <div ng-show="chooseSport" class="item item-divider">
-                        I'm a Footer in a Card!
+                    <div ng-show="chooseSport" class="item item-divider text-right">
+                        <button class="button button-clear button-primary" ng-click="goToPayment(sport)">Checkout</button>
                     </div>
                 </div>
                 <div class="card">
                     <div ng-show="choosePremium" class="item item-divider">
-                        I'm a Header in a Card!
+                        <p id="memberApplyPrice">$29.99/mo.</p>
+                        <span ng-click="choosePremium=false" id="memberApplyClose" class="ion-close-circled"></span>
                     </div>
                     <div id="membershipSignUpPremium" ng-click="choosePremium=true" class="item item-text-wrap text-center">
-                        Premium
+                        Premium Membership
+                        <div ng-show="chooseClub">
+                        <!-- Membership tier description goes here -->
+                        </div>
                     </div>
-                    <div ng-show="choosePremium" class="item item-divider">
-                        I'm a Footer in a Card!
+                    <div ng-show="choosePremium" class="item item-divider text-right">
+                        <button class="button button-clear button-primary" ng-click="goToPayment(membership)">Checkout</button>
                     </div>
                 </div>
             </ion-content>

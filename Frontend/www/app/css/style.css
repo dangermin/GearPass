@@ -1,7 +1,9 @@
 /********************************
 Login
 *********************************/
-
+.scroll {
+	height:100%;
+}
 .login-page {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url(../img/giphy.gif);
     background-size: cover;
@@ -39,6 +41,16 @@ Login
 #loginContainer {
 	color:white;
 }
+
+#memberApplyPrice {
+	display: inline;
+}
+
+#memberApplyClose {
+	float:right;
+	cursor: pointer;
+}
+
 
 
 
