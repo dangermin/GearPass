@@ -31,14 +31,6 @@ angular.module('starter')
         IonicLogin.signUp($scope.data.email, $scope.data.password);
         $scope.applicationModal.hide();
 
-        Parse.Cloud.run('generateMembershipNumber').then(
-            function(data) {
-                console.log(data);
-            },
-            function(err) {
-                console.log(err);
-            }
-        );
     }
 
 })

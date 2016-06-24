@@ -5,4 +5,4 @@ angular.module('starter').value('APP_CONFIG', {
 })
 
 
-
+// Local server URL: http://localhost:1337/parse
