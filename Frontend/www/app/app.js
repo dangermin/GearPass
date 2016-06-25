@@ -55,6 +55,12 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'uiGmapgoog
         controller: 'LoginController'
     })
 
+    .state('payment', {
+        url: '/payment',
+        templateUrl: 'app/Payment/payment.html',
+        controller: 'PaymentController'
+    })
+
     .state('tab', {
         url: '/tab',
         abstract: true,
