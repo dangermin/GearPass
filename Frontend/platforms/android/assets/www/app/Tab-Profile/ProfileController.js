@@ -13,23 +13,59 @@ angular.module('starter')
     $scope.publicLastName = { "value": "" };
     $scope.publicLocation = { "value": "" };
 
-    $scope.addPublicProfileToCurrentUser = function() {
+
+    $scope.updateProfile = function() {
+
+        profile = $scope.thisProfile.value;
+
+        profile.set('User', Parse.User.current());
+        profile.set('FirstName', $scope.publicFirstName.value);
+        profile.set('LastName', $scope.publicLastName.value);
+        profile.set('Location', $scope.publicLocation.value.formatted_address);
+
+
+        profile.save();
+        alert('All done!');
+
+        $scope.profileModal.hide();
+
+    }
+
+
+    $scope.createProfile = function() {
 
         var PublicProfileSchema = Parse.Object.extend('PublicProfile');
 
         var public = new PublicProfileSchema();
 
         public.set('User', Parse.User.current());
-        public.set('Email', $scope.displayEmail.email);
         public.set('FirstName', $scope.publicFirstName.value);
         public.set('LastName', $scope.publicLastName.value);
         public.set('Location', $scope.publicLocation.value.formatted_address);
 
 
         public.save();
-
-        $scope.hasProfile = { "value": true }
+        alert("all done");
 
         $scope.profileModal.hide();
     }
+
+    var query = new Parse.Query(Parse.Object.extend("PublicProfile"));
+    return query.each(function(profile) {
+        var user = profile.get('User');
+        if (user.id == $scope.currentUser.id) {
+            var First = profile.get('FirstName');
+            var Last = profile.get('LastName');
+            var Location = profile.get('Location');
+            var Email = profile.get('Email');
+            $scope.thisProfile = { "value": profile };
+            $scope.$apply(function() {
+                $scope.profile = { "FirstName": First, "LastName": Last, "Location": Location, "Email": Email, "value": true};
+            });
+            console.log($scope.partner);
+        } else {
+            console.log("attempting to find partner profile");
+        }
+
+    });
 });

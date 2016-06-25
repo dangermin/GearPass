@@ -10,8 +10,9 @@ angular.module('starter')
 
         Parse.User.logIn(email, password, {
             success: function(user) {
+                console.log(user);
                 $ionicLoading.hide();
-                $state.transitionTo('tab.dash');
+                $state.go('splash');
             },
             error: function(user, error) {
                 $ionicPopup.alert({
@@ -32,8 +33,7 @@ angular.module('starter')
         Parse.User.logOut().then(
             function(user) {
                 $ionicLoading.hide();
-                window.localStorage['session'] = "";
-                $state.transitionTo('login');
+                $state.go('splash');
             });
     }
 
@@ -49,7 +49,7 @@ angular.module('starter')
                 $ionicLoading.hide();
                 Parse.User.logIn(email, password).then(
                     function() {
-                        $state.transitionTo('tab.dash');
+                        $state.transitionTo('splash');
                     }
                 );
             },
