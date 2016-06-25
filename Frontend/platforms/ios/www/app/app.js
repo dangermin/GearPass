@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaOauth'])
+angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'uiGmapgoogle-maps', 'ngCordovaOauth'])
 
 .run(function($ionicPlatform, APP_CONFIG) {
 
@@ -27,7 +27,14 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyC8hW8Oaabo6DjgqDFREUrqZnBtlytHgGQ',
+    v: '3.17',
+    libraries: 'weather,geometry,visualization',
+    language: 'en',
+    sensor: 'false',
+  })
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -47,14 +54,13 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
         templateUrl: 'app/Login/login.html',
         controller: 'LoginController'
     })
-    // setup an abstract state for the tabs directive
+
     .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'app/Tab/tabs.html'
+        templateUrl: 'app/Tab/tab.html',
+        controller: 'TabController'
     })
-
-    // Each tab has its own nav history stack:
 
     .state('tab.dash', {
         url: '/dash',
@@ -81,6 +87,16 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
             'tab-profile': {
                 templateUrl: 'app/Tab-Profile/tab-profile.html',
                 controller: 'ProfileController'
+            }
+        }
+    })
+
+    .state('tab.partner', {
+        url: '/partner',
+        views: {
+            'tab-partner': {
+                templateUrl: 'app/Tab-Partner/tab-partner.html',
+                controller: 'PartnerController'
             }
         }
     });

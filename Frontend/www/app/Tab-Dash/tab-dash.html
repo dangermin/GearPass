@@ -2,30 +2,35 @@
     <ion-content class="padding">
         <div class="centerDiv">
             <ion-pane>
-                <ion-content>
+                <ion-content data-tap-disabled="true">
                     <div class="item item-input controls">
                         <i class="icon ion-search placeholder-icon"></i>
                         <input id="shop-input" type="search" placeholder="Search Shops" data-tap-disabled="true" ng-model="search" ng-focus="searchFocused = true" ng-blur="searchFocused = false" ng-change="scrollTop()">
                         <button class="button" ng-click="searchShops()">Search</button>
                     </div>
-                        <div id="map_canvas"></div>
-                        <!-- Number of Boards select -->
-                        <select class="selectpicker">
-                            <option>1 Board</option>
-                            <option>2 Boards</option>
-                            <option>3 Boards</option>
-                            <option>4 Boards</option>
-                            <option>5 Boards</option>
-                            <option>6 Boards</option>
-                            <option>7 Boards</option>
-                            <option>8 Boards</option>
-                            <option>9 Boards</option>
-                            <option>10 Boards</option>
-                            <option>11 Boards</option>
-                        </select>
-                        <button class="button" ng-click="searchShopsAdv">Quick Search</button>
+                    <div id="map_canvas">
+                        <ui-gmap-google-map bounds="map.bounds" center="map.center" zoom="map.zoom" options="options">
+                            <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow" templateUrl="'windowContent.html'" templateParameter="windowParams">
+                            </ui-gmap-window>
+                        </ui-gmap-google-map>
+                    </div>
+                    <!-- Number of Boards select -->
+                    <select class="selectpicker">
+                        <option>1 Board</option>
+                        <option>2 Boards</option>
+                        <option>3 Boards</option>
+                        <option>4 Boards</option>
+                        <option>5 Boards</option>
+                        <option>6 Boards</option>
+                        <option>7 Boards</option>
+                        <option>8 Boards</option>
+                        <option>9 Boards</option>
+                        <option>10 Boards</option>
+                        <option>11 Boards</option>
+                    </select>
+                    <button class="button" ng-click="searchShopsAdv">Quick Search</button>
                 </ion-content>
             </ion-pane>
-            </div>
+        </div>
     </ion-content>
 </ion-view>

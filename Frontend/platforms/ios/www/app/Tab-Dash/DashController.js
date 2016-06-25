@@ -2,70 +2,97 @@ angular.module('starter')
 
 
 // HOME PAGE CONTROLLER
-.controller('DashCtrl', function($scope, IonicLogin, $state, $cordovaGeolocation) {
-
-
+.controller('DashController', function($scope, IonicLogin, $state, $cordovaGeolocation) {
+    $scope.shops = [];
     var options = { timeout: 10000, enableHighAccuracy: true };
-
     $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
-
-
-
         var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         console.log(latLng);
         var mapOptions = {
             center: latLng,
-            zoom: 15,
+            zoom: 10,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
+
         $scope.map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-        var marker = new google.maps.Marker({
-            position: latLng,
-            map: $scope.map,
-            title: 'Your location'
+        google.maps.event.addListener($scope.map, 'click', function() {
+            infowindow.close();
         });
 
-        // var request = {
-        //     location: latLng,
-        //     radius: '500',
-        //     types: ['food']
-        // };
+        Parse.GeoPoint.current({
+            success: function(point) {
+                var shopList = [];
+                var LatLng = [];
+                var avgLoc = [];
+                // var contentString = [];
+                var query = new Parse.Query(Parse.Object.extend("Shop"));
+                // query.setLimit(3);
+                query.each(function(shop) {
+                    var Name = shop.get('ShopName');
+                    var Location = shop.get('Location');
+                    var Lat = Location._latitude;
+                    var Lng = Location._longitude;
+                    var LatLng = { lat: Lat, lng: Lng };
+                    var Numb = shop.get('PhoneNumber');
+                    var Address = shop.get('Address');
+                    var Web = shop.get('WebAddres');
+                    var Hrs = shop.get('Hours');
 
-        // service = new google.maps.places.PlacesService($scope.map);
-        // service.nearbySearch(request, callback);
+                   
+                    contentString = Name, Numb, Address, Web, Hrs;
+                  
 
+                    // console.log(contentString);
+                    shopList.push({ "Name": Name, "Location": Location });
 
-        // function callback(results, status) {
-        //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-        //         for (var i = 0; i < results.length; i++) {
-        //             createMarker(results[i]);
-        //         }
-        //     }
-        // }
+                    var marker = new google.maps.Marker({
+                        map: $scope.map,
+                        animation: google.maps.Animation.DROP,
+                        position: LatLng,
+                    });
 
-        function createMarker(place) {
-            var placeLoc = place.geometry.location;
-            var marker = new google.maps.Marker({
-                map: $scope.map,
-                position: place.geometry.location
-            });
+                    var infowindow = new google.maps.InfoWindow();
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent(contentString);
+                        infowindow.open($scope.map, this);
+                    });
+                });
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
 
-            var infowindow = new google.maps.InfoWindow();
+        $scope.searchShops = function() {
+            Parse.GeoPoint.current({
+                success: function(point) {
+                    var shopList = [];
+                    var LatLng = [];
+                    var query = new Parse.Query(Parse.Object.extend("Shop"));
+                    // query.setLimit(3);
+                    query.each(function(shop) {
+                        var Name = shop.get('ShopName');
+                        var Location = shop.get('Location');
+                        var Lat = Location._latitude;
+                        var Lng = Location._longitude;
+                        var LatLng = { lat: Lat, lng: Lng };
 
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(place.name);
-                infowindow.open($scope.map, this);
+                        shopList.push({ "Name": Name, "Location": Location });
+
+                        var marker = new google.maps.Marker({
+                            map: $scope.map,
+                            position: LatLng,
+                        });
+                    });
+                },
+                error: function(err) {
+                    console.log(err);
+                }
             });
         }
-
-
-
-
-
     }, function(error) {
         console.log("Could not get location");
     });
-
 })

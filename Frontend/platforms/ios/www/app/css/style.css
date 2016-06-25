@@ -1,5 +1,3 @@
-/* Empty. Add your own CSS if you like */
-
 .centerDiv{
   display: inline-block; width:100%; margin: 0 auto; padding: 6px; text-align: center;
 }
@@ -7,6 +5,16 @@
 .buttonFullwidth{
   width: 46% ;
 }
+
+.scroll {
+    height: 100%;
+}
+
+
+
+/********************************
+Login
+*********************************/
 
 .login-page {
     background: url(../img/giphy.gif);
@@ -18,11 +26,60 @@
   padding: 30px;
 }
 
-.scroll {
-    height: 100%;
-}
- 
+
+
+
+
+
+/********************************
+Splash
+*********************************/
+
+
+
+/********************************
+Tab
+*********************************/
+
+
+
+
+/********************************
+Tab-Chats
+*********************************/
+
+
+
+
+/********************************
+Tab-Dash
+*********************************/
+
 #map_canvas {
-    width: 100%;
-    height: 70%;
+  width: 100%;
+  height: 70%;
+  margin: 0;
+  position: relative;
+}
+
+.scroll {
+  height: 100%;
+}
+
+.angular-google-map-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+
+
+/********************************
+Tab-Profile
+*********************************/
+
+#profileCard {
+	border-style: none;
 }

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaOauth'])
+angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'uiGmapgoogle-maps', 'ngCordovaOauth'])
 
 .run(function($ionicPlatform, APP_CONFIG) {
 
@@ -27,7 +27,14 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyC8hW8Oaabo6DjgqDFREUrqZnBtlytHgGQ',
+    v: '3.17',
+    libraries: 'weather,geometry,visualization',
+    language: 'en',
+    sensor: 'false',
+  })
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -46,6 +53,12 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
         url: '/login',
         templateUrl: 'app/Login/login.html',
         controller: 'LoginController'
+    })
+
+    .state('payment', {
+        url: '/payment',
+        templateUrl: 'app/Payment/payment.html',
+        controller: 'PaymentController'
     })
 
     .state('tab', {

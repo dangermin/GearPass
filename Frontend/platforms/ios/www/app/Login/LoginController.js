@@ -1,7 +1,7 @@
-angular.module('starter', [])
+angular.module('starter')
 
 // LOGIN PAGE CONTROLLER
-.controller('IonicLogin', function($scope, IonicLogin, $ionicLoading, $http, $cordovaFacebook, $state, $cordovaOauth) {
+.controller('LoginController', function($scope, IonicLogin, $ionicLoading, $http, $cordovaFacebook, $state, $cordovaOauth) {
 
     // REMOVE THE USER LOGIN INFORMATION WHEN RETURNING TO LOGIN SCREEN
     $scope.$on('$ionicView.enter', function(e) {
