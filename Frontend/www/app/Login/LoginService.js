@@ -15,15 +15,16 @@ angular.module('starter')
                 $ionicLoading.hide();
                 Parse.User.logIn(email, password).then(
                     function(user) {
-                        $state.go('splash');
                         Parse.Cloud.run('generateMembershipNumber').then(
                             function(data) {
                                 console.log(data);
+                                $state.go('splash');
                             },
                             function(err) {
                                 console.log(err);
                             }
                         );
+
                     },
                     function() {
                         console.log("couldn't log in new users");

@@ -4,5 +4,10 @@ angular.module('starter').value('APP_CONFIG', {
     FACEBOOK_APP_ID: '284143441935321'
 })
 
-
+//For testing:
 // Local server URL: http://localhost:1337/parse
+
+
+//For production:
+// Heroku server URL: https://shielded-escarpment-82919.herokuapp.com/parse
+ 

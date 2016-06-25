@@ -2,18 +2,9 @@
     <ion-content class="padding login-page">
         <div>
             <img id="loginLogo" src="app/img/surf.png" alt="Logo" class="Logo">
-            <form name="paymentFormm">
-                <div class="list">
-                    <label id="paymentInput" class="item item-input item-stacked-label text-left">
-                        <span id="paymentInfoContainer" class="input-label ">First Name</span>
-                        <input required type="text" ng-model="paymentContactInfo.first">
-                    </label>
-                    <label id="paymentInput" class="item item-input item-stacked-label text-left ">
-                        <span id="paymentInfoContainer" class="input-label">Last Name</span>
-                        <input required type="text" ng-model="paymentContactInfo.last">
-                    </label>
-                    <button id="paymentButtons" class="button button-calm" ng-click="">Back</button>
-                </div>
+            <form action="" method="POST">
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_qVOqOhnaihK12calHXo8wgQM" data-amount="999" data-name="Demo Site" data-description="Widget" data-image="/img/documentation/checkout/marketplace.png" data-locale="auto">
+                </script>
             </form>
             <button id="paymentButtons" class="button button-block button-dark" ng-click="">continue</button>
             <!--             <div class="centerDiv">
