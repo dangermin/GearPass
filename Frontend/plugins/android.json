@@ -20,6 +20,9 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
         }
     },
     "dependent_plugins": {

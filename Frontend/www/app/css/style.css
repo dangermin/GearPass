@@ -1,9 +1,11 @@
 /********************************
 Login
 *********************************/
+
 .scroll {
-	height:100%;
+    height: 100%;
 }
+
 .login-page {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url(../img/giphy.gif);
     background-size: cover;
@@ -27,10 +29,9 @@ Login
     border-radius: 50%;
 }
 
-
 #membershipSignUpSport {
-	font-family: 'Shadows Into Light', cursive;
-	font-size: 2em;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 2em;
 }
 
 #membershipSignUpPremium {
@@ -39,20 +40,17 @@ Login
 }
 
 #loginContainer {
-	color:white;
+    color: white;
 }
 
 #memberApplyPrice {
-	display: inline;
+    display: inline;
 }
 
 #memberApplyClose {
-	float:right;
-	cursor: pointer;
+    float: right;
+    cursor: pointer;
 }
-
-
-
 
 
 /********************************
@@ -66,23 +64,53 @@ Tab
 
 
 /********************************
-Tab-Chats
+Tab-History
 *********************************/
+#avatar{
+    max-height: 50px;
+}
 
+.history-item-message {
+
+  &:last-child{
+    margin-bottom: 50px;
+  }
+
+
+  h2, h1, p{
+    margin: 0 0 0 48px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+
+
+    span{
+      font-weight: normal;
+      color: #ccc;
+    }
+  }
+
+  p{
+    font-weight: normal;
+    text-overflow: clip !important;
+    white-space: normal !important;
+  }
+
+}
 
 /********************************
 Tab-Dash
 *********************************/
 
 #map_canvas {
-  width: 100%;
-  height: 70%;
-  margin: 0;
-  position: relative;
+    width: 100%;
+    height: 70%;
+    margin: 0;
+    position: relative;
 }
 
 .scroll {
-  height: 100%;
+    height: 100%;
 }
 
 .angular-google-map-container {
@@ -94,13 +122,24 @@ Tab-Dash
     left: 0;
 }
 
-#content{
-  max-height: 130px;
-  width: 170px;
+#content {
+    max-height: 130px;
+    width: 170px;
 }
-#webLink{
-  position: relative;
+
+#webLink {
+    position: relative;
     bottom: auto;
+}
+
+.button {
+    line-height: 10px !important;
+    min-height: 20px !important;
+    padding: 2px;
+    font-weight: bold !important;
+    margin-left: 4px;
+    margin-right: 4px;
+    font-size: 13px;
 }
 
 
