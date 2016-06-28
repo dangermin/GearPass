@@ -24,6 +24,7 @@
 		48763081DD3640CFBD779B4B /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE873C7BAF7A4E10867C977D /* CDVInAppBrowser.m */; };
 		F84E724C0A8B441A8BA5AE79 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C70A291E852E4645BE333A9E /* CDVLocation.m */; };
 		B975C1C41F92459F86093287 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B444F8077AD54283940495D8 /* CoreLocation.framework */; };
+		24BA407021BE4BA99F8BD00E /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82AA3FDE2642A3A86D00D1 /* IonicKeyboard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		C70A291E852E4645BE333A9E /* CDVLocation.m */ = {isa = PBXFileReference; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		182A542A036C4B69A7492A00 /* CDVLocation.h */ = {isa = PBXFileReference; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		B444F8077AD54283940495D8 /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		AF82AA3FDE2642A3A86D00D1 /* IonicKeyboard.m */ = {isa = PBXFileReference; name = "IonicKeyboard.m"; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		5C0A1955450943D284121F34 /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,8 @@
 				6483237D6CD049138629F600 /* CDVInAppBrowser.h */,
 				C70A291E852E4645BE333A9E /* CDVLocation.m */,
 				182A542A036C4B69A7492A00 /* CDVLocation.h */,
+				AF82AA3FDE2642A3A86D00D1 /* IonicKeyboard.m */,
+				5C0A1955450943D284121F34 /* IonicKeyboard.h */,
 			);
 			name = Plugins;
 			path = "IonicLogin/Plugins";
@@ -312,6 +317,7 @@
 				61880EE3871B4B9CB46302B7 /* FacebookConnectPlugin.m in Sources */,
 				48763081DD3640CFBD779B4B /* CDVInAppBrowser.m in Sources */,
 				F84E724C0A8B441A8BA5AE79 /* CDVLocation.m in Sources */,
+				24BA407021BE4BA99F8BD00E /* IonicKeyboard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -43,6 +43,10 @@
                         {
                             "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.Geolocation\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"io.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -104,6 +108,9 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
         }
     },
     "dependent_plugins": {},
@@ -134,6 +141,14 @@
             "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
             "id": "cordova-plugin-geolocation.PositionError",
             "runs": true
+        },
+        {
+            "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+            "id": "ionic-plugin-keyboard.keyboard",
+            "clobbers": [
+                "cordova.plugins.Keyboard"
+            ],
+            "runs": true
         }
     ],
     "plugin_metadata": {
@@ -141,6 +156,7 @@
         "cordova-plugin-whitelist": "1.2.2",
         "cordova-plugin-inappbrowser": "1.4.0",
         "cordova-plugin-compat": "1.0.0",
-        "cordova-plugin-geolocation": "2.2.0"
+        "cordova-plugin-geolocation": "2.2.0",
+        "ionic-plugin-keyboard": "2.2.1"
     }
 }

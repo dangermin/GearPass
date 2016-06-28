@@ -1,9 +1,11 @@
 /********************************
 Login
 *********************************/
+
 .scroll {
-	height:100%;
+    height: 100%;
 }
+
 .login-page {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url(../img/giphy.gif);
     background-size: cover;
@@ -27,10 +29,11 @@ Login
     border-radius: 50%;
 }
 
-
+<<<<<<< HEAD
+=======
 #membershipSignUpSport {
-	font-family: 'Shadows Into Light', cursive;
-	font-size: 2em;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 2em;
 }
 
 #membershipSignUpPremium {
@@ -38,22 +41,23 @@ Login
     font-size: 2em;
 }
 
+>>>>>>> origin/DMF
 #loginContainer {
-	color:white;
+    color: white;
 }
 
+<<<<<<< HEAD
+=======
 #memberApplyPrice {
-	display: inline;
+    display: inline;
 }
 
 #memberApplyClose {
-	float:right;
-	cursor: pointer;
+    float: right;
+    cursor: pointer;
 }
 
-
-
-
+>>>>>>> origin/DMF
 
 /********************************
 Splash
@@ -66,25 +70,81 @@ Tab
 
 
 /********************************
-Tab-Chats
+Tab-History
 *********************************/
+#avatar{
+    max-height: 50px;
+}
+<<<<<<< HEAD
+​
+.history-item-message {
+​
+  &:last-child{
+    margin-bottom: 50px;
+  }
+​
+​
+=======
+
+.history-item-message {
+
+  &:last-child{
+    margin-bottom: 50px;
+  }
 
 
+>>>>>>> origin/DMF
+  h2, h1, p{
+    margin: 0 0 0 48px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+<<<<<<< HEAD
+​
+​
+=======
+
+
+>>>>>>> origin/DMF
+    span{
+      font-weight: normal;
+      color: #ccc;
+    }
+  }
+<<<<<<< HEAD
+​
+=======
+
+>>>>>>> origin/DMF
+  p{
+    font-weight: normal;
+    text-overflow: clip !important;
+    white-space: normal !important;
+  }
+<<<<<<< HEAD
+​
+}
+​
+=======
+
+}
+
+>>>>>>> origin/DMF
 /********************************
 Tab-Dash
 *********************************/
-
+​
 #map_canvas {
-  width: 100%;
-  height: 70%;
-  margin: 0;
-  position: relative;
+    width: 100%;
+    height: 70%;
+    margin: 0;
+    position: relative;
 }
-
+​
 .scroll {
-  height: 100%;
+    height: 100%;
 }
-
+​
 .angular-google-map-container {
     position: absolute;
     height: 100%;
@@ -93,16 +153,43 @@ Tab-Dash
     right: 0;
     left: 0;
 }
+<<<<<<< HEAD
+​
+=======
 
-#content{
-  max-height: 130px;
-  width: 170px;
+>>>>>>> origin/DMF
+#content {
+    max-height: 130px;
+    width: 170px;
 }
-#webLink{
-  position: relative;
+<<<<<<< HEAD
+​
+=======
+
+>>>>>>> origin/DMF
+#webLink {
+    position: relative;
     bottom: auto;
 }
+<<<<<<< HEAD
+​
+=======
 
+>>>>>>> origin/DMF
+.button {
+    line-height: 10px !important;
+    min-height: 20px !important;
+    padding: 2px;
+    font-weight: bold !important;
+    margin-left: 4px;
+    margin-right: 4px;
+    font-size: 13px;
+}
+<<<<<<< HEAD
+​
+=======
+
+>>>>>>> origin/DMF
 
 /********************************
 Tab-Profile

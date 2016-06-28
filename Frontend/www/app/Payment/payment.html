@@ -1,70 +1,155 @@
-<ion-view view-title="Payment" hide-back-button="false" can-swipe-back="true">
-    <ion-content class="padding login-page">
-        <div>
-            <img id="loginLogo" src="app/img/surf.png" alt="Logo" class="Logo">
-            <form action="" method="POST">
-                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_qVOqOhnaihK12calHXo8wgQM" data-amount="999" data-name="Demo Site" data-description="Widget" data-image="/img/documentation/checkout/marketplace.png" data-locale="auto">
-                </script>
-            </form>
-            <button id="paymentButtons" class="button button-block button-dark" ng-click="">continue</button>
-            <!--             <div class="centerDiv">
-                <button class="button button-positive buttonFullwidth" ng-click="facebookLogin()">Facebook</button>
-                <button class="button button-assertive buttonFullwidth" ng-click="googleLogin()">Google+</button>
-            </div> -->
-            <!-- <div class="centerDiv">
-      <button class="button button-energized buttonFullwidth" ng-click="instagramLogin()">Instagram</button>
-      <button class="button button-calm buttonFullwidth" ng-click="twitterLogin()">Twitter</button>
-    </div> -->
-        </div>
+<ion-view view-title="Membership Sign Up" hide-back-button="false" can-swipe-back="true">
+    <ion-content>
+        <h3>Confirm Details:</h3>
+        <ul class="list">
+            <div class="item item-divider">
+                Billing Information:
+            </div>
+            <li class="item">{{payment.first}}</li>
+            <li class="item">{{payment.last}}</li>
+            <li class="item">{{payment.street1}}</li>
+            <li class="item">{{payment.street2}}</li>
+            <li class="item">{{payment.city}}</li>
+            <li class="item">{{payment.state}}</li>
+            <li class="item">{{payment.zip}}</li>
+            <div class="item item-divider">
+                Credit Card Information:
+            </div>
+            <li class="item">{{payment.cardNumber}}</li>
+            <li class="item">{{payment.month}}</li>
+            <li class="item">{{payment.year}}</li>
+            <li class="item">{{payment.cvc}}</li>
+        </ul>
+        <button class="button button-block button-light" ng-click="">Confirm Payment!</button>
     </ion-content>
-    <script id="templates/contactInfoModal.html" type="text/ng-template">
+    <script id="templates/profileModal.html" type="text/ng-template">
         <ion-modal-view>
             <ion-header-bar class="bar bar-header bar-positive">
                 <h1 class="title">Contact Information</h1>
-                <button class="button button-clear button-primary" ng-click="contactInfoModal.hide()">Cancel</button>
+                <button class="button button-clear button-primary" ng-click="profileModal.hide()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <form name="profileInfoForm">
+                    <div class="card" ng-hide="part2">
+                        <label class="item item-input item-stacked-label text-left">
+                            <span class="input-label ">  First Name:</span>
+                            <input required type="text" ng-model="data.first">
+                        </label>
+                        <label class="item item-input item-stacked-label text-left ">
+                            <span class="input-label">  Last Name:</span>
+                            <input required type="text" ng-model="data.last">
+                        </label>
+                        <label class="item item-input item-stacked-label text-left">
+                            <span class="input-label ">  Street Address:</span>
+                            <input required type="text" ng-model="data.street1">
+                        </label>
+                        <label class="item item-input item-stacked-label text-left ">
+                            <span class="input-label">  Street Address 2 (Optional):</span>
+                            <input required type="text" ng-model="data.street2">
+                        </label>
+                        <label class="item item-input item-stacked-label text-left">
+                            <span class="input-label "> City:</span>
+                            <input required type="text" ng-model="data.city">
+                        </label>
+                        <label class="item item-input item-stacked-label text-left ">
+                            <span class="input-label">  State:</span>
+                            <input required type="text" ng-model="data.state">
+                        </label>
+                        <label class="item item-input item-stacked-label text-left">
+                            <span class="input-label ">  Zip Code:</span>
+                            <input required type="text" ng-model="data.zip">
+                        </label>
+                        <label class="item item-input item-stacked-label text-left ">
+                            <span class="input-label">  Phone Number:</span>
+                            <input required type="text" ng-model="data.phone">
+                        </label>
+                        <button class="button button-block button-dark" ng-click="part2=true">continue</button>
+                    </div>
+                    <div class="card" ng-show="part2">
+                        <label class="item item-input item-stacked-label text-left">
+                            <span class="input-label ">  Email Address:</span>
+                            <input required type="text" ng-model="data.email">
+                        </label>
+                        <label class="item item-input item-stacked-label text-left ">
+                            <span class="input-label">  New Password:</span>
+                            <input required type="password" placeholder=" " ng-model="data.password">
+                        </label>
+                        <label class="item item-input item-stacked-label text-left ">
+                            <span class="input-label">  Confirm Password:</span>
+                            <input required type="password" placeholder=" Confirm Password" ng-model="data.confirmpassword">
+                        </label>
+                        <button class="button button-block button-dark" ng-click="part2=false">back</button>
+                    </div>
+                </form>
+                <button ng-show="part2" id="continueToPayment" class="button button-block button-dark" ng-click="continueToPayment()">continue</button>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+    <script id="templates/paymentModal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Payment Information</h1>
+                <button class="button button-clear button-primary" ng-click="paymentModal.hide()">Cancel</button>
             </ion-header-bar>
             <ion-content class="padding">
                 <div class="card">
-                    <div class="item item-divider">
-                        <p id="contactInfoHeader">First Name:</p>
-                    </div>
-                    <div id="contactInfoInput" class="item item-text-wrap">
-                        <input type="text" placeholder=" Jim" ng-model="data.first">
-                    </div>
+                    <button class="button button-block button-dark" ng-click="clearContactInfo()">Clear Billing Info</button>
+                    <label class="item item-input item-stacked-label text-left">
+                        <span class="input-label ">  First Name:</span>
+                        <input required type="text" ng-model="payment.first">
+                    </label>
+                    <label class="item item-input item-stacked-label text-left ">
+                        <span class="input-label">  Last Name:</span>
+                        <input required type="text" ng-model="payment.last">
+                    </label>
+                    <label class="item item-input item-stacked-label text-left">
+                        <span class="input-label ">  Street Address:</span>
+                        <input required type="text" ng-model="payment.street1">
+                    </label>
+                    <label class="item item-input item-stacked-label text-left ">
+                        <span class="input-label">  Street Address 2 (Optional):</span>
+                        <input required type="text" ng-model="payment.street2">
+                    </label>
+                    <label class="item item-input item-stacked-label text-left">
+                        <span class="input-label "> City:</span>
+                        <input required type="text" ng-model="payment.city">
+                    </label>
+                    <label class="item item-input item-stacked-label text-left ">
+                        <span class="input-label">  State:</span>
+                        <input required type="text" ng-model="payment.state">
+                    </label>
+                    <label class="item item-input item-stacked-label text-left">
+                        <span class="input-label ">  Zip Code:</span>
+                        <input required type="text" ng-model="payment.zip">
+                    </label>
                 </div>
                 <div class="card">
                     <div class="item item-divider">
-                        <p id="contactInfoHeader">Age:</p>
+                        <p id="contactInfoHeader">Card Number:</p>
                     </div>
                     <div id="contactInfoInput" class="item item-text-wrap">
-                        <input type="number" placeholder=" 35" ng-model="data.age">
+                        <input type="text" placeholder=" xxxxxxxxxxxxxxxx" ng-model="payment.cardNumber">
                     </div>
-                </div>
-                <div class="card">
                     <div class="item item-divider">
-                        <p id="contactInfoHeader">Last Name:</p>
+                        <p id="contactInfoHeader">Exp. Month</p>
                     </div>
                     <div id="contactInfoInput" class="item item-text-wrap">
-                        <input type="text" placeholder=" Jones" ng-model="data.last">
+                        <input type="number" placeholder=" 05" ng-model="payment.month">
                     </div>
-                </div>
-                <div class="card">
                     <div class="item item-divider">
-                        <p id="contactInfoHeader">Email Address:</p>
+                        <p id="contactInfoHeader">Exp. Year</p>
                     </div>
                     <div id="contactInfoInput" class="item item-text-wrap">
-                        <input type="text" placeholder=" Jimmy@gmail.com" ng-model="data.email">
+                        <input type="number" placeholder=" 2020" ng-model="payment.year">
                     </div>
-                </div>
-                <div class="card">
                     <div class="item item-divider">
-                        <p id="contactInfoHeader">Phone Number:</p>
+                        <p id="contactInfoHeader">CVC</p>
                     </div>
                     <div id="contactInfoInput" class="item item-text-wrap">
-                        <input type="text" placeholder=" 555-555-5555" ng-model="data.phone">
+                        <input type="text" placeholder=" 123" ng-model="payment.cvc">
                     </div>
                 </div>
-                <button id="continueToPayment" class="button button-block button-dark" ng-click="continueToPayment()">continue</button>
+                <button class="button button-block button-dark" ng-click="continueToCheckout()">continue</button>
             </ion-content>
         </ion-modal-view>
     </script>

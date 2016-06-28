@@ -13,7 +13,7 @@
                         <span id="loginContainer" class="input-label">  Password:</span>
                         <input required type="password" placeholder="  Password" ng-model="data.password">
                     </label>
-                    <button id="loginButtons" class="button button-calm" ng-click="signUp()">Login</button>
+                    <button id="loginButtons" class="button button-calm" ng-click="login()">Login</button>
                     <button id="loginButtons" class="button button-calm" ng-click="loggingIn=false">Back</button>
                 </div>
             </form>
@@ -36,48 +36,49 @@
             </ion-header-bar>
             <ion-content class="padding">
                 <div class="card">
-                    <div ng-show="chooseClub" class="item item-divider">
-                        <p id="memberApplyPrice">$29.99/mo.</p>
-                        <span ng-click="chooseClub=false" id="memberApplyClose" class="ion-close-circled"></span>
+                    <div ng-show="chooseClub" class="item item-divider text-left">
+                        <p id="memberApplyPrice">$9.99/mo.</p>
                     </div>
-                    <div id="membershipSignUpClub" ng-click="chooseClub=true" class="item item-text-wrap text-center">
-                        CLUB MEMBERSHIP
-                        <div ng-show="chooseClub">
-                        <!-- Membership tier description goes here -->
-                        </div>
+                    <div id="membershipSignUpClub" ng-click="chooseClub=!chooseClub" class="item item-text-wrap text-center">
+                        Club Membership
+                    </div>
+                    <div ng-show="chooseClub" class="item item-text-wrap text-left">
+                        <h4>10% discount at all Partner locations</h4>
+                        <h4>Free T-shirt</h4>
                     </div>
                     <div ng-show="chooseClub" class="item item-divider text-right">
-                        <button class="button button-clear button-primary" ng-click="goToPayment(club)">Checkout</button>
+                        <button class="button button-clear button-primary" ng-click="goToPayment('club')">Sign Up!</button>
                     </div>
                 </div>
                 <div class="card">
                     <div ng-show="chooseSport" class="item item-divider">
-                        <p id="memberApplyPrice">$29.99/mo.</p>
-                        <span ng-click="chooseSport=false" id="memberApplyClose" class="ion-close-circled"></span>
+                        <p id="memberApplyPrice">$14.99/mo.</p>
                     </div>
-                    <div id="membershipSignUpSport" ng-click="chooseSport=true" class="item item-text-wrap text-center">
-                        SPORT MEMBERSHIP
-                        <div ng-show="chooseClub">
-                        <!-- Membership tier description goes here -->
-                        </div>
+                    <div id="membershipSignUpSport" ng-click="chooseSport=!chooseSport" class="item item-text-wrap text-center">
+                        Sport Membership
+                    </div>
+                    <div ng-show="chooseSport" class="item item-text-wrap text-left">
+                        <h4>15% discount at all Partner locations</h4>
+                        <h4>Free T-shirt</h4>
                     </div>
                     <div ng-show="chooseSport" class="item item-divider text-right">
-                        <button class="button button-clear button-primary" ng-click="goToPayment(sport)">Checkout</button>
+                        <button class="button button-clear button-primary" ng-click="goToPayment('sport')">Sign Up!</button>
                     </div>
                 </div>
                 <div class="card">
                     <div ng-show="choosePremium" class="item item-divider">
-                        <p id="memberApplyPrice">$29.99/mo.</p>
-                        <span ng-click="choosePremium=false" id="memberApplyClose" class="ion-close-circled"></span>
+                        <p id="memberApplyPrice">$19.99/mo.</p>
                     </div>
-                    <div id="membershipSignUpPremium" ng-click="choosePremium=true" class="item item-text-wrap text-center">
+                    <div id="membershipSignUpPremium" ng-click="choosePremium=!choosePremium" class="item item-text-wrap text-center">
                         Premium Membership
-                        <div ng-show="chooseClub">
-                        <!-- Membership tier description goes here -->
-                        </div>
+                    </div>
+                    <div ng-show="choosePremium" class="item item-text-wrap text-left">
+                        <h4>15% discount at all Partner locations</h4>
+                        <h4>Bring a new friend every time for free!</h4>
+                        <h4>Free T-shirt</h4>
                     </div>
                     <div ng-show="choosePremium" class="item item-divider text-right">
-                        <button class="button button-clear button-primary" ng-click="goToPayment(membership)">Checkout</button>
+                        <button class="button button-clear button-primary" ng-click="goToPayment('premium')">Sign Up!</button>
                     </div>
                 </div>
             </ion-content>

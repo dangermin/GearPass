@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'uiGmapgoogle-maps', 'ngCordovaOauth'])
+angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaOauth'])
+//, 'uiGmapgoogle-maps'
 
 .run(function($ionicPlatform, APP_CONFIG) {
 
@@ -27,14 +28,16 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'uiGmapgoog
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
-  uiGmapGoogleMapApiProvider.configure({
-    key: 'AIzaSyC8hW8Oaabo6DjgqDFREUrqZnBtlytHgGQ',
-    v: '3.17',
-    libraries: 'weather,geometry,visualization',
-    language: 'en',
-    sensor: 'false',
-  })
+.config(function($stateProvider, $urlRouterProvider)
+//, uiGmapGoogleMapApiProvider
+ {
+  // uiGmapGoogleMapApiProvider.configure({
+  //   key: 'AIzaSyC8hW8Oaabo6DjgqDFREUrqZnBtlytHgGQ',
+  //   v: '3.17',
+  //   libraries: 'weather,geometry,visualization',
+  //   language: 'en',
+  //   sensor: 'false',
+  // })
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -78,11 +81,12 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'uiGmapgoog
         }
     })
 
-    .state('tab.chats', {
-        url: '/chats',
+    .state('tab.history', {
+        url: '/history',
         views: {
-            'tab-chats': {
-                templateUrl: 'app/Tab-Chats/tab-chats.html'
+            'tab-history': {
+                templateUrl: 'app/Tab-History/tab-history.html',
+                controller: 'HistoryController' 
             }
         }
     })

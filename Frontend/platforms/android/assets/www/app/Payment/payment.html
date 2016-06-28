@@ -1,0 +1,71 @@
+<ion-view view-title="Payment" hide-back-button="false" can-swipe-back="true">
+    <ion-content class="padding login-page">
+        <div>
+            <img id="loginLogo" src="app/img/surf.png" alt="Logo" class="Logo">
+            <form action="" method="POST">
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_qVOqOhnaihK12calHXo8wgQM" data-amount="999" data-name="Demo Site" data-description="Widget" data-image="/img/documentation/checkout/marketplace.png" data-locale="auto">
+                </script>
+            </form>
+            <button id="paymentButtons" class="button button-block button-dark" ng-click="">continue</button>
+            <!--             <div class="centerDiv">
+                <button class="button button-positive buttonFullwidth" ng-click="facebookLogin()">Facebook</button>
+                <button class="button button-assertive buttonFullwidth" ng-click="googleLogin()">Google+</button>
+            </div> -->
+            <!-- <div class="centerDiv">
+      <button class="button button-energized buttonFullwidth" ng-click="instagramLogin()">Instagram</button>
+      <button class="button button-calm buttonFullwidth" ng-click="twitterLogin()">Twitter</button>
+    </div> -->
+        </div>
+    </ion-content>
+    <script id="templates/contactInfoModal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Contact Information</h1>
+                <button class="button button-clear button-primary" ng-click="contactInfoModal.hide()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <div class="card">
+                    <div class="item item-divider">
+                        <p id="contactInfoHeader">First Name:</p>
+                    </div>
+                    <div id="contactInfoInput" class="item item-text-wrap">
+                        <input type="text" placeholder=" Jim" ng-model="data.first">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="item item-divider">
+                        <p id="contactInfoHeader">Age:</p>
+                    </div>
+                    <div id="contactInfoInput" class="item item-text-wrap">
+                        <input type="number" placeholder=" 35" ng-model="data.age">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="item item-divider">
+                        <p id="contactInfoHeader">Last Name:</p>
+                    </div>
+                    <div id="contactInfoInput" class="item item-text-wrap">
+                        <input type="text" placeholder=" Jones" ng-model="data.last">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="item item-divider">
+                        <p id="contactInfoHeader">Email Address:</p>
+                    </div>
+                    <div id="contactInfoInput" class="item item-text-wrap">
+                        <input type="text" placeholder=" Jimmy@gmail.com" ng-model="data.email">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="item item-divider">
+                        <p id="contactInfoHeader">Phone Number:</p>
+                    </div>
+                    <div id="contactInfoInput" class="item item-text-wrap">
+                        <input type="text" placeholder=" 555-555-5555" ng-model="data.phone">
+                    </div>
+                </div>
+                <button id="continueToPayment" class="button button-block button-dark" ng-click="continueToPayment()">continue</button>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+</ion-view>
