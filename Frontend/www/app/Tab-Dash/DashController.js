@@ -1,13 +1,13 @@
- (function() {
+(function() {
     'use strict';
     angular.module('starter')
-​
+
     // HOME PAGE CONTROLLER
     .controller('DashController', function($scope, IonicLogin, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile) {
         var map = null;
         $scope.shops = [];
         initMap();
-​
+
         function initMap() {
             var options = { timeout: 10000, enableHighAccuracy: true };
             $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
@@ -28,7 +28,7 @@
                 loadMarkers();
             });
         }
-​
+
         function loadMarkers() {
             Parse.GeoPoint.current({
                 success: function(point) {
@@ -46,9 +46,9 @@
                         $scope.newObj.Address = shop.get('Address');
                         $scope.newObj.Web = shop.get('WebAddress');
                         $scope.newObj.Hrs = shop.get('Hours');
-​
+
                         $scope.shops.push($scope.newObj);
-​
+
                         for (var i = 0; i < $scope.shops.length; i++) {
                             var shop = $scope.shops[i];
                             var markerPos = new google.maps.LatLng($scope.shops[i].Location._latitude, $scope.shops[i].Location._longitude);
@@ -58,7 +58,7 @@
                                 animation: google.maps.Animation.DROP,
                                 position: markerPos,
                             });
-​
+
                             var infoWindowContent = '<div id="content">' +
                                 '<div style="float:left; width:5%; padding-right:2cm"><img src="app/img/surf.png" width="60" height="40"/></div>' +
                                 '<div style="float:right">' +
@@ -71,16 +71,6 @@
                                 '<p><a href="shop.Web">' + shop.Web + '</a> ' +
                                 '<button id="requestBnt" class="button button-calm" ng-click="requestModal.show()">Request</button>' +
                                 '</div>';
-<<<<<<< HEAD
-​
-​
-                            var compiled = $compile(infoWindowContent)($scope);
-​
-                            var infoWindow = new google.maps.InfoWindow({
-                                content: compiled[0]
-                            });
-​
-=======
 
 
                             var compiled = $compile(infoWindowContent)($scope);
@@ -89,25 +79,11 @@
                                 content: compiled[0]
                             });
 
->>>>>>> origin/DMF
                             $ionicModal.fromTemplateUrl('templates/modalContent.html', {
                                 scope: $scope
                             }).then(function(requestModal) {
                                 $scope.requestModal = requestModal;
                             });
-<<<<<<< HEAD
-​
-​
-​
-                            $scope.openModal = function() {
-                                $scope.requestModal.show();
-                            };
-​
-                            $scope.closeModal = function() {
-                                $scope.requestModal.hide();
-                            };
-​
-=======
 
 
 
@@ -119,73 +95,46 @@
                                 $scope.requestModal.hide();
                             };
 
->>>>>>> origin/DMF
                             //Cleanup the modal when we're done with it!
                             $scope.$on('$destroy', function() {
                                 $scope.modal.remove();
                             });
-<<<<<<< HEAD
-​
-=======
 
->>>>>>> origin/DMF
                             // Execute action on hide modal
                             $scope.$on('modal.hidden', function() {
                                 // Execute action
                             });
-<<<<<<< HEAD
-​
-=======
 
->>>>>>> origin/DMF
                             // Execute action on remove modal
                             $scope.$on('modal.removed', function() {
                                 // Execute action
                             });
-<<<<<<< HEAD
-​
-​
-​
-=======
 
 
 
->>>>>>> origin/DMF
                             // $scope.requestModal = $ionicModal.fromTemplate('<ion-modal-view>' +
                             //     ' <ion-header-bar>' +
                             //     '<h1 class = "title">Modal Title</h1>' +
                             //     '</ion-header-bar>' +
-<<<<<<< HEAD
-​
-                            //     '<ion-content>' +
-                            //     '<button class="button icon icon-left ion-ios-close-outline" ng-click="closeModal()">Close Modal </button>' +
-                            //     '</ion-content>' +
-​
-=======
 
                             //     '<ion-content>' +
                             //     '<button class="button icon icon-left ion-ios-close-outline" ng-click="closeModal()">Close Modal </button>' +
                             //     '</ion-content>' +
 
->>>>>>> origin/DMF
                             //     '</ion-modal-view>', {
                             //         scope: $scope,
                             //         animation: 'slide-in-up'
                             //     })
-<<<<<<< HEAD
-​
-=======
 
->>>>>>> origin/DMF
                             addInfoWindow(marker, compiled[0], shop);
                         }
                     });
                 }
             })
         }
-​
+
         function addInfoWindow(marker, message, shop) {
-​
+
             var infoWindow = new google.maps.InfoWindow({
                 content: message
             });
@@ -196,16 +145,6 @@
                 infoWindow.close($scope.map, this);
             });
         }
-<<<<<<< HEAD
-​
-        $scope.request = { "gear": "", "quantity": "", "message": ""};
-​
-        function comfirm(gear, quantity, message){
-​
-        }
-​
-​
-=======
 
         $scope.request = { "gear": "", "quantity": "", "message": ""};
 
@@ -214,7 +153,6 @@
         }
 
 
->>>>>>> origin/DMF
         // Calculate average location
         // console.log(avgLoc);
         // var latSum = 0;
@@ -229,10 +167,6 @@
         // console.log("this");
         // console.log(latAvg);
         // map.setCenter(new google.maps.LatLng(latAvg, lngAvg));
-<<<<<<< HEAD
-​
-=======
 
->>>>>>> origin/DMF
     });
 })();
