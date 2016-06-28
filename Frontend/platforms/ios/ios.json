@@ -43,6 +43,10 @@
                         {
                             "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -93,6 +97,9 @@
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
         "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         }
     },
@@ -146,6 +153,15 @@
             "clobbers": [
                 "navigator.geolocation"
             ]
+        },
+        {
+            "file": "plugins/ionic-plugin-keyboard/www/ios/keyboard.js",
+            "id": "ionic-plugin-keyboard.keyboard",
+            "pluginId": "ionic-plugin-keyboard",
+            "clobbers": [
+                "cordova.plugins.Keyboard"
+            ],
+            "runs": true
         }
     ],
     "plugin_metadata": {
@@ -153,6 +169,7 @@
         "cordova-plugin-whitelist": "1.2.2",
         "cordova-plugin-inappbrowser": "1.4.0",
         "cordova-plugin-compat": "1.0.0",
-        "cordova-plugin-geolocation": "2.2.0"
+        "cordova-plugin-geolocation": "2.2.0",
+        "ionic-plugin-keyboard": "2.2.1"
     }
 }

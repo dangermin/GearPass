@@ -14,23 +14,50 @@
                             </ui-gmap-window>
                         </ui-gmap-google-map>
                     </div>
-                    <!-- Number of Boards select -->
-                    <select class="selectpicker">
-                        <option>1 Board</option>
-                        <option>2 Boards</option>
-                        <option>3 Boards</option>
-                        <option>4 Boards</option>
-                        <option>5 Boards</option>
-                        <option>6 Boards</option>
-                        <option>7 Boards</option>
-                        <option>8 Boards</option>
-                        <option>9 Boards</option>
-                        <option>10 Boards</option>
-                        <option>11 Boards</option>
-                    </select>
-                    <button class="button" ng-click="searchShopsAdv">Quick Search</button>
                 </ion-content>
             </ion-pane>
         </div>
+        <script id="templates/modalContent.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-header-bar class="bar bar-header bar-positive">
+                    <h1 class="title">Request Gear</h1>
+                    <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
+                </ion-header-bar>
+                <ion-content class="padding">
+                    <label id="requestInput" class="item item-input item-select">
+                        <div class="gear">
+                            Select Gear
+                        </div>
+                        <select ng-model="request.gear">
+                            <option value="sB" selected>Surf Board</option>
+                            <option value="b">Bike</option>
+                            <option value="s">Ski</option>
+                        </select>
+                    </label>
+                    <label id="requestInput" class="item item-input item-select">
+                        <div class="quantity">
+                            Select Quantity
+                        </div>
+                        <select ng-model="request.quantity">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </label>
+                    <label id="requestInput" class="item item-input item-select">
+                        <textarea placeholder="Custom Message" rows="5" lose-focus-on-return ng-model="request.message"></textarea>
+                    </label>
+                    <button class="button button-full button-positive" ng-click="Comfirm(user)">Comfirm</button>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
     </ion-content>
 </ion-view>
