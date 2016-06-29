@@ -3,51 +3,105 @@ angular.module('starter')
 // LOGIN PAGE CONTROLLER
 .controller('PaymentController', function($scope, $ionicModal, IonicLogin, $ionicLoading, $state, $cordovaOauth) {
 
-    //tell modal how to be
-    $ionicModal.fromTemplateUrl('templates/contactInfoModal.html', {
+    //define the payment Modal
+    $ionicModal.fromTemplateUrl('templates/paymentModal.html', {
         scope: $scope
-    }).then(function(contactInfoModal) {
-        $scope.contactInfoModal = contactInfoModal;
+    }).then(function(paymentModal) {
+        $scope.paymentModal = paymentModal;
     });
 
-    // REMOVE THE USER LOGIN INFORMATION WHEN RETURNING TO LOGIN SCREEN
+    $ionicModal.fromTemplateUrl('templates/profileModal.html', {
+        scope: $scope
+    }).then(function(profileModal) {
+        $scope.profileModal = profileModal;
+    });
+
     $scope.$on('$ionicView.enter', function(e) {
-        $scope.contactInfoModal.show()
+        $scope.profileModal.show();
     });
 
-    $scope.data = { "first": "",  "last": "",  "email": "", "phone": "", "age": "" };
+    //set a variable to capture user profile information
+    $scope.data = {
+        "first": "",
+        "last": "",
+        "email": "",
+        "password": "",
+        "confirmpassword": "",
+        "street1": "",
+        "street2": "",
+        "city": "",
+        "state": "",
+        "zip": "",
+        "phone": ""
+    };
 
+    //check if passwords match, create user account, show payment Modal
     $scope.continueToPayment = function() {
-        $scope.contactInfoModal.hide();
-        $scope.paymentContactInfo = {"first": $scope.data.first, "last": $scope.data.last,  "email": $scope.data.email, "phone": $scope.data.phone, "age": $scope.data.age };
+
+        if ($scope.data.password != $scope.data.confirmpassword) {
+            $ionicPopup.alert("Passwords do not match!");
+        } else {
+            IonicLogin.signUp($scope.data);
+            //set billing information same as profile information, for convenience
+            $scope.payment = {
+                "first": $scope.data.first,
+                "last": $scope.data.last,
+                "street1": $scope.data.street1,
+                "street2": $scope.data.street2,
+                "city": $scope.data.city,
+                "state": $scope.data.state,
+                "zip": $scope.data.zip
+            };
+            $scope.profileModal.hide();
+            $scope.paymentModal.show();
+        }
+
+        // IonicLogin.signUp($scope.data.email, $scope.data.password);
+        // Parse.Cloud.run('generateMembershipNumber').then(
+        //     function(data) {
+        //         console.log(data);
+        //     },
+        //     function(err) {
+        //         console.log(err);
+        //     }
+        // );
     }
 
-    $scope.clearContactInfo = function () {
-        $scope.paymentContactInfo = {};
+    //user can clear billing information if different from profile information
+    $scope.clearContactInfo = function() {
+        $scope.payment = {};
     }
 
-
-
-
-
-    // LOGIN FUNCTION
-    $scope.login = function() {
-        IonicLogin.login($scope.data.email, $scope.data.password);
+    //once credit card info is filled out, continue to show them profile and have them confirm payment
+    $scope.continueToCheckout = function() {
+        $scope.paymentModal.hide();
     }
 
-    // SIGNUP FUNCTION
-    $scope.signUp = function() {
-        IonicLogin.signUp($scope.data.email, $scope.data.password);
-        $scope.applicationModal.hide();
+    //Stripe configuration
+    $scope.collectPaymentInformation = function() {
 
-        Parse.Cloud.run('generateMembershipNumber').then(
-            function(data) {
-                console.log(data);
+        var cardInfo = {
+            // "city": $scope.paymentContactInfo.city,
+            // "state": $scope.paymentContactInfo.state,
+            "number": $scope.payment.cardNumber,
+            "month": $scope.payment.month,
+            "year": $scope.payment.year,
+            "cvc": $scope.payment.cvc
+        };
+
+        Parse.Cloud.run('collectPaymentInformation', cardInfo, {
+            success: function(customer) {
+                console.log("check");
+                console.log(customer);
             },
-            function(err) {
+            error: function(err) {
                 console.log(err);
             }
-        );
+        });
+
+
+        $state.go('login');
     }
+
 
 })

@@ -48,7 +48,7 @@
     <author email="christianmcfarland@gmail.com" href="http://www.gearpass.com/">
     Christian McFarland
   </author>
-    <content original-src="index.html" src="http://192.168.0.2:8100" />
+    <content original-src="index.html" src="http://192.168.1.34:8100" />
     <access origin="*" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />

@@ -51,6 +51,7 @@ angular.module('starter')
 
         var location = new Parse.GeoPoint($scope.Location.value.geometry.location.lat(), $scope.Location.value.geometry.location.lng())
 
+        shop.set('User', Parse.User.current());
         shop.set('ShopName', $scope.ShopName.value);
         shop.set('Hours', $scope.Open.open + "-" + $scope.Close.value);
         shop.set('ContactName', $scope.ContactName.value);

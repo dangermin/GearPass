@@ -46,6 +46,7 @@
                         $scope.newObj.Address = shop.get('Address');
                         $scope.newObj.Web = shop.get('WebAddress');
                         $scope.newObj.Hrs = shop.get('Hours');
+                        $scope.newObj.Email = shop.get('EmailAddress');
 
                         $scope.shops.push($scope.newObj);
 
@@ -66,10 +67,11 @@
                                 '<div>' +
                                 '<h6>' + shop.Numb + '</h6>' +
                                 '<h6>' + shop.Address + '</h6>' +
+                                // '<h6>' + shop.Email + '</h6>' +
                                 '</div>' +
                                 '<div id="webLink" style="float:left">' +
                                 '<p><a href="shop.Web">' + shop.Web + '</a> ' +
-                                '<button id="requestBnt" class="button button-calm" ng-click="requestModal.show()">Request</button>' +
+                                '<button id="requestBtn" class="button button-calm" ng-click="openModal(\'' + shop.Name + '\',\'' + shop.Email + '\')">Request</button>' +
                                 '</div>';
 
 
@@ -78,39 +80,6 @@
                             var infoWindow = new google.maps.InfoWindow({
                                 content: compiled[0]
                             });
-
-                            $ionicModal.fromTemplateUrl('templates/modalContent.html', {
-                                scope: $scope
-                            }).then(function(requestModal) {
-                                $scope.requestModal = requestModal;
-                            });
-
-
-
-                            $scope.openModal = function() {
-                                $scope.requestModal.show();
-                            };
-
-                            $scope.closeModal = function() {
-                                $scope.requestModal.hide();
-                            };
-
-                            //Cleanup the modal when we're done with it!
-                            $scope.$on('$destroy', function() {
-                                $scope.modal.remove();
-                            });
-
-                            // Execute action on hide modal
-                            $scope.$on('modal.hidden', function() {
-                                // Execute action
-                            });
-
-                            // Execute action on remove modal
-                            $scope.$on('modal.removed', function() {
-                                // Execute action
-                            });
-
-
 
                             // $scope.requestModal = $ionicModal.fromTemplate('<ion-modal-view>' +
                             //     ' <ion-header-bar>' +
@@ -127,11 +96,47 @@
                             //     })
 
                             addInfoWindow(marker, compiled[0], shop);
+                            // $scope.openModal(compiled[0]);
                         }
                     });
                 }
             })
         }
+
+
+        $ionicModal.fromTemplateUrl('templates/modalContent.html', {
+            scope: $scope
+        }).then(function(requestModal) {
+            $scope.requestModal = requestModal;
+        });
+
+
+
+        $scope.openModal = function(shop, email) {
+            $scope.requestModal.show();
+            $scope.request = { "name": shop, "email": email };
+            console.log($scope.request);
+        };
+
+        $scope.closeModal = function() {
+            $scope.requestModal.hide();
+        };
+
+        //Cleanup the modal when we're done with it!
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
+
+        // Execute action on hide modal
+        $scope.$on('modal.hidden', function() {
+            // Execute action
+        });
+
+        // Execute action on remove modal
+        $scope.$on('modal.removed', function() {
+            // Execute action
+        });
+
 
         function addInfoWindow(marker, message, shop) {
 
@@ -145,11 +150,34 @@
                 infoWindow.close($scope.map, this);
             });
         }
+        
+        //create new partner function, only shows if user is not a partner
+        $scope.Confirm = function() {
 
-        $scope.request = { "gear": "", "quantity": "", "message": ""};
+            console.log($scope.request);
 
-        function comfirm(gear, quantity, message){
+            var RequestSchema = Parse.Object.extend('Request');
 
+            var request = new RequestSchema();
+
+            request.set('User', Parse.User.current());
+            request.set('Quantity', $scope.request.quantity);
+            request.set('Gear', $scope.request.gear);
+            request.set('Message', $scope.request.message);
+            request.set('ShopName', $scope.request.name);
+            request.set('ShopEmail', $scope.request.email);
+
+            request.save();
+
+            Parse.Cloud.run('requestMail', $scope.request,
+                function(data) {
+                    console.log('data');
+                },
+                function(err) {
+                    console.log(err);
+                });
+
+            $scope.requestModal.hide();
         }
 
 

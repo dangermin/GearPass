@@ -3,35 +3,26 @@ angular.module('starter')
 .factory('IonicLogin', function($http, $q, $log, $state, $ionicPopup, $ionicLoading) {
 
 
+    // Parse.Cloud.run('generateMembershipNumber',
+    //     function(data) {
+    //         console.log(data);
+    //     },
+    //     function(err) {
+    //         console.log(err);
+    //     });
 
-    function signUp(email, password) {
+    function signUp(data) {
 
         $ionicLoading.show({
             template: 'Creating Account...'
         });
 
-        Parse.User.signUp(email, password, { email: email }).then(
-            function(user) {
-                $ionicLoading.hide();
-                Parse.User.logIn(email, password).then(
-                    function(user) {
-                        Parse.Cloud.run('generateMembershipNumber').then(
-                            function(data) {
-                                console.log(data);
-                                $state.go('splash');
-                            },
-                            function(err) {
-                                console.log(err);
-                            }
-                        );
-
-                    },
-                    function() {
-                        console.log("couldn't log in new users");
-                    }
-                );
-            },
+        Parse.User.signUp(data.email, data.password, { email: data.email, first: data.first, last: data.last, street1: data.street1, street2: data.street2, city: data.city, state: data.state, zip: data.zip }).then(
             function() {
+                Parse.User.logOut();
+                $ionicLoading.hide();
+            },
+            function(err) {
                 $ionicLoading.hide();
                 $ionicPopup.alert({
                     title: 'Username Taken',
@@ -69,13 +60,8 @@ angular.module('starter')
 
     function logout() {
 
-        $ionicLoading.show({
-            template: 'Logging Out...'
-        });
-
         Parse.User.logOut().then(
             function(user) {
-                $ionicLoading.hide();
                 $state.go('splash');
             });
     }
