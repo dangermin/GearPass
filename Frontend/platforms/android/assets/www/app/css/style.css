@@ -70,47 +70,7 @@ Tab-History
     max-height: 50px;
 }
 
-.history-item-message {
 
-  &:last-child{
-    margin-bottom: 50px;
-  }
-
-  border: none;
-  text-overflow: clip !important;
-  white-space: normal !important;
-
-  img{
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    max-width: 34px;
-    max-height: 34px;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-  }
-
-  h2, h1, p{
-    margin: 0 0 0 48px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #000000;
-
-
-    span{
-      font-weight: normal;
-      color: #ccc;
-    }
-  }
-
-  p{
-    font-weight: normal;
-    text-overflow: clip !important;
-    white-space: normal !important;
-  }
-
-}
 
 /********************************
 Tab-Dash
@@ -118,7 +78,7 @@ Tab-Dash
 
 #map_canvas {
     width: 100%;
-    height: 70%;
+    height: 100%;
     margin: 0;
     position: relative;
 }

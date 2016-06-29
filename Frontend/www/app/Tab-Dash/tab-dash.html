@@ -24,14 +24,15 @@
                     <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
                 </ion-header-bar>
                 <ion-content class="padding">
+                    <h2>{{request.name}}</h2>
                     <label id="requestInput" class="item item-input item-select">
                         <div class="gear">
                             Select Gear
                         </div>
                         <select ng-model="request.gear">
-                            <option value="sB" selected>Surf Board</option>
-                            <option value="b">Bike</option>
-                            <option value="s">Ski</option>
+                            <option value="Surf Board(s)" selected>Surf Board</option>
+                            <option value="Bike(s)">Bike</option>
+                            <option value="Ski set(s)">Ski</option>
                         </select>
                     </label>
                     <label id="requestInput" class="item item-input item-select">
@@ -54,7 +55,7 @@
                     <label id="requestInput" class="item item-input item-select">
                         <textarea placeholder="Custom Message" rows="5" lose-focus-on-return ng-model="request.message"></textarea>
                     </label>
-                    <button class="button button-full button-positive" ng-click="Comfirm(user)">Comfirm</button>
+                    <button class="button button-full button-positive" ng-click="Confirm()">Confirm</button>
                     </div>
                 </ion-content>
             </ion-modal-view>

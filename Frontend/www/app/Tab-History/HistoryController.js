@@ -14,14 +14,24 @@
             ionic.DomUtil.blurAll();
         }
 
+        $scope.requests = [];
 
-        $scope.message = {
-            text: ''
-        };
+        var query = new Parse.Query(Parse.Object.extend("Request"));
+        return query.each(function(request) {
+            var user = request.get('User');
+            if (user.id == $scope.currentUser.id) {
+                var shopName = request.get('ShopName');
+                var quantity = request.get('Quantity');
+                var gear = request.get('Gear');
+                var date = request.get('createdAt');
 
-        $scope.messages = [
-            { id: 1, user: 'Danger', avatar: 'app/img/avatar1.png', date: 'Nov 12th', text: 'hello world!' }
-        ];
+                var request = { "ShopName": shopName, "Quantity": quantity, "Gear": gear, "Date": date };
+                $scope.requests.push(request);
+            } else {
+                console.log("attempting to find request");
+            }
+
+        });
 
         $scope.ajustarScroll = function() {
             $ionicScrollDelegate.resize();

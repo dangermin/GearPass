@@ -1,10 +1,10 @@
 <ion-view view-title="Gear Pass">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="message in messages" class="history-message">
-          <img id="avatar" src="{{message.avatar}}" alt="avatar">
-          <h2>{{message.user}} <span>{{message.date}}</span></h2>
-          <p>{{message.text}}</p>
+      <ion-item ng-repeat="request in requests" class="history-message">
+          <h2>{{request.ShopName}} <span>{{request.Gear}}</span></h2>
+          <p>{{request.Quantity}}</p>
+          <p>{{request.Date}}</p>
       </ion-item>
     </ion-list>
   </ion-content>
