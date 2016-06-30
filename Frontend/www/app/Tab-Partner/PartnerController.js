@@ -27,7 +27,7 @@ angular.module('starter')
         updateShop = $scope.thisShop.value;
 
         updateShop.set('ShopName', $scope.ShopName.value);
-        updateShop.set('Hours', $scope.Open.open + "-" + $scope.Close.value);
+        updateShop.set('Hours', $scope.Open.value + "-" + $scope.Close.value);
         updateShop.set('ContactName', $scope.ContactName.value);
         updateShop.set('PhoneNumber', $scope.Phone.value);
         updateShop.set('WebAddress', $scope.WebAddress.value);
