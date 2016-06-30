@@ -142,7 +142,7 @@
         }
 
         //create new partner function, only shows if user is not a partner
-         $scope.Confirm = function() {
+        $scope.Confirm = function() {
 
             var query = new Parse.Query('Shop');
             query.equalTo("ShopName", $scope.request.name);
@@ -177,6 +177,7 @@
                     console.log(err);
                 }
             });
+
 
         }
 
