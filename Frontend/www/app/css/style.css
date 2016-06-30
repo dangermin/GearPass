@@ -66,10 +66,35 @@ Tab
 /********************************
 Tab-History
 *********************************/
-#avatar{
+
+#avatar {
     max-height: 50px;
 }
 
+#historyCard {
+    white-space: normal;
+    padding-bottom: 15px;
+}
+
+#historyTime {
+    float: right;
+}
+
+#historyCompleted {
+    color: green;
+    font-size: 2em;
+    opacity: .5;
+}
+
+#historyNotCompleted {
+    color: red;
+    font-size: 2em;
+    opacity: .5;
+}
+
+#historyCaret {
+    opacity: .5;
+}
 
 
 /********************************

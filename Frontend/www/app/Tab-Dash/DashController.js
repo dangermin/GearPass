@@ -112,10 +112,10 @@
 
 
 
-        $scope.openModal = function(shop, email) {
+
+        $scope.openModal = function(name, email) {
+            $scope.request = { "name": name, "email": email };
             $scope.requestModal.show();
-            $scope.request = { "name": shop, "email": email };
-            console.log($scope.request);
         };
 
         $scope.closeModal = function() {
@@ -150,34 +150,44 @@
                 infoWindow.close($scope.map, this);
             });
         }
-        
+
         //create new partner function, only shows if user is not a partner
         $scope.Confirm = function() {
 
-            console.log($scope.request);
+            var query = new Parse.Query('Shop');
+            query.equalTo("ShopName", $scope.request.name);
+            query.first({
+                success: function(object) {
+                    var shop = object;
+                    console.log(shop);
+                    var RequestSchema = Parse.Object.extend('Request');
+                    var request = new RequestSchema();
+                    request.set('User', Parse.User.current());
+                    request.set('Shop', shop);
+                    request.set('Quantity', $scope.request.quantity);
+                    request.set('Gear', $scope.request.gear);
+                    request.set('Message', $scope.request.message);
+                    request.set('Completed', false);
 
-            var RequestSchema = Parse.Object.extend('Request');
+                    request.save();
 
-            var request = new RequestSchema();
+                    Parse.Cloud.run('requestMail', $scope.request, {
+                        success: function(data) {
+                            console.log(data);
+                        },
+                        error: function(err) {
+                            console.log(err);
+                        }
+                    });
 
-            request.set('User', Parse.User.current());
-            request.set('Quantity', $scope.request.quantity);
-            request.set('Gear', $scope.request.gear);
-            request.set('Message', $scope.request.message);
-            request.set('ShopName', $scope.request.name);
-            request.set('ShopEmail', $scope.request.email);
+                    $scope.requestModal.hide();
 
-            request.save();
-
-            Parse.Cloud.run('requestMail', $scope.request,
-                function(data) {
-                    console.log('data');
                 },
-                function(err) {
+                error: function(err) {
                     console.log(err);
-                });
+                }
+            });
 
-            $scope.requestModal.hide();
         }
 
 
