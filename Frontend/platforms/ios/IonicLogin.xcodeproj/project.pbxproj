@@ -25,6 +25,10 @@
 		F84E724C0A8B441A8BA5AE79 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C70A291E852E4645BE333A9E /* CDVLocation.m */; };
 		B975C1C41F92459F86093287 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B444F8077AD54283940495D8 /* CoreLocation.framework */; };
 		24BA407021BE4BA99F8BD00E /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82AA3FDE2642A3A86D00D1 /* IonicKeyboard.m */; };
+		B12D43C226544FD69E2CF30B /* ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 935F06A8B7E94BD1B11303D5 /* ActionSheet.m */; };
+		4A16C05DA8074EAF9D74215D /* CMMapLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD048678F4C41159856CDA9 /* CMMapLauncher.m */; };
+		EF68F104F99A42E9A793AD09 /* LaunchNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBCC255751844DB9693949A /* LaunchNavigator.m */; };
+		88C2754590584002A8B83EF7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2B564B1D36467596B8338D /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +82,13 @@
 		B444F8077AD54283940495D8 /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		AF82AA3FDE2642A3A86D00D1 /* IonicKeyboard.m */ = {isa = PBXFileReference; name = "IonicKeyboard.m"; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		5C0A1955450943D284121F34 /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		935F06A8B7E94BD1B11303D5 /* ActionSheet.m */ = {isa = PBXFileReference; name = "ActionSheet.m"; path = "cordova-plugin-actionsheet/ActionSheet.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		FCE445DDE8464C868F230305 /* ActionSheet.h */ = {isa = PBXFileReference; name = "ActionSheet.h"; path = "cordova-plugin-actionsheet/ActionSheet.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		7DD048678F4C41159856CDA9 /* CMMapLauncher.m */ = {isa = PBXFileReference; name = "CMMapLauncher.m"; path = "uk.co.workingedge.phonegap.plugin.launchnavigator/CMMapLauncher.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		7FBCC255751844DB9693949A /* LaunchNavigator.m */ = {isa = PBXFileReference; name = "LaunchNavigator.m"; path = "uk.co.workingedge.phonegap.plugin.launchnavigator/LaunchNavigator.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		609F73122EA946FBA1BF6243 /* CMMapLauncher.h */ = {isa = PBXFileReference; name = "CMMapLauncher.h"; path = "uk.co.workingedge.phonegap.plugin.launchnavigator/CMMapLauncher.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		6DC23058C7894549A4185B92 /* LaunchNavigator.h */ = {isa = PBXFileReference; name = "LaunchNavigator.h"; path = "uk.co.workingedge.phonegap.plugin.launchnavigator/LaunchNavigator.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		CB2B564B1D36467596B8338D /* MapKit.framework */ = {isa = PBXFileReference; name = "MapKit.framework"; path = "System/Library/Frameworks/MapKit.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +103,7 @@
 				D1C6CC4CDD34428B8CF8C3A0 /* Accounts.framework in Frameworks */,
 				4347482885D242FD85801A0D /* Security.framework in Frameworks */,
 				B975C1C41F92459F86093287 /* CoreLocation.framework in Frameworks */,
+				88C2754590584002A8B83EF7 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +179,7 @@
 				50007E757E1A4ACB89C62A5F /* Accounts.framework */,
 				5342C7D2192F43AF91F83F2D /* Security.framework */,
 				B444F8077AD54283940495D8 /* CoreLocation.framework */,
+				CB2B564B1D36467596B8338D /* MapKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -200,6 +213,12 @@
 				182A542A036C4B69A7492A00 /* CDVLocation.h */,
 				AF82AA3FDE2642A3A86D00D1 /* IonicKeyboard.m */,
 				5C0A1955450943D284121F34 /* IonicKeyboard.h */,
+				935F06A8B7E94BD1B11303D5 /* ActionSheet.m */,
+				FCE445DDE8464C868F230305 /* ActionSheet.h */,
+				7DD048678F4C41159856CDA9 /* CMMapLauncher.m */,
+				7FBCC255751844DB9693949A /* LaunchNavigator.m */,
+				609F73122EA946FBA1BF6243 /* CMMapLauncher.h */,
+				6DC23058C7894549A4185B92 /* LaunchNavigator.h */,
 			);
 			name = Plugins;
 			path = "IonicLogin/Plugins";
@@ -318,6 +337,9 @@
 				48763081DD3640CFBD779B4B /* CDVInAppBrowser.m in Sources */,
 				F84E724C0A8B441A8BA5AE79 /* CDVLocation.m in Sources */,
 				24BA407021BE4BA99F8BD00E /* IonicKeyboard.m in Sources */,
+				B12D43C226544FD69E2CF30B /* ActionSheet.m in Sources */,
+				4A16C05DA8074EAF9D74215D /* CMMapLauncher.m in Sources */,
+				EF68F104F99A42E9A793AD09 /* LaunchNavigator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

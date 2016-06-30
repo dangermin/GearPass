@@ -47,6 +47,14 @@
                         {
                             "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ActionSheet\"><param name=\"ios-package\" value=\"ActionSheet\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"LaunchNavigator\"><param name=\"ios-package\" value=\"LaunchNavigator\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -76,6 +84,12 @@
                             "xml": "<string />",
                             "count": 1
                         }
+                    ],
+                    "LSApplicationQueriesSchemes": [
+                        {
+                            "xml": "<array><string>citymapper</string><string>comgooglemaps</string><string>navigon</string><string>transit</string><string>waze</string><string>yandexnavi</string><string>uber</string><string>tomtomhome</string><string>com.sygic.aura</string><string>here-route</string><string>moovit</string></array>",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -100,6 +114,12 @@
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
         "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         }
     },
@@ -162,6 +182,30 @@
                 "cordova.plugins.Keyboard"
             ],
             "runs": true
+        },
+        {
+            "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+            "id": "cordova-plugin-actionsheet.ActionSheet",
+            "pluginId": "cordova-plugin-actionsheet",
+            "clobbers": [
+                "window.plugins.actionsheet"
+            ]
+        },
+        {
+            "file": "plugins/uk.co.workingedge.phonegap.plugin.launchnavigator/www/common.js",
+            "id": "uk.co.workingedge.phonegap.plugin.launchnavigator.Common",
+            "pluginId": "uk.co.workingedge.phonegap.plugin.launchnavigator",
+            "clobbers": [
+                "launchnavigator"
+            ]
+        },
+        {
+            "file": "plugins/uk.co.workingedge.phonegap.plugin.launchnavigator/www/ios/launchnavigator.js",
+            "id": "uk.co.workingedge.phonegap.plugin.launchnavigator.LaunchNavigator",
+            "pluginId": "uk.co.workingedge.phonegap.plugin.launchnavigator",
+            "merges": [
+                "launchnavigator"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -170,6 +214,8 @@
         "cordova-plugin-inappbrowser": "1.4.0",
         "cordova-plugin-compat": "1.0.0",
         "cordova-plugin-geolocation": "2.2.0",
-        "ionic-plugin-keyboard": "2.2.1"
+        "ionic-plugin-keyboard": "2.2.1",
+        "cordova-plugin-actionsheet": "2.2.2",
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.1.1"
     }
 }

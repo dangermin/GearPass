@@ -3,11 +3,20 @@
         <div class="centerDiv">
             <ion-pane>
                 <ion-content data-tap-disabled="true">
-                    <div class="item item-input controls">
-                        <i class="icon ion-search placeholder-icon"></i>
-                        <input id="shop-input" type="search" placeholder="Search Shops" data-tap-disabled="true" ng-model="search" ng-focus="searchFocused = true" ng-blur="searchFocused = false" ng-change="scrollTop()">
-                        <button class="button" ng-click="searchShops()">Search</button>
-                    </div>
+                    <p>
+                        <span ng-model="selected"><b>Name:</b> {{selected.Name}}</span>
+                    </p>
+                    <p>
+                        <span ng-model="selected"><b>Address:</b> {{selected.Address}}</span>
+                    </p>
+                    <p>
+                        <span ng-model="selected"><b>Phone:</b> {{selected.Numb}}</span>
+                    </p>
+                    <p>
+                        <span ng-model="selected"><b>Hours:</b> {{selected.Hrs}}</span>
+                    </p>
+                    <button class="ReqButton" ng-click="openModal(selected.Name, selected.Email)">Request</button>
+                    <button class="NavButton" ng-click="navigate()">Navigate</button>
                     <div id="map_canvas">
                         <ui-gmap-google-map bounds="map.bounds" center="map.center" zoom="map.zoom" options="options">
                             <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow" templateUrl="'windowContent.html'" templateParameter="windowParams">

@@ -3,10 +3,30 @@
         <div class="centerDiv">
             <ion-pane>
                 <ion-content data-tap-disabled="true">
-                    <div class="item item-input controls">
-                        <i class="icon ion-search placeholder-icon"></i>
-                        <input id="shop-input" type="search" placeholder="Search Shops" data-tap-disabled="true" ng-model="search" ng-focus="searchFocused = true" ng-blur="searchFocused = false" ng-change="scrollTop()">
-                        <button class="button" ng-click="searchShops()">Search</button>
+                    <!-- <ion-list no-lines>
+                    <ion-item ng-repeat="select in selected">
+                    {{Name}}
+                    <ion-item>
+                    </ion-list> -->
+                    <div class="card">
+                        <div class="item item-text-wrap" ng-repeat="x in seleceted">
+                            This is a basic Card which contains an item that has wrapping text.
+                            {{Name}}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="item item-divider">
+                            <div type="text" ng-repeat="select in selected">
+                                <div>{{Name}}Name</div>
+                                <h2>{{Name}}Name</h2>
+                                <div>Phone{{selected.Numb}}</div>
+                                <p>Address{{shop.Address}}</p>
+                                <p>Hours{{shop.Hrs}}</p>
+                                <div>{{shop.Web}}</div>
+                                <button class="button" ng-click="loadMarkers()">Search</button>
+                                <button class="button" ng-click="navigate()">Navigate</button>
+                            </div>
+                        </div>
                     </div>
                     <div id="map_canvas">
                         <ui-gmap-google-map bounds="map.bounds" center="map.center" zoom="map.zoom" options="options">
