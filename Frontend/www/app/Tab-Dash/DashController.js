@@ -3,16 +3,17 @@
     angular.module('starter')
 
     // HOME PAGE CONTROLLER
-    .controller('DashController', function($scope, IonicLogin, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile) {
+    .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator) {
         var map = null;
         $scope.shops = [];
+        // console.log($scope.shops);
         initMap();
+        var markerPos = [];
 
         function initMap() {
             var options = { timeout: 10000, enableHighAccuracy: true };
             $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
                 var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                console.log(latLng);
                 var mapOptions = {
                     center: latLng,
                     zoom: 11,
@@ -32,7 +33,7 @@
         function loadMarkers() {
             Parse.GeoPoint.current({
                 success: function(point) {
-                    $scope.shops = [];
+                    // $scope.shops = [];
                     var LatLng = [];
                     var avgLoc = [];
                     var contentString = [];
@@ -47,6 +48,7 @@
                         $scope.newObj.Web = shop.get('WebAddress');
                         $scope.newObj.Hrs = shop.get('Hours');
                         $scope.newObj.Email = shop.get('EmailAddress');
+                        $scope.newObj.Location = shop.get('Location');
 
                         $scope.shops.push($scope.newObj);
 
@@ -67,11 +69,11 @@
                                 '<div>' +
                                 '<h6>' + shop.Numb + '</h6>' +
                                 '<h6>' + shop.Address + '</h6>' +
-                                // '<h6>' + shop.Email + '</h6>' +
                                 '</div>' +
                                 '<div id="webLink" style="float:left">' +
-                                '<p><a href="shop.Web">' + shop.Web + '</a> ' +
+                                '<p><a href="#" onclick="cordova.InAppBrowser.open(google.com);">' + shop.Web + '</a> ' +
                                 '<button id="requestBtn" class="button button-calm" ng-click="openModal(\'' + shop.Name + '\',\'' + shop.Email + '\')">Request</button>' +
+                                '<button id="requestBtn" class="button button-calm" ng-click="navigate(\'' + markerPos + '\')">Navigate</button>' +
                                 '</div>';
 
 
@@ -80,20 +82,6 @@
                             var infoWindow = new google.maps.InfoWindow({
                                 content: compiled[0]
                             });
-
-                            // $scope.requestModal = $ionicModal.fromTemplate('<ion-modal-view>' +
-                            //     ' <ion-header-bar>' +
-                            //     '<h1 class = "title">Modal Title</h1>' +
-                            //     '</ion-header-bar>' +
-
-                            //     '<ion-content>' +
-                            //     '<button class="button icon icon-left ion-ios-close-outline" ng-click="closeModal()">Close Modal </button>' +
-                            //     '</ion-content>' +
-
-                            //     '</ion-modal-view>', {
-                            //         scope: $scope,
-                            //         animation: 'slide-in-up'
-                            //     })
 
                             addInfoWindow(marker, compiled[0], shop);
                             // $scope.openModal(compiled[0]);
@@ -112,10 +100,9 @@
 
 
 
-
         $scope.openModal = function(name, email) {
-            $scope.request = { "name": name, "email": email };
             $scope.requestModal.show();
+            $scope.request = { "name": name, "email": email };
         };
 
         $scope.closeModal = function() {
@@ -137,15 +124,18 @@
             // Execute action
         });
 
-
         function addInfoWindow(marker, message, shop) {
 
             var infoWindow = new google.maps.InfoWindow({
                 content: message
             });
+            //Binde selected shop to infoWindow
             google.maps.event.addListener(marker, 'click', function() {
                 infoWindow.open($scope.map, this);
+                $scope.selected = shop;
+                $scope.$apply();
             });
+
             google.maps.event.addListener($scope.map, 'click', function() {
                 infoWindow.close($scope.map, this);
             });
@@ -187,6 +177,92 @@
                     console.log(err);
                 }
             });
+
+        }
+
+        // Navigation
+        $scope.navigate = function(destination) {
+            $cordovaGeolocation.getCurrentPosition().then(function(start) {
+                $cordovaLaunchNavigator.navigate(destination, {
+                    start: [start.coords.latitude, start.coords.longitude],
+                    enableDebug: true
+                }).then(function() {
+                    alert("Navigator Launched");
+                }, function(err) {
+                    alert(err);
+                });
+            });
+        }
+
+        // Loading URLs outside of the app
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            console.log("window.open works well");
+        }
+
+        var inAppBrowserRef = undefined;
+
+        function showHelp(url) {
+
+            var target = "_blank";
+
+            var options = "location=yes,hidden=yes";
+
+            inAppBrowserRef = cordova.InAppBrowser.open(url, target, options);
+
+            var inAppBrowserRef = function() {
+
+                addEventListener('loadstart', loadStartCallBack);
+
+                addEventListener('loadstop', loadStopCallBack);
+
+                addEventListener('loaderror', loadErrorCallBack);
+            }
+
+        }
+
+        function loadStartCallBack() {
+
+            $('#status-message').text("loading please wait ...");
+
+        }
+
+        function loadStopCallBack() {
+
+            if (inAppBrowserRef != undefined) {
+
+                inAppBrowserRef.insertCSS({ code: "body{font-size: 25px;" });
+
+                $('#status-message').text("");
+
+                inAppBrowserRef.show();
+            }
+
+        }
+
+        function loadErrorCallBack(params) {
+
+            $('#status-message').text("");
+
+            var scriptErrorMesssage =
+                "alert('Sorry we cannot open that page. Message from the server is : " + params.message + "');"
+
+            inAppBrowserRef.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
+
+            inAppBrowserRef.close();
+
+            inAppBrowserRef = undefined;
+
+        }
+
+        function executeScriptCallBack(params) {
+
+            if (params[0] == null) {
+
+                $('#status-message').text(
+                    "Sorry we couldn't open that page. Message from the server is : '" + params.message + "'");
+            }
 
         }
 
