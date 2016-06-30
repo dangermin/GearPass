@@ -47,6 +47,14 @@
                         {
                             "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"io.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ActionSheet\"><param name=\"android-package\" value=\"nl.xservices.plugins.actionsheet.ActionSheet\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"LaunchNavigator\"><param name=\"android-package\" value=\"uk.co.workingedge.phonegap.plugin.LaunchNavigator\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -111,6 +119,12 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
         }
     },
     "dependent_plugins": {},
@@ -149,6 +163,27 @@
                 "cordova.plugins.Keyboard"
             ],
             "runs": true
+        },
+        {
+            "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+            "id": "cordova-plugin-actionsheet.ActionSheet",
+            "clobbers": [
+                "window.plugins.actionsheet"
+            ]
+        },
+        {
+            "file": "plugins/uk.co.workingedge.phonegap.plugin.launchnavigator/www/common.js",
+            "id": "uk.co.workingedge.phonegap.plugin.launchnavigator.Common",
+            "clobbers": [
+                "launchnavigator"
+            ]
+        },
+        {
+            "file": "plugins/uk.co.workingedge.phonegap.plugin.launchnavigator/www/android/launchnavigator.js",
+            "id": "uk.co.workingedge.phonegap.plugin.launchnavigator.LaunchNavigator",
+            "merges": [
+                "launchnavigator"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -157,6 +192,8 @@
         "cordova-plugin-inappbrowser": "1.4.0",
         "cordova-plugin-compat": "1.0.0",
         "cordova-plugin-geolocation": "2.2.0",
-        "ionic-plugin-keyboard": "2.2.1"
+        "ionic-plugin-keyboard": "2.2.1",
+        "cordova-plugin-actionsheet": "2.2.2",
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.1.1"
     }
 }
