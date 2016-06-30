@@ -3,8 +3,7 @@
     angular.module('starter')
 
     // History CONTROLLER
-    .controller('HistoryController', function($scope, $state, $ionicLoading,
-        $ionicScrollDelegate, $timeout) {
+    .controller('HistoryController', function($scope, $state, $ionicLoading, $ionicScrollDelegate, $timeout) {
         //IonicLogin, $ionicModal, $ionicSideMenuDelegate,
         // $scope.$on('$ionicView.enter', function(e) {
 
@@ -14,24 +13,70 @@
             ionic.DomUtil.blurAll();
         }
 
-        $scope.requests = [];
 
-        var query = new Parse.Query(Parse.Object.extend("Request"));
-        return query.each(function(request) {
-            var user = request.get('User');
-            if (user.id == $scope.currentUser.id) {
-                var shopName = request.get('ShopName');
-                var quantity = request.get('Quantity');
-                var gear = request.get('Gear');
-                var date = request.get('createdAt');
+        $scope.$on('$ionicView.enter', function(e) {
 
-                var request = { "ShopName": shopName, "Quantity": quantity, "Gear": gear, "Date": date };
-                $scope.requests.push(request);
-            } else {
-                console.log("attempting to find request");
-            }
+            $ionicLoading.show({
+                template: 'Fetching History...'
+            });
 
+            $scope.requests = [];
+
+            var query = new Parse.Query("Request");
+            var query2 = new Parse.Query('Shop');
+            query.each(function(request) {
+                var req = request;
+                var user = request.get('User');
+                var shop = request.get('Shop');
+                query2.get(shop.id, {
+                    success: function(object) {
+                        if (user.id == $scope.currentUser.id) {
+                            var newShop = object;
+                            var shopName = newShop.get('ShopName');
+                            var address = newShop.get('Address');
+                            var phone = newShop.get('PhoneNumber');
+                            var hours = newShop.get('Hours');
+                            var completed = req.get('Completed');
+                            var quantity = req.get('Quantity');
+                            var gear = req.get('Gear');
+                            var date = req.get('createdAt');
+                            var prettyDate = moment(date).format('dddd, MMMM Do YYYY');
+                            var prettyTime = moment(date).format('h:mm a');
+
+
+                            var request = {
+                                "ShopName": shopName,
+                                "Address": address,
+                                "Phone": phone,
+                                "Hours": hours,
+                                "Completed": completed,
+                                "Quantity": quantity,
+                                "Gear": gear,
+                                "Date": prettyDate,
+                                "Time": prettyTime,
+                                "Created": date
+                            };
+
+
+                            $scope.$apply(function() {
+                                $scope.requests.push(request);
+                            });
+                            console.log($scope.requests);
+                        } else {
+                            console.log("attempting to find request");
+                        }
+                    },
+
+                    error: function(object, error) {
+                        console.log(error);
+                    }
+                });
+
+
+                $ionicLoading.hide();
+            });
         });
+
 
         $scope.ajustarScroll = function() {
             $ionicScrollDelegate.resize();

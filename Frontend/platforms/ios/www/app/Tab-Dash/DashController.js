@@ -150,9 +150,7 @@
                 infoWindow.close($scope.map, this);
             });
         }
-
-        $scope.request = { "gear": "", "quantity": "", "message": "" };
-
+        
         //create new partner function, only shows if user is not a partner
         $scope.Confirm = function() {
 

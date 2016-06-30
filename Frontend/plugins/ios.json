@@ -23,10 +23,16 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         }
     }
