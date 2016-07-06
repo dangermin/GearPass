@@ -50,6 +50,22 @@ angular.module('starter')
         $scope.profileModal.hide();
     }
 
+    $scope.ratingsObject = {
+        iconOn: 'ion-ios-star',
+        iconOff: 'ion-ios-star-outline',
+        iconOnColor: 'rgb(200, 200, 100)',
+        iconOffColor: 'rgb(200, 100, 100)',
+        rating: 2,
+        minRating: 1,
+        callback: function(rating) {
+            $scope.ratingsCallback(rating);
+        }
+    };
+
+    $scope.ratingsCallback = function(rating) {
+        console.log('Selected rating is : ', rating);
+    };
+
     var query = new Parse.Query(Parse.Object.extend("PublicProfile"));
     return query.each(function(profile) {
         var user = profile.get('User');
@@ -60,7 +76,7 @@ angular.module('starter')
             var Email = profile.get('Email');
             $scope.thisProfile = { "value": profile };
             $scope.$apply(function() {
-                $scope.profile = { "FirstName": First, "LastName": Last, "Location": Location, "Email": Email, "value": true};
+                $scope.profile = { "FirstName": First, "LastName": Last, "Location": Location, "Email": Email, "value": true };
             });
             console.log($scope.partner);
         } else {

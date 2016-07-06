@@ -1,22 +1,40 @@
 <ion-view view-title="Gear Pass">
-  <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="request in requests" class="history-message">
-          <h2>{{request.ShopName}} <span>{{request.Gear}}</span></h2>
-          <p>{{request.Quantity}}</p>
-          <p>{{request.Date}}</p>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-
-  <div keyboard-attach class="bar bar-footer bar-stable item-input-inset history-bar">
+    <ion-content>
+        <div class="card" ng-repeat="request in requests | orderBy:'-Created'">
+            <div ng-click="shopDetails=!shopDetails" id="historyCard" class="item item-divider row">
+                <div class="col col-95">
+                    <h2><b>{{request.ShopName}}</b></h2>
+                    <br ng-show="shopDetails">
+                    <h4 ng-show="shopDetails"><b>Hours:</b> {{request.Hours}}</h4>
+                    <h4 ng-show="shopDetails"><b>Address:</b> {{request.Address}}</h4>
+                    <h4 ng-show="shopDetails"><b>Phone Number:</b> {{request.Phone}}</h4>
+                    <h4 ng-show="shopDetails"><b>Phone Number:</b> {{request.Phone}}</h4>
+                </div>
+                <div class="col text-right">
+                    <span id="historyCaret" ng-hide="shopDetails" class="ion-android-more-horizontal"></span>
+                </div>
+            </div>
+            <div class="item row">
+                <div class="col col-50">
+                    <h3>{{request.Quantity}} <span>{{request.Gear}}</span></h3>
+                    <h4>{{request.Date}}</h4>
+                    <h4>{{request.Time}}</h4>
+                </div>
+                <div class="col col-50 text-center">
+                    <span ng-show="request.Completed" id="historyCompleted" class="ion-checkmark-circled"></span>
+                    <span ng-hide="request.Completed" id="historyNotCompleted" class="ion-close-circled"></span>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <!--   <div keyboard-attach class="bar bar-footer bar-stable item-input-inset history-bar">
     <i class="icon ion-ios-plus-outline"></i>
     <label class="item-input-wrapper">
-      <input type="text" placeholder="Message"ng-focus="adjustScroll()" ng-blur="adjustScroll()" ng-model="message.text">
+      <input type="text" placeholder="Message" ng-focus="adjustScroll()" ng-blur="adjustScroll()" ng-model="message.text">
     </label>
     <div ng-class="{hide:!message.text}" ng-click="sendMessage(message)" class="button button-clear button-positive">
       Send
     </div>
 
-  </div>
+  </div> -->
 </ion-view>

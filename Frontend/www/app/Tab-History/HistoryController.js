@@ -102,5 +102,22 @@
             $scope.message.Text = '';
             $ionicScrollDelegate.scrollBottom(true);
         }
+
+        $scope.openBrowser = function(url) {
+            var options = {
+                location: 'yes',
+                clearcache: 'yes',
+                toolbar: 'no'
+            };
+            $cordovaInAppBrowser.open(url,'_blank', options)
+
+            .then(function(event) {
+                // success
+            })
+
+            .catch(function(event) {
+                // error
+            });
+        }
     })
 })();

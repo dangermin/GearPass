@@ -5,18 +5,22 @@
                 <ion-content data-tap-disabled="true">
                     <p>
                         <span ng-model="selected"><b>Name:</b> {{selected.Name}}</span>
+                        <ionic-ratings ratingsobj='ratingsObject' style="float: right"></ionic-ratings>
                     </p>
                     <p>
                         <span ng-model="selected"><b>Address:</b> {{selected.Address}}</span>
                     </p>
-                    <p>
-                        <span ng-model="selected"><b>Phone:</b> {{selected.Numb}}</span>
+                    <p><span><b>Phone:</b></span>
+                        <a ng-href="tel: {{selected.Numb}}" ng-model="selected"> {{selected.Numb}}</a>
                     </p>
                     <p>
                         <span ng-model="selected"><b>Hours:</b> {{selected.Hrs}}</span>
                     </p>
-                    <button class="ReqButton" ng-click="openModal(selected.Name, selected.Email)">Request</button>
-                    <button class="NavButton" ng-click="navigate()">Navigate</button>
+                    <p>
+                        <span ng-model="selected"><b>Web:</b></span><span id="webLink" ng-click="openBrowser('http://' + selected.Web)">{{selected.Web}}</span>
+                    </p>
+                    <button class="button button-balanced NavButton" ng-click="navigate(selected.Marker)" style="float:left">Navigate</button>
+                    <button class="button button-positive ReqButton" ng-click="openModal(selected.Name, selected.Email)" style="float:right">Request</button>
                     <div id="map_canvas">
                         <ui-gmap-google-map bounds="map.bounds" center="map.center" zoom="map.zoom" options="options">
                             <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow" templateUrl="'windowContent.html'" templateParameter="windowParams">

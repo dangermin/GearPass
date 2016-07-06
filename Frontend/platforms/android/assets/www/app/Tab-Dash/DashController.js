@@ -3,10 +3,9 @@
     angular.module('starter')
 
     // HOME PAGE CONTROLLER
-    .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator) {
+    .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator, $cordovaInAppBrowser) {
         var map = null;
         $scope.shops = [];
-        // console.log($scope.shops);
         initMap();
         var markerPos = [];
 
@@ -48,19 +47,27 @@
                         $scope.newObj.Web = shop.get('WebAddress');
                         $scope.newObj.Hrs = shop.get('Hours');
                         $scope.newObj.Email = shop.get('EmailAddress');
-                        $scope.newObj.Location = shop.get('Location');
-
+                        var location = $scope.newObj.Location;
+                        $scope.newObj.Marker = new google.maps.LatLng(location._latitude, location._longitude).toString();
                         $scope.shops.push($scope.newObj);
 
                         for (var i = 0; i < $scope.shops.length; i++) {
                             var shop = $scope.shops[i];
                             var markerPos = new google.maps.LatLng($scope.shops[i].Location._latitude, $scope.shops[i].Location._longitude);
-                            // Add markers to Map
-                            // console.log(markerPos);
+                            $scope.MarkerPos = markerPos;
+
                             var marker = new google.maps.Marker({
                                 map: $scope.map,
                                 animation: google.maps.Animation.DROP,
                                 position: markerPos,
+                                // icon: {
+                                //     path: ROUTE,
+                                //     fillColor: '#1998F7',
+                                //     fillOpacity: 1,
+                                //     strokeColor: '',
+                                //     strokeWeight: 0
+                                // },
+                                // map_icon_label: '<span class="map-icon map-icon-transit-station"></span>'
                             });
 
                             var infoWindowContent = '<div id="content">' +
@@ -70,25 +77,11 @@
                                 '<div>' +
                                 '<h6>' + shop.Numb + '</h6>' +
                                 '<h6>' + shop.Address + '</h6>' +
-                                // '<h6>' + shop.Email + '</h6>' +
                                 '</div>' +
                                 '<div id="webLink" style="float:left">' +
-                                // '<p><a href="shop.Web">' + shop.Web + '</a> ' +
-                                '<p><a href="#" onclick="cordova.InAppBrowser.open(google.com);">' + shop.Web + '</a> ' +
+                                '<p><a href="#" onclick="openBrowser(google.com);">' + shop.Web + '</a> ' +
                                 '<button id="requestBtn" class="button button-calm" ng-click="openModal(\'' + shop.Name + '\',\'' + shop.Email + '\')">Request</button>' +
-                                // '<button id="requestBtn" class="button button-calm" ng-click="navigate(\'' + shop.Location + '\')">Navigate</button>' +
                                 '<button id="requestBtn" class="button button-calm" ng-click="navigate(\'' + markerPos + '\')">Navigate</button>' +
-                                //     ' <script>' +
-                                //             'document.onclick = function(e) {' +
-                                //                 'e = e || window.event;' +
-                                //                 'var element = e.target || e.srcElement;' +
-
-                                //                 'if (element.tagName == 'A') {' +
-                                //                     'indow.open(element.href, "_blank", "location=yes");' +
-                                //                     'return false; // prevent default action and stop event propagation' +
-                                //                 '}' +
-                                //             '};' +
-                                // '< /script>' +
                                 '</div>';
 
 
@@ -99,7 +92,6 @@
                             });
 
                             addInfoWindow(marker, compiled[0], shop);
-                            // $scope.openModal(compiled[0]);
                         }
                     });
                 }
@@ -115,9 +107,9 @@
 
 
 
-        $scope.openModal = function(shop, email) {
+        $scope.openModal = function(name, email) {
             $scope.requestModal.show();
-            $scope.request = { "name": shop, "email": email };
+            $scope.request = { "name": name, "email": email };
         };
 
         $scope.closeModal = function() {
@@ -139,24 +131,20 @@
             // Execute action
         });
 
-        // $scope.selected = null;
-        // $scope.selectedShop = function(shop) {
-        //     $scope.selected = shop;
-        // }
-
-
         function addInfoWindow(marker, message, shop) {
 
             var infoWindow = new google.maps.InfoWindow({
                 content: message
             });
+            $scope.selected = shop;
+
+                $scope.$apply();
+            //Binde selected shop to infoWindow
             google.maps.event.addListener(marker, 'click', function() {
-                infoWindow.open($scope.map, this);
+                // infoWindow.open($scope.map, this);
                 $scope.selected = shop;
-                // $scope.selectedShop = function(shop) {
-                // $scope.selected = shop;
-                console.log($scope.selected.Name);
-                // }
+
+                $scope.$apply();
             });
 
             google.maps.event.addListener($scope.map, 'click', function() {
@@ -167,30 +155,39 @@
         //create new partner function, only shows if user is not a partner
         $scope.Confirm = function() {
 
-            // console.log($scope.request);
+            var query = new Parse.Query('Shop');
+            query.equalTo("ShopName", $scope.request.name);
+            query.first({
+                success: function(object) {
+                    var shop = object;
+                    console.log(shop);
+                    var RequestSchema = Parse.Object.extend('Request');
+                    var request = new RequestSchema();
+                    request.set('User', Parse.User.current());
+                    request.set('Shop', shop);
+                    request.set('Quantity', $scope.request.quantity);
+                    request.set('Gear', $scope.request.gear);
+                    request.set('Message', $scope.request.message);
+                    request.set('Completed', false);
 
-            var RequestSchema = Parse.Object.extend('Request');
+                    request.save();
 
-            var request = new RequestSchema();
+                    Parse.Cloud.run('requestMail', $scope.request, {
+                        success: function(data) {
+                            console.log(data);
+                        },
+                        error: function(err) {
+                            console.log(err);
+                        }
+                    });
 
-            request.set('User', Parse.User.current());
-            request.set('Quantity', $scope.request.quantity);
-            request.set('Gear', $scope.request.gear);
-            request.set('Message', $scope.request.message);
-            request.set('ShopName', $scope.request.name);
-            request.set('ShopEmail', $scope.request.email);
+                    $scope.requestModal.hide();
 
-            request.save();
-
-            Parse.Cloud.run('requestMail', $scope.request,
-                function(data) {
-                    console.log('data');
                 },
-                function(err) {
+                error: function(err) {
                     console.log(err);
-                });
-
-            $scope.requestModal.hide();
+                }
+            });
         }
 
         // Navigation
@@ -207,78 +204,38 @@
             });
         }
 
-        // Loading URLs outside of the app
-        document.addEventListener("deviceready", onDeviceReady, false);
+        $scope.openBrowser = function(url) {
+            var options = {
+                location: 'yes',
+                clearcache: 'yes',
+                toolbar: 'no'
+            };
+            $cordovaInAppBrowser.open(url, '_blank', options)
 
-        function onDeviceReady() {
-            console.log("window.open works well");
+            .then(function(event) {
+                // success
+            })
+
+            .catch(function(event) {
+                // error
+            });
         }
 
-        var inAppBrowserRef = undefined;
-
-        function showHelp(url) {
-
-            var target = "_blank";
-
-            var options = "location=yes,hidden=yes";
-
-            inAppBrowserRef = cordova.InAppBrowser.open(url, target, options);
-
-            var inAppBrowserRef = function() {
-
-                addEventListener('loadstart', loadStartCallBack);
-
-                addEventListener('loadstop', loadStopCallBack);
-
-                addEventListener('loaderror', loadErrorCallBack);
+        $scope.ratingsObject = {
+            iconOn: 'ion-ios-star',
+            iconOff: 'ion-ios-star-outline',
+            iconOnColor: 'rgb(200, 200, 100)',
+            iconOffColor: 'rgb(200, 100, 100)',
+            rating: 0,
+            minRating: 0,
+            callback: function(rating) {
+                $scope.ratingsCallback(rating);
             }
+        };
 
-        }
-
-        function loadStartCallBack() {
-
-            $('#status-message').text("loading please wait ...");
-
-        }
-
-        function loadStopCallBack() {
-
-            if (inAppBrowserRef != undefined) {
-
-                inAppBrowserRef.insertCSS({ code: "body{font-size: 25px;" });
-
-                $('#status-message').text("");
-
-                inAppBrowserRef.show();
-            }
-
-        }
-
-        function loadErrorCallBack(params) {
-
-            $('#status-message').text("");
-
-            var scriptErrorMesssage =
-                "alert('Sorry we cannot open that page. Message from the server is : " + params.message + "');"
-
-            inAppBrowserRef.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
-
-            inAppBrowserRef.close();
-
-            inAppBrowserRef = undefined;
-
-        }
-
-        function executeScriptCallBack(params) {
-
-            if (params[0] == null) {
-
-                $('#status-message').text(
-                    "Sorry we couldn't open that page. Message from the server is : '" + params.message + "'");
-            }
-
-        }
-
+        $scope.ratingsCallback = function(rating) {
+            console.log('Selected rating is : ', rating);
+        };
 
         // Calculate average location
         // console.log(avgLoc);
