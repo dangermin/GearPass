@@ -3,10 +3,9 @@
     angular.module('starter')
 
     // HOME PAGE CONTROLLER
-    .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator) {
+    .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator, $cordovaInAppBrowser) {
         var map = null;
         $scope.shops = [];
-        // console.log($scope.shops);
         initMap();
         var markerPos = [];
 
@@ -48,18 +47,27 @@
                         $scope.newObj.Web = shop.get('WebAddress');
                         $scope.newObj.Hrs = shop.get('Hours');
                         $scope.newObj.Email = shop.get('EmailAddress');
-                        $scope.newObj.Location = shop.get('Location');
-
+                        var location = $scope.newObj.Location;
+                        $scope.newObj.Marker = new google.maps.LatLng(location._latitude, location._longitude).toString();
                         $scope.shops.push($scope.newObj);
 
                         for (var i = 0; i < $scope.shops.length; i++) {
                             var shop = $scope.shops[i];
                             var markerPos = new google.maps.LatLng($scope.shops[i].Location._latitude, $scope.shops[i].Location._longitude);
-                            // Add markers to Map
+                            $scope.MarkerPos = markerPos;
+
                             var marker = new google.maps.Marker({
                                 map: $scope.map,
                                 animation: google.maps.Animation.DROP,
                                 position: markerPos,
+                                // icon: {
+                                //     path: ROUTE,
+                                //     fillColor: '#1998F7',
+                                //     fillOpacity: 1,
+                                //     strokeColor: '',
+                                //     strokeWeight: 0
+                                // },
+                                // map_icon_label: '<span class="map-icon map-icon-transit-station"></span>'
                             });
 
                             var infoWindowContent = '<div id="content">' +
@@ -71,7 +79,7 @@
                                 '<h6>' + shop.Address + '</h6>' +
                                 '</div>' +
                                 '<div id="webLink" style="float:left">' +
-                                '<p><a href="#" onclick="cordova.InAppBrowser.open(google.com);">' + shop.Web + '</a> ' +
+                                '<p><a href="#" onclick="openBrowser(google.com);">' + shop.Web + '</a> ' +
                                 '<button id="requestBtn" class="button button-calm" ng-click="openModal(\'' + shop.Name + '\',\'' + shop.Email + '\')">Request</button>' +
                                 '<button id="requestBtn" class="button button-calm" ng-click="navigate(\'' + markerPos + '\')">Navigate</button>' +
                                 '</div>';
@@ -84,7 +92,6 @@
                             });
 
                             addInfoWindow(marker, compiled[0], shop);
-                            // $scope.openModal(compiled[0]);
                         }
                     });
                 }
@@ -129,10 +136,14 @@
             var infoWindow = new google.maps.InfoWindow({
                 content: message
             });
+            $scope.selected = shop;
+
+                $scope.$apply();
             //Binde selected shop to infoWindow
             google.maps.event.addListener(marker, 'click', function() {
-                infoWindow.open($scope.map, this);
+                // infoWindow.open($scope.map, this);
                 $scope.selected = shop;
+
                 $scope.$apply();
             });
 
@@ -142,7 +153,7 @@
         }
 
         //create new partner function, only shows if user is not a partner
-         $scope.Confirm = function() {
+        $scope.Confirm = function() {
 
             var query = new Parse.Query('Shop');
             query.equalTo("ShopName", $scope.request.name);
@@ -177,7 +188,6 @@
                     console.log(err);
                 }
             });
-
         }
 
         // Navigation
@@ -194,78 +204,38 @@
             });
         }
 
-        // Loading URLs outside of the app
-        document.addEventListener("deviceready", onDeviceReady, false);
+        $scope.openBrowser = function(url) {
+            var options = {
+                location: 'yes',
+                clearcache: 'yes',
+                toolbar: 'no'
+            };
+            $cordovaInAppBrowser.open(url, '_blank', options)
 
-        function onDeviceReady() {
-            console.log("window.open works well");
+            .then(function(event) {
+                // success
+            })
+
+            .catch(function(event) {
+                // error
+            });
         }
 
-        var inAppBrowserRef = undefined;
-
-        function showHelp(url) {
-
-            var target = "_blank";
-
-            var options = "location=yes,hidden=yes";
-
-            inAppBrowserRef = cordova.InAppBrowser.open(url, target, options);
-
-            var inAppBrowserRef = function() {
-
-                addEventListener('loadstart', loadStartCallBack);
-
-                addEventListener('loadstop', loadStopCallBack);
-
-                addEventListener('loaderror', loadErrorCallBack);
+        $scope.ratingsObject = {
+            iconOn: 'ion-ios-star',
+            iconOff: 'ion-ios-star-outline',
+            iconOnColor: 'rgb(200, 200, 100)',
+            iconOffColor: 'rgb(200, 100, 100)',
+            rating: 0,
+            minRating: 0,
+            callback: function(rating) {
+                $scope.ratingsCallback(rating);
             }
+        };
 
-        }
-
-        function loadStartCallBack() {
-
-            $('#status-message').text("loading please wait ...");
-
-        }
-
-        function loadStopCallBack() {
-
-            if (inAppBrowserRef != undefined) {
-
-                inAppBrowserRef.insertCSS({ code: "body{font-size: 25px;" });
-
-                $('#status-message').text("");
-
-                inAppBrowserRef.show();
-            }
-
-        }
-
-        function loadErrorCallBack(params) {
-
-            $('#status-message').text("");
-
-            var scriptErrorMesssage =
-                "alert('Sorry we cannot open that page. Message from the server is : " + params.message + "');"
-
-            inAppBrowserRef.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
-
-            inAppBrowserRef.close();
-
-            inAppBrowserRef = undefined;
-
-        }
-
-        function executeScriptCallBack(params) {
-
-            if (params[0] == null) {
-
-                $('#status-message').text(
-                    "Sorry we couldn't open that page. Message from the server is : '" + params.message + "'");
-            }
-
-        }
-
+        $scope.ratingsCallback = function(rating) {
+            console.log('Selected rating is : ', rating);
+        };
 
         // Calculate average location
         // console.log(avgLoc);

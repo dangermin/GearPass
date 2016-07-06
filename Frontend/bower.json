@@ -11,6 +11,7 @@
     "ng-cordova-oauth": "^0.2.8",
     "ion-google-place": "^0.0.1",
     "toastr": "^2.1.2",
-    "angular-toastr": "^1.7.0"
+    "angular-toastr": "^1.7.0",
+    "ionic-ratings": "^0.2.0"
   }
 }
