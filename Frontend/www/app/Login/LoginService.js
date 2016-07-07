@@ -43,6 +43,7 @@ angular.module('starter')
 
         Parse.User.logIn(email, password, {
             success: function(user) {
+                console.log(user);
                 $ionicLoading.hide();
                 $state.go('splash');
             },
