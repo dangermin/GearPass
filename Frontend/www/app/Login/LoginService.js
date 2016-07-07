@@ -37,24 +37,32 @@ angular.module('starter')
 
     function login(email, password) {
 
-        $ionicLoading.show({
-            template: 'Logging In...'
-        });
+        if (!email || !password) {
+            $ionicPopup.alert({
+                title: 'Login',
+                template: 'Please fill out all fields'
+            });
+        } else {
 
-        Parse.User.logIn(email, password, {
-            success: function(user) {
-                console.log(user);
-                $ionicLoading.hide();
-                $state.go('splash');
-            },
-            error: function(user, error) {
-                $ionicLoading.hide();
-                $ionicPopup.alert({
-                    title: 'Login',
-                    template: 'Wrong User or Password'
-                });
-            }
-        });
+            $ionicLoading.show({
+                template: 'Logging In...'
+            });
+
+            Parse.User.logIn(email, password, {
+                success: function(user) {
+                    console.log(user);
+                    $ionicLoading.hide();
+                    $state.go('splash');
+                },
+                error: function(user, error) {
+                    $ionicLoading.hide();
+                    $ionicPopup.alert({
+                        title: 'Login',
+                        template: 'Wrong User or Password'
+                    });
+                }
+            });
+        }
     }
 
 

@@ -1,21 +1,5 @@
-<ion-view view-title="Partner">
-    <ion-content id="superUserContent">
-        <div class="card" ng-show="partnerSearchResults">
-            <h5>{{thisShop.ShopName}}</h5>
-            <h6>{{thisShop.Hours}}</h6>
-            <h6>{{thisShop.ContactName}}</h6>
-            <h6>{{thisShop.PhoneNumber}}</h6>
-            <h6>{{thisShop.WebAddress}}</h6>
-            <h6>{{thisShop.Address}}</h6>
-            <h6>{{thisShop.Pending}}</h6>
-            <a class="button button-block button-danger" ng-click="deletePartner(thisShop.Address)">delete partner</a>
-        </div>
-        <div class="card" ng-show="userSearchResults">
-            <h4>Member Name: {{thisUser.First}} {{thisUser.Last}}</h4>
-            <h5>Email: {{thisUser.Email}}</h5>
-            <h5>Tier: {{thisUser.MembershipTier}}</h5>
-            <a class="button button-block button-danger" ng-click="deleteMember()">delete member</a>
-        </div>
+<ion-view title='<img height=40px width=50px src="app/img/icon.png" alt="Logo" class="Logo">'>
+    <ion-content id="superUserContent" scroll="false">
         <h2 id="partnerWelcomeMessage" ng-show="welcomeMessageShowing" class="text-center">Welcome, Mr. Woodhams</h2>
         <div id="partnerContent" ng-hide="welcomeMessageShowing" class="list text-center">
             <h3>{{currentDate}}</h3>
@@ -36,6 +20,22 @@
                     <input ng-model="userSearch.email" type="text" placeholder="Search Members" />
                 </form>
             </div>
+        </div>
+        <div class="card" ng-show="partnerSearchResults">
+            <h5>{{thisShop.ShopName}}</h5>
+            <h6>{{thisShop.Hours}}</h6>
+            <h6>{{thisShop.ContactName}}</h6>
+            <h6>{{thisShop.PhoneNumber}}</h6>
+            <h6>{{thisShop.WebAddress}}</h6>
+            <h6>{{thisShop.Address}}</h6>
+            <h6>{{thisShop.Pending}}</h6>
+            <a class="button button-block button-danger" ng-click="deletePartner(thisShop.Address)">delete partner</a>
+        </div>
+        <div class="card" ng-show="userSearchResults">
+            <h4>Member Name: {{thisUser.First}} {{thisUser.Last}}</h4>
+            <h5>Email: {{thisUser.Email}}</h5>
+            <h5>Tier: {{thisUser.MembershipTier}}</h5>
+            <a class="button button-block button-danger" ng-click="deleteMember()">delete member</a>
         </div>
     </ion-content>
     <!-- New Partner Modal -->
