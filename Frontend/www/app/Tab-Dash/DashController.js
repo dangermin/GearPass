@@ -109,7 +109,7 @@
 
         $scope.openModal = function(name, email) {
             $scope.requestModal.show();
-            $scope.request = { "name": name, "email": email };
+            $scope.request = { "name": name, "email": email, "date": new moment().format()};
         };
 
         $scope.closeModal = function() {

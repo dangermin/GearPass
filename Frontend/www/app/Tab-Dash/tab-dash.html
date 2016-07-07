@@ -37,6 +37,10 @@
                     <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
                 </ion-header-bar>
                 <ion-content class="padding">
+                    <div class="item item-icon-left" ion-datetime-picker ng-model="request.date">
+                        <i class="icon ion-ios-calendar-outline positive"></i>
+                        <strong>{{request.date| date: "yyyy-MM-dd H:mm"}}</strong>
+                    </div>
                     <label id="requestInput" class="item item-input item-select">
                         <div class="gear">
                             Select Gear
@@ -45,23 +49,6 @@
                             <option value="Surf Board(s)" selected>Surf Board</option>
                             <option value="Bike(s)">Bike</option>
                             <option value="Ski set(s)">Ski</option>
-                        </select>
-                    </label>
-                    <label id="requestInput" class="item item-input item-select">
-                        <div class="quantity">
-                            Select Quantity
-                        </div>
-                        <select ng-model="request.quantity">
-                            <option value="1" selected>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
                         </select>
                     </label>
                     <label id="requestInput" class="item item-input item-select">

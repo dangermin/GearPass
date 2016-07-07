@@ -13,6 +13,12 @@
     "toastr": "^2.1.2",
     "angular-toastr": "^1.7.0",
     "moment": "^2.13.0",
-    "ionic-ratings": "^0.2.0"
+    "ionic-ratings": "^0.2.0",
+    "ion-datetime-picker": "^0.3.0"
+  },
+  "resolutions": {
+    "angular-animate": "1.4.3",
+    "angular": "1.5.3",
+    "angular-sanitize": "1.5.3"
   }
 }
