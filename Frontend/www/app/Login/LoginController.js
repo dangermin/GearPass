@@ -20,7 +20,6 @@ angular.module('starter')
         IonicLogin.login($scope.data.email, $scope.data.password);
     }
 
-
     $scope.goToPayment = function(tier) {
         $scope.applicationModal.hide();
         $state.go('payment', { tier: tier });
