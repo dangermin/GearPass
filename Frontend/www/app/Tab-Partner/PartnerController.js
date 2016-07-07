@@ -1,153 +1,83 @@
 angular.module('starter')
 
-.controller('PartnerController', function($scope, $ionicModal, IonicLogin, $state, $ionicLoading, $timeout) {
-
-    //search results box is hidden
-    $scope.partnerSearchResults = false;
-    $scope.userSearchResults = false;
-
-
-    //set current date
-    $scope.currentDate = { "value": new moment().format("MMM d, YYYY").toString() };
+.controller('PartnerController', function($scope, $ionicModal, IonicLogin, $state, $ionicLoading, $timeout, PartnerService) {
 
     //show welcome message
     $scope.welcomeMessageShowing = true;
 
     //wait 2 seconds and then hide welcome message
     $scope.$on('$ionicView.enter', function(e) {
+        //search results box is hidden
+        $scope.partnerSearchResults = false;
+        $scope.userSearchResults = false;
+        //set current date
+        $scope.currentDate = moment().format("MMMM D, YYYY").toString();
+        //show welcome message
         $scope.welcomeMessageShowing = true;
         $timeout(function() {
+            //hide welcome message
             $scope.welcomeMessageShowing = false;
         }, 2000);
+
+        //get a count of current PARTNERS
+        var PartnerQuery = new Parse.Query('Shop');
+        PartnerQuery.count({
+            success: function(count) {
+                $scope.partnerCount = count;
+            },
+            error: function(err) {
+                console.log("error getting partners");
+            }
+        });
+
+        //get a count of current USERS
+        var UserQuery = new Parse.Query('User');
+        UserQuery.count({
+            success: function(count) {
+                $scope.userCount = count;
+            },
+            error: function(err) {
+                console.log("error getting users");
+            }
+        });
     });
 
-    //get a count of current PARTNERS
-    var PartnerQuery = new Parse.Query('Shop');
-    PartnerQuery.count({
-        success: function(count) {
-            $scope.partnerCount = count;
-        },
-        error: function(err) {
-            console.log("error getting partners");
-        }
-    });
 
     // define email input variable
     $scope.partnerSearch = { "email": "" };
-
     //define shop search results variable
     $scope.thisShop;
-
     //function called when searching for partners 
     $scope.searchPartners = function() {
-
-        var thisShop = {
-            "ShopName": "",
-            "Hours": "",
-            "ContactName": "",
-            "PhoneNumber": "",
-            "WebAddress": "",
-            "Address": "",
-            "Location": "",
-            "Pending": ""
-        };
-
-        var pendingQuery = new Parse.Query('Request');
         var email = $scope.partnerSearch.email;
-        PartnerQuery.equalTo('EmailAddress', email);
-        PartnerQuery.first({
-            success: function(partner) {
-                if (!partner) {
-                    console.log("coulcn't find partner");
-                } else {
-                    pendingQuery.equalTo('Shop', partner);
-                    pendingQuery.equalTo('Completed', false);
-                    pendingQuery.count({
-                        success: function(count) {
-                            thisShop.Pending = count;
-                            thisShop.ShopName = partner.get('ShopName');
-                            thisShop.Hours = partner.get('Hours');
-                            thisShop.ContactName = partner.get('ContactName');
-                            thisShop.PhoneNumber = partner.get('PhoneNumber');
-                            thisShop.WebAddress = partner.get('WebAddress');
-                            thisShop.Address = partner.get('Address');
-                            thisShop.Location = partner.get('Location');
-                            $scope.$apply(function() {
-                                $scope.userSearchResults = false;
-                                $scope.partnerSearchResults = true;
-                                $scope.thisShop = thisShop;
-                                $scope.partnerSearch = { "email": "" };
-
-                            })
-                        },
-                        error: function(err) {
-                            console.log(err);
-                        }
-
-                    })
-                }
-
-            },
-            error: function(partner, err) {
-                alert('could not find partner with that email address');
-                console.log(err);
-            }
-        })
+        PartnerService.SearchPartners(email);
+        $timeout(function() {
+            $scope.userSearchResults = false;
+            $scope.partnerSearchResults = true;
+            $scope.thisShop = PartnerService.thisShop;
+            console.log($scope.thisShop);
+            $scope.partnerSearch = { "email": "" };
+        }, 1000);
     }
 
 
-    //get a count of current USERS
-    var UserQuery = new Parse.Query('User');
-    UserQuery.count({
-        success: function(count) {
-            $scope.userCount = count;
-        },
-        error: function(err) {
-            console.log("error getting users");
-        }
-    });
 
     //set user email search variable
     $scope.userSearch = { "email": "" };
-
     //set search results variable
     $scope.thisUser;
-
     //function called when searching users
     $scope.searchUsers = function() {
-
-        var thisUser = {
-            "First": "",
-            "Last": "",
-            "Email": ""
-        };
-
         var email = $scope.userSearch.email;
-        UserQuery.equalTo('email', email);
-        UserQuery.first({
-            success: function(user) {
-                if (!user) {
-                    console.log("coulcn't find user");
-                } else {
-                    thisUser.First = user.get('first');
-                    thisUser.Last = user.get('last');
-                    thisUser.Email = user.get('email');
-                    thisUser.MembershipTier = user.get('MembershipTier');
-                }
-                $scope.$apply(function() {
-                    $scope.partnerSearchResults = false;
-                    $scope.userSearchResults = true;
-                    $scope.thisUser = thisUser;
-                    $scope.userSearch = { "email": "" };
-
-                })
-            },
-            error: function(user, err) {
-                alert('could not find user with that email address');
-                console.log(err);
-            }
-        })
+        PartnerService.SearchUsers(email);
+        $timeout(function() {
+            $scope.partnerSearchResults = false;
+            $scope.userSearchResults = true;
+            $scope.thisUser = PartnerService.thisUser;
+            $scope.userSearch = { "email": "" };
+        }, 1000);
     }
+
 
 
     //define the PARTNER modal
@@ -156,7 +86,6 @@ angular.module('starter')
     }).then(function(modal) {
         $scope.modal = modal;
     });
-
     //define PARTNER variables for this scope
     $scope.ShopName = { value: "" };
     $scope.EmailAddress = { value: "" };
@@ -185,9 +114,36 @@ angular.module('starter')
         shop.set('Address', $scope.Location.value.formatted_address);
         shop.set('Location', location);
 
-        shop.save()
+        shop.save();
 
         $scope.modal.hide();
+    }
+
+
+    //function to delete partner
+    $scope.deletePartner = function(address) {
+        $scope.thisShop = {};
+        var PQ = new Parse.Query('Shop');
+        PQ.equalTo("Address", address);
+        PQ.first({
+            success: function(object) {
+                object.destroy({
+                    success: function(object) {
+                        console.log("deleted");
+                    },
+                    error: function(err) {
+                        console.log("not deleted");
+                    }
+
+                })
+            },
+            error: function() {
+                console.log("error");
+            }
+        })
+
+
+
     }
 
 

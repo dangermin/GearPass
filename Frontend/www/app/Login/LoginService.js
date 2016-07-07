@@ -37,18 +37,21 @@ angular.module('starter')
 
     function login(email, password) {
 
-        $ionicLoading.show({
-            template: 'Logging In...'
-        });
+        console.log("step 2");
+        console.log(email);
+        // $ionicLoading.show({
+        //     template: 'Logging In...'
+        // });
 
         Parse.User.logIn(email, password, {
             success: function(user) {
-                console.log(user);
+                console.log("step 3");
                 $ionicLoading.hide();
                 $state.go('splash');
             },
             error: function(user, error) {
                 $ionicLoading.hide();
+                console.log("Wrong user or pass");
                 $ionicPopup.alert({
                     title: 'Login',
                     template: 'Wrong User or Password'
