@@ -3,6 +3,8 @@ angular.module('starter')
 // LOGIN PAGE CONTROLLER
 .controller('LoginController', function($scope, $ionicModal, IonicLogin, $ionicLoading, $state, $cordovaOauth) {
 
+    $scope.data = {};
+
     //tell modal how to be
     $ionicModal.fromTemplateUrl('templates/applicationModal.html', {
         scope: $scope

@@ -1,11 +1,12 @@
 <ion-view view-title="Gear Pass">
     <ion-content class="padding">
-        <div class="centerDiv">
+        <div class="centerDiv" ng-if="!loading">
             <ion-pane>
                 <ion-content data-tap-disabled="true">
+
                     <p>
                         <span ng-model="selected"><b>Name:</b> {{selected.Name}}</span>
-                        <ionic-ratings ratingsobj='ratingsObject' style="float: right"></ionic-ratings>
+                        <ionic-ratings ng-model="selected.Rated" ratingsobj="{rating: selectedRating, readOnly: true}" style="float: right;"></ionic-ratings>
                     </p>
                     <p>
                         <span ng-model="selected"><b>Address:</b> {{selected.Address}}</span>

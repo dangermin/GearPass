@@ -5,7 +5,7 @@
                 <ion-content data-tap-disabled="true">
                     <p>
                         <span ng-model="selected"><b>Name:</b> {{selected.Name}}</span>
-                        <ionic-ratings ratingsobj='ratingsObject' style="float: right"></ionic-ratings>
+                        <ionic-ratings ng-model="shop" ratingsobj="{rating: shop.Rated.rating}" style="float: right"></ionic-ratings>
                     </p>
                     <p>
                         <span ng-model="selected"><b>Address:</b> {{selected.Address}}</span>
