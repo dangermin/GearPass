@@ -11,11 +11,11 @@ angular.module('starter')
     });
 
     // REMOVE THE USER LOGIN INFORMATION WHEN RETURNING TO LOGIN SCREEN
-    $scope.data = { "email": "", "password": "" };
-
+    $scope.$on('$ionicView.enter', function(e) {
+        $scope.data = {};
+    });
     // LOGIN FUNCTION
     $scope.login = function() {
-        console.log("step 1");
         IonicLogin.login($scope.data.email, $scope.data.password);
     }
 
