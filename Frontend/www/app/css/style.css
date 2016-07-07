@@ -97,7 +97,6 @@ Tab-History
 }
 
 
-
 /********************************
 Tab-Dash
 *********************************/
@@ -156,30 +155,77 @@ a {
     font-size: 13px;
 }
 
+
 /*.ReqButton {*/
-    line-height: 20px !important;
-    min-height: 0px !important;
-    /*padding: 2px;*/
-    font-weight: bold !important;
-    /*margin-left: 4px;
+
+line-height: 20px !important;
+min-height: 0px !important;
+
+/*padding: 2px;*/
+
+font-weight: bold !important;
+
+/*margin-left: 4px;
     margin-right: 4px;*/
-    font-size: 13px;
+
+font-size: 13px;
+
 }
 
 /*.NavButton {*/
-    line-height: 20px !important;
-    min-height: 20px !important;
-    /*padding: 2px;*/
-    font-weight: bold !important;
-    /*margin-left: 4px;
+line-height: 20px !important;
+min-height: 20px !important;
+
+/*padding: 2px;*/
+font-weight: bold !important;
+
+/*margin-left: 4px;
     margin-right: 4px;*/
-    font-size: 13px;
+font-size: 13px;
+
 }
 
 /********************************
 Tab-Profile
 *********************************/
-
 #profileCard {
     border-style: none;
+}
+
+/********************************
+Tab-Partner
+*********************************/
+#partnerTitle {
+    margin-bottom: 0px;
+}
+
+#partnerAdd {
+    margin-bottom: 10px;
+}
+
+#superUserContent {
+    background-color: black;
+    padding: 10px;
+}
+
+#superUserContent .card {
+    padding:0 10px;
+}
+
+#superUserContent h2,h3 {
+    font-family: 'Great Vibes', cursive;
+    color:white;
+}
+
+#superUserContent input {
+    color:white;
+}
+
+#superUserContent .item-input{
+    background-color: black;
+    margin: 0 10%;
+}
+
+#partnerWelcomeMessage {
+    margin-top: 50%;
 }

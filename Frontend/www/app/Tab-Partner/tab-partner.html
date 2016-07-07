@@ -1,15 +1,48 @@
 <ion-view view-title="Partner">
-    <ion-content>
-        <div class="list">
-            <h2>Welcome, <span ng-bind ="displayEmail.email"></span></h2>
-            <button class="button button-block button-positive" ng-click="modal.show()">Add a partner</button>
+    <ion-content id="superUserContent">
+        <div class="card" ng-show="partnerSearchResults">
+            <h5>{{thisShop.ShopName}}</h5>
+            <h6>{{thisShop.Hours}}</h6>
+            <h6>{{thisShop.ContactName}}</h6>
+            <h6>{{thisShop.PhoneNumber}}</h6>
+            <h6>{{thisShop.WebAddress}}</h6>
+            <h6>{{thisShop.Address}}</h6>
+            <h6>{{thisShop.Pending}}</h6>
+            <a class="button button-block button-danger" ng-click="deletePartner(thisShop.Address)">delete partner</a>
         </div>
-        <button class="button button-block button-positive" ng-click="logout()">Logout</button>
+        <div class="card" ng-show="userSearchResults">
+            <h4>Member Name: {{thisUser.First}} {{thisUser.Last}}</h4>
+            <h5>Email: {{thisUser.Email}}</h5>
+            <h5>Tier: {{thisUser.MembershipTier}}</h5>
+            <a class="button button-block button-danger" ng-click="deleteMember()">delete member</a>
+        </div>
+        <h2 id="partnerWelcomeMessage" ng-show="welcomeMessageShowing" class="text-center">Welcome, Mr. Woodhams</h2>
+        <div id="partnerContent" ng-hide="welcomeMessageShowing" class="list text-center">
+            <h3>{{currentDate}}</h3>
+            <br>
+            <div class="text-center">
+                <h2 id="partnerTitle">Partners: {{partnerCount}}</h2>
+                <a id="partnerAdd" class="button button-clear button-positive" ng-click="modal.show()">add</a>
+                <form name="name" class="form item item-input" ng-submit="searchPartners()">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input ng-model="partnerSearch.email" type="text" placeholder="Search Partners" />
+                </form>
+            </div>
+            <br>
+            <div class="text-center">
+                <h2>Members: {{userCount}}</h2>
+                <form name="name" class="form item item-input" ng-submit="searchUsers()">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input ng-model="userSearch.email" type="text" placeholder="Search Members" />
+                </form>
+            </div>
+        </div>
     </ion-content>
+    <!-- New Partner Modal -->
     <script id="templates/modal.html" type="text/ng-template">
         <ion-modal-view>
             <ion-header-bar class="bar bar-header bar-positive">
-                <h1 class="title">Partner Application</h1>
+                <h1 class="title">New Partner</h1>
                 <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
             </ion-header-bar>
             <ion-content class="padding">
@@ -17,6 +50,10 @@
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Shop Name</span>
                         <input type="text" ng-model="ShopName.value" placeholder="Rocky's Surf Shop...">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Email Address:</span>
+                        <input type="text" ng-model="EmailAddress.value" placeholder="bob@surf.com...">
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Shop Location</span>
@@ -42,13 +79,10 @@
                         <span class="input-label">Closing Hour</span>
                         <input type="text" ng-model="Close.value" placeholder="5pm">
                     </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Number of boards</span>
-                        <input type="num" ng-model="Boards.value" placeholder="18">
-                    </label>
                 </div>
-                <button ng-hide="partner.value" class="button button-block button-positive" ng-click="createPartner()">Register</button>
-                <button ng-show="partner.value" class="button button-block button-positive" ng-click="updatePartner()">Update</button>
+                <button class="button button-block button-positive" ng-click="createPartner()">add partner</button>
+                <!--                 <button ng-show="partner.value" class="button button-block button-positive" ng-click="updatePartner()">Update</button>
+ -->
             </ion-content>
         </ion-modal-view>
     </script>

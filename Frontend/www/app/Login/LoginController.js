@@ -16,12 +16,11 @@ angular.module('starter')
     $scope.$on('$ionicView.enter', function(e) {
         $scope.data = {};
     });
-
+    
     // LOGIN FUNCTION
     $scope.login = function() {
         IonicLogin.login($scope.data.email, $scope.data.password);
     }
-
 
     $scope.goToPayment = function(tier) {
         $scope.applicationModal.hide();
