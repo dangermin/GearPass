@@ -4,11 +4,16 @@
 
     // HOME PAGE CONTROLLER
     .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator, $cordovaInAppBrowser, $timeout) {
-        var map = null;
-        $scope.selectedRating = {};
-        $scope.shops = [];
-        initMap();
-        var markerPos = [];
+
+
+        $scope.$on('$ionicView.enter', function(e) {
+
+            var map = null;
+            $scope.selectedRating = {};
+            $scope.shops = [];
+            initMap();
+            var markerPos = [];
+        });
 
         function initMap() {
             var options = { timeout: 10000, enableHighAccuracy: true };
@@ -52,7 +57,7 @@
                         var avg = $scope.newObj.Rating;
                         var len = $scope.newObj.Rating.length;
                         var total = .2;
-                        for (var i in avg){ total += avg[i] / len};
+                        for (var i in avg) { total += avg[i] / len };
                         $scope.newObj.Rating = Math.round(total);
                         console.log(total);
                         console.log($scope.newObj.Rating);
@@ -138,7 +143,7 @@
 
         $scope.openModal = function(name, email) {
             $scope.requestModal.show();
-            $scope.request = { "name": name, "email": email, "date": new moment().format()};
+            $scope.request = { "name": name, "email": email, "date": new moment().format() };
         };
 
         $scope.closeModal = function() {

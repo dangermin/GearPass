@@ -28,91 +28,78 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider)
+.config(function($stateProvider, $urlRouterProvider) {
     //, uiGmapGoogleMapApiProvider
-    {
-        // uiGmapGoogleMapApiProvider.configure({
-        //   key: 'AIzaSyC8hW8Oaabo6DjgqDFREUrqZnBtlytHgGQ',
-        //   v: '3.17',
-        //   libraries: 'weather,geometry,visualization',
-        //   language: 'en',
-        //   sensor: 'false',
-        // })
+    // uiGmapGoogleMapApiProvider.configure({
+    //   key: 'AIzaSyC8hW8Oaabo6DjgqDFREUrqZnBtlytHgGQ',
+    //   v: '3.17',
+    //   libraries: 'weather,geometry,visualization',
+    //   language: 'en',
+    //   sensor: 'false',
+    // })
 
-        // Ionic uses AngularUI Router which uses the concept of states
-        // Learn more here: https://github.com/angular-ui/ui-router
-        // Set up the various states which the app can be in.
-        // Each state's controller can be found in controllers.js
-        $stateProvider
-
-
-            .state('splash', {
-            url: '/splash',
-            templateUrl: 'app/Splash/splash.html',
-            controller: 'SplashController'
-        })
-
-        .state('login', {
-            url: '/login',
-            templateUrl: 'app/Login/login.html',
-            controller: 'LoginController'
-        })
-
-        .state('payment', {
-            url: '/payment',
-            templateUrl: 'app/Payment/payment.html',
-            controller: 'PaymentController'
-        })
-
-        .state('tab', {
-            url: '/tab',
-            abstract: true,
-            templateUrl: 'app/Tab/tab.html',
-            controller: 'TabController'
-        })
-
-        .state('tab.dash', {
-            url: '/dash',
-            views: {
-                'tab-dash': {
-                    templateUrl: 'app/Tab-Dash/tab-dash.html',
-                    controller: 'DashController'
-                }
-            }
-        })
-
-        .state('tab.history', {
-            url: '/history',
-            views: {
-                'tab-history': {
-                    templateUrl: 'app/Tab-History/tab-history.html',
-                    controller: 'HistoryController'
-                }
-            }
-        })
-
-        .state('tab.profile', {
-            url: '/profile',
-            views: {
-                'tab-profile': {
-                    templateUrl: 'app/Tab-Profile/tab-profile.html',
-                    controller: 'ProfileController'
-                }
-            }
-        })
-
-        .state('tab.partner', {
-            url: '/partner',
-            views: {
-                'tab-partner': {
-                    templateUrl: 'app/Tab-Partner/tab-partner.html',
-                    controller: 'PartnerController'
-                }
-            }
-        });
+    // Ionic uses AngularUI Router which uses the concept of states
+    // Learn more here: https://github.com/angular-ui/ui-router
+    // Set up the various states which the app can be in.
+    // Each state's controller can be found in controllers.js
+    $stateProvider
 
 
-        // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('splash');
+        .state('splash', {
+        url: '/splash',
+        templateUrl: 'app/Splash/splash.html',
+        controller: 'SplashController'
+    })
+
+    .state('login', {
+        url: '/login',
+        templateUrl: 'app/Login/login.html',
+        controller: 'LoginController'
+    })
+
+    .state('payment', {
+        url: '/payment',
+        templateUrl: 'app/Payment/payment.html',
+        controller: 'PaymentController'
+    })
+
+    .state('tab', {
+        url: '/tab',
+        abstract: true,
+        templateUrl: 'app/Tab/tab.html',
+        controller: 'TabController'
+    })
+
+    .state('tab.dash', {
+        url: '/dash',
+        templateUrl: 'app/Tab-Dash/tab-dash.html',
+        controller: 'DashController'
+
+    })
+
+    .state('tab.history', {
+        url: '/history',
+        templateUrl: 'app/Tab-History/tab-history.html',
+        controller: 'HistoryController'
+
+    })
+
+    .state('tab.profile', {
+        url: '/profile',
+        templateUrl: 'app/Tab-Profile/tab-profile.html',
+        controller: 'ProfileController'
+
+    })
+
+    .state('tab.partner', {
+        url: '/partner',
+        templateUrl: 'app/Tab-Partner/tab-partner.html',
+        controller: 'PartnerController'
 
     });
+
+
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('splash');
+
+});
