@@ -3,8 +3,9 @@
     angular.module('starter')
 
     // HOME PAGE CONTROLLER
-    .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator, $cordovaInAppBrowser) {
+    .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator, $cordovaInAppBrowser, $timeout) {
         var map = null;
+        $scope.selectedRating = {};
         $scope.shops = [];
         initMap();
         var markerPos = [];
@@ -24,7 +25,7 @@
                     loadMarkers();
                 });
             }, function(error) {
-                content.log("Could not ger location");
+                console.log("Could not ger location");
                 loadMarkers();
             });
         }
@@ -32,7 +33,6 @@
         function loadMarkers() {
             Parse.GeoPoint.current({
                 success: function(point) {
-                    // $scope.shops = [];
                     var LatLng = [];
                     var avgLoc = [];
                     var contentString = [];
@@ -47,7 +47,15 @@
                         $scope.newObj.Web = shop.get('WebAddress');
                         $scope.newObj.Hrs = shop.get('Hours');
                         $scope.newObj.Email = shop.get('EmailAddress');
+                        $scope.newObj.Rating = shop.get('Rating');
                         var location = $scope.newObj.Location;
+                        var avg = $scope.newObj.Rating;
+                        var len = $scope.newObj.Rating.length;
+                        var total = .2;
+                        for (var i in avg){ total += avg[i] / len};
+                        $scope.newObj.Rating = Math.round(total);
+                        console.log(total);
+                        console.log($scope.newObj.Rating);
                         $scope.newObj.Marker = new google.maps.LatLng(location._latitude, location._longitude).toString();
                         $scope.shops.push($scope.newObj);
 
@@ -56,18 +64,16 @@
                             var markerPos = new google.maps.LatLng($scope.shops[i].Location._latitude, $scope.shops[i].Location._longitude);
                             $scope.MarkerPos = markerPos;
 
+                            shop.Rated = {
+                                rating: shop.Rating,
+                                // rating: Number.parseInt(shop.Rating.toString()),
+                                readOnly: true,
+                            };
+
                             var marker = new google.maps.Marker({
                                 map: $scope.map,
                                 animation: google.maps.Animation.DROP,
                                 position: markerPos,
-                                // icon: {
-                                //     path: ROUTE,
-                                //     fillColor: '#1998F7',
-                                //     fillOpacity: 1,
-                                //     strokeColor: '',
-                                //     strokeWeight: 0
-                                // },
-                                // map_icon_label: '<span class="map-icon map-icon-transit-station"></span>'
                             });
 
                             var infoWindowContent = '<div id="content">' +
@@ -77,6 +83,7 @@
                                 '<div>' +
                                 '<h6>' + shop.Numb + '</h6>' +
                                 '<h6>' + shop.Address + '</h6>' +
+                                '<ionic-ratings ratingsobj="{rating: ' + shop.Rating + ', readOnly: ' + true + ' }" style="float: right"></ionic-ratings>' +
                                 '</div>' +
                                 '<div id="webLink" style="float:left">' +
                                 '<p><a href="#" onclick="openBrowser(google.com);">' + shop.Web + '</a> ' +
@@ -84,9 +91,8 @@
                                 '<button id="requestBtn" class="button button-calm" ng-click="navigate(\'' + markerPos + '\')">Navigate</button>' +
                                 '</div>';
 
-
                             var compiled = $compile(infoWindowContent)($scope);
-
+                            console.log(infoWindowContent);
                             var infoWindow = new google.maps.InfoWindow({
                                 content: compiled[0]
                             });
@@ -98,14 +104,37 @@
             })
         }
 
+        //InfoWindow
+        function addInfoWindow(marker, message, shop) {
 
+            var infoWindow = new google.maps.InfoWindow({
+                content: message
+            });
+
+            $scope.selected = shop;
+
+            //Binde selected shop to infoWindow
+            google.maps.event.addListener(marker, 'click', function() {
+                // infoWindow.open($scope.map, this);
+                $scope.selected = shop;
+                $scope.selectedRating = $scope.selected.Rated.rating;
+
+                $scope.$apply();
+            });
+
+            $scope.selectedRating = $scope.selected.Rated.rating;
+
+            google.maps.event.addListener($scope.map, 'click', function() {
+                infoWindow.close($scope.map, this);
+            });
+        }
+
+        //Request Modal
         $ionicModal.fromTemplateUrl('templates/modalContent.html', {
             scope: $scope
         }).then(function(requestModal) {
             $scope.requestModal = requestModal;
         });
-
-
 
         $scope.openModal = function(name, email) {
             $scope.requestModal.show();
@@ -120,37 +149,6 @@
         $scope.$on('$destroy', function() {
             $scope.modal.remove();
         });
-
-        // Execute action on hide modal
-        $scope.$on('modal.hidden', function() {
-            // Execute action
-        });
-
-        // Execute action on remove modal
-        $scope.$on('modal.removed', function() {
-            // Execute action
-        });
-
-        function addInfoWindow(marker, message, shop) {
-
-            var infoWindow = new google.maps.InfoWindow({
-                content: message
-            });
-            $scope.selected = shop;
-
-                $scope.$apply();
-            //Binde selected shop to infoWindow
-            google.maps.event.addListener(marker, 'click', function() {
-                // infoWindow.open($scope.map, this);
-                $scope.selected = shop;
-
-                $scope.$apply();
-            });
-
-            google.maps.event.addListener($scope.map, 'click', function() {
-                infoWindow.close($scope.map, this);
-            });
-        }
 
         //create new partner function, only shows if user is not a partner
         $scope.Confirm = function() {
@@ -220,22 +218,6 @@
                 // error
             });
         }
-
-        $scope.ratingsObject = {
-            iconOn: 'ion-ios-star',
-            iconOff: 'ion-ios-star-outline',
-            iconOnColor: 'rgb(200, 200, 100)',
-            iconOffColor: 'rgb(200, 100, 100)',
-            rating: 0,
-            minRating: 0,
-            callback: function(rating) {
-                $scope.ratingsCallback(rating);
-            }
-        };
-
-        $scope.ratingsCallback = function(rating) {
-            console.log('Selected rating is : ', rating);
-        };
 
         // Calculate average location
         // console.log(avgLoc);

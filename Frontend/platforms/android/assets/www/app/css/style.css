@@ -109,6 +109,10 @@ Tab-Dash
     position: relative;
 }
 
+ .ionic_ratings .read_only {
+    pointer-events:none !important;
+  }
+
 .scroll {
     height: 100%;
 }
