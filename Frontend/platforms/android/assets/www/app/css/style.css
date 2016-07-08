@@ -53,6 +53,7 @@ Login
 }
 
 
+
 /********************************
 Splash
 *********************************/
@@ -61,7 +62,9 @@ Splash
 /********************************
 Tab
 *********************************/
-
+#ion-ios-arrow-right{
+    font-size: 1px;
+}
 
 /********************************
 Tab-History
@@ -71,9 +74,16 @@ Tab-History
     max-height: 50px;
 }
 
+#historyCardParent {
+    height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-right: -18px;
+}
+
 #historyCard {
-    white-space: normal;
-    padding-bottom: 15px;
+        white-space: normal;
+        padding-bottom: 15px;
 }
 
 #historyTime {
@@ -97,34 +107,32 @@ Tab-History
 }
 
 
-
 /********************************
 Tab-Dash
 *********************************/
 
 #map_canvas {
     width: 100%;
-    height: 77%;
-    margin: 0;
+    height: 460px;
     position: relative;
+}
+
+#requestBox {
+    margin-bottom: 35px !important;
 }
 
  .ionic_ratings .read_only {
     pointer-events:none !important;
   }
 
-.scroll {
-    height: 100%;
-}
-
-.angular-google-map-container {
+/*.angular-google-map-container {
     position: absolute;
     height: 100%;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-}
+}*/
 
 #content {
     max-height: 130px;
@@ -156,30 +164,110 @@ a {
     font-size: 13px;
 }
 
-/*.ReqButton {*/
-    line-height: 20px !important;
-    min-height: 0px !important;
-    /*padding: 2px;*/
-    font-weight: bold !important;
-    /*margin-left: 4px;
-    margin-right: 4px;*/
-    font-size: 13px;
+#bottomButtons {
+    position: absolute;
+    bottom: 35px;
 }
 
-/*.NavButton {*/
-    line-height: 20px !important;
-    min-height: 20px !important;
-    /*padding: 2px;*/
-    font-weight: bold !important;
-    /*margin-left: 4px;
-    margin-right: 4px;*/
-    font-size: 13px;
+#topButtonsDash {
+    background-color: #0099ff;
+    opacity: .5;
+    position: relative;
+    top: 0;
+    margin-left: 2px;
+    height: 75px;
+    width: 100%;
+}
+
+#topButtonsTasks span {
+    color: white;
+}
+
+#centerDiv {
+    padding: 10px;
+}
+
+#bottomLeftButton {
+    font-size: 4em;
+    padding-top: 12px;
+}
+
+#bottomCenterButton {
+    font-size: 5em;
+}
+
+#bottomRightButton {
+    font-size: 3.8em;
+    padding-top: 12px;
 }
 
 /********************************
 Tab-Profile
 *********************************/
-
 #profileCard {
     border-style: none;
 }
+
+ #profileLogout{
+    position: absolute;
+    bottom: 10px;
+    min-height: 30px;
+}
+
+#profileUpdate{
+    /*position: absolute;
+    bottom: 10px;*/
+    min-height: 30px;
+}
+
+#modalUpdate{
+    /*position: absolute;
+    bottom: 10px;*/
+    min-height: 30px;
+}
+
+#profileLogout{
+    position: absolute;
+    bottom: 10px;
+    min-height: 30px;
+} 
+
+/********************************
+Tab-Partner
+*********************************/
+#partnerTitle {
+    margin-bottom: 0px;
+}
+
+#partnerAdd {
+    margin-bottom: 10px;
+}
+
+#superUserContent {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(../img/indie.jpg);
+    background-size: cover;
+    padding: 10px;
+}
+
+#superUserContent .card {
+    padding:0 10px;
+}
+
+#superUserContent h2,h3 {
+    font-family: 'Great Vibes', cursive;
+    color:white;
+}
+
+#superUserContent input {
+    color:white;
+}
+
+#superUserContent .item-input{
+    background-color: rgba(0, 0, 0, 0);
+    margin: 0 10%;
+}
+
+#partnerWelcomeMessage {
+    margin-top: 50%;
+}
+

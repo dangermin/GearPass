@@ -1,5 +1,5 @@
 <ion-view view-title="Gear Pass" hide-back-button="true" can-swipe-back="false">
-    <ion-content class="padding login-page">
+    <ion-content class="padding login-page" scroll="false">
         <div class="login-div">
             <img id="loginLogo" src="app/img/surf.png" alt="Logo" class="Logo">
             <button id="loginButtons" ng-hide="loggingIn" class="button button-block button-calm" ng-click="loggingIn=true">Member Login</button>
@@ -7,7 +7,7 @@
                 <div class="list">
                     <label id="loginInput" class="item item-input item-stacked-label text-left">
                         <span id="loginContainer" class="input-label ">  Membership Number:</span>
-                        <input required type="text" placeholder="  x-xxx" ng-model="data.email">
+                        <input required type="text" placeholder="x-xxx" ng-model="data.email">
                     </label>
                     <label id="loginInput" class="item item-input item-stacked-label text-left ">
                         <span id="loginContainer" class="input-label">  Password:</span>

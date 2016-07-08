@@ -3,6 +3,8 @@ angular.module('starter')
 // LOGIN PAGE CONTROLLER
 .controller('LoginController', function($scope, $ionicModal, IonicLogin, $ionicLoading, $state, $cordovaOauth) {
 
+    $scope.data = {};
+
     //tell modal how to be
     $ionicModal.fromTemplateUrl('templates/applicationModal.html', {
         scope: $scope
@@ -11,15 +13,12 @@ angular.module('starter')
     });
 
     // REMOVE THE USER LOGIN INFORMATION WHEN RETURNING TO LOGIN SCREEN
-    $scope.$on('$ionicView.enter', function(e) {
-        $scope.data = {};
-    });
+    $scope.data = {};
 
     // LOGIN FUNCTION
     $scope.login = function() {
         IonicLogin.login($scope.data.email, $scope.data.password);
     }
-
 
     $scope.goToPayment = function(tier) {
         $scope.applicationModal.hide();

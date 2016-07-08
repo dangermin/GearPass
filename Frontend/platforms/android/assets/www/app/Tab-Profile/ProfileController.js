@@ -50,6 +50,8 @@ angular.module('starter')
         $scope.profileModal.hide();
     }
 
+
+
     $scope.ratingsObject = {
         iconOn: 'ion-ios-star',
         iconOff: 'ion-ios-star-outline',
@@ -66,19 +68,21 @@ angular.module('starter')
         console.log('Selected rating is : ', rating);
     };
 
-    var query = new Parse.Query(Parse.Object.extend("PublicProfile"));
+var profile = Parse.User.current().get('username');
+
+    var query = new Parse.Query(Parse.Object.extend("User"));
     return query.each(function(profile) {
-        var user = profile.get('User');
         if (user.id == $scope.currentUser.id) {
             var First = profile.get('FirstName');
             var Last = profile.get('LastName');
             var Location = profile.get('Location');
             var Email = profile.get('Email');
+            var Rating = profile.get('Rating');
             $scope.thisProfile = { "value": profile };
             $scope.$apply(function() {
-                $scope.profile = { "FirstName": First, "LastName": Last, "Location": Location, "Email": Email, "value": true };
+                $scope.profile = { "FirstName": First, "LastName": Last, "Location": Location, "Email": Email, "value": true, "Rating": Rating };
             });
-            console.log($scope.partner);
+            console.log($scope.profile);
         } else {
             console.log("attempting to find partner profile");
         }

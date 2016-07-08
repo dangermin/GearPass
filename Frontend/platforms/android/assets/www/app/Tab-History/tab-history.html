@@ -1,28 +1,29 @@
-<ion-view view-title="Gear Pass">
-    <ion-content>
-        <div class="card" ng-repeat="request in requests | orderBy:'-Created'">
-            <div ng-click="shopDetails=!shopDetails" id="historyCard" class="item item-divider row">
-                <div class="col col-95">
-                    <h2><b>{{request.ShopName}}</b></h2>
-                    <!-- <br ng-show="shopDetails"> -->
-                    <h4 ng-show="shopDetails"><b>Hours:</b> {{request.Hours}}</h4>
-                    <h4 ng-show="shopDetails"><b>Address:</b> {{request.Address}}</h4>
-                    <h4 ng-show="shopDetails"><b>Phone Number:</b> {{request.Phone}}</h4>
-                    <h4 ng-show="shopDetails"><b>Phone Number:</b> {{request.Phone}}</h4>
+<ion-view title='<img height=40px width=50px src="app/img/icon.png" alt="Logo" class="Logo">'>
+    <ion-content scroll="false">
+        <div id="historyCardParent">
+            <div class="card" ng-repeat="request in requests | orderBy:'-Created'">
+                <div ng-click="shopDetails=!shopDetails" id="historyCard" class="item item-divider row">
+                    <div class="col col-95">
+                        <h2><b>{{request.ShopName}}</b></h2>
+                        <!-- <br ng-show="shopDetails"> -->
+                        <h4 ng-show="shopDetails"><b>Hours:</b> {{request.Hours}}</h4>
+                        <h4 ng-show="shopDetails"><b>Address:</b> {{request.Address}}</h4>
+                        <h4 ng-show="shopDetails"><b>Phone Number:</b> {{request.Phone}}</h4>
+                    </div>
+                    <div class="col text-right">
+                        <span id="historyCaret" ng-hide="shopDetails" class="ion-android-more-horizontal"></span>
+                    </div>
                 </div>
-                <div class="col text-right">
-                    <span id="historyCaret" ng-hide="shopDetails" class="ion-android-more-horizontal"></span>
-                </div>
-            </div>
-            <div class="item row">
-                <div class="col col-50">
-                    <h3>{{request.Quantity}} <span>{{request.Gear}}</span></h3>
-                    <h4>{{request.Date}}</h4>
-                    <h4>{{request.Time}}</h4>
-                </div>
-                <div class="col col-50 text-center">
-                    <span ng-show="request.Completed" id="historyCompleted" class="ion-checkmark-circled"></span>
-                    <span ng-hide="request.Completed" id="historyNotCompleted" class="ion-close-circled"></span>
+                <div class="item row">
+                    <div class="col col-50">
+                        <h3>{{request.Quantity}} <span>{{request.Gear}}</span></h3>
+                        <h4>{{request.Date}}</h4>
+                        <h4>{{request.Time}}</h4>
+                    </div>
+                    <div class="col col-50 text-center">
+                        <span ng-show="request.Completed" id="historyCompleted" class="ion-checkmark-circled"></span>
+                        <span ng-hide="request.Completed" id="historyNotCompleted" class="ion-close-circled"></span>
+                    </div>
                 </div>
             </div>
         </div>

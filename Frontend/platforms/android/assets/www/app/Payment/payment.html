@@ -1,5 +1,5 @@
 <ion-view view-title="Membership Sign Up" hide-back-button="false" can-swipe-back="true">
-    <ion-content>
+    <ion-content scroll="false">
         <h3>Confirm Details:</h3>
         <ul class="list">
             <div class="item item-divider">
@@ -20,7 +20,7 @@
             <li class="item">{{payment.year}}</li>
             <li class="item">{{payment.cvc}}</li>
         </ul>
-        <button class="button button-block button-light" ng-click="">Confirm Payment!</button>
+        <button class="button button-block button-light" ng-click="collectPaymentInformation()">Confirm Payment!</button>
     </ion-content>
     <script id="templates/profileModal.html" type="text/ng-template">
         <ion-modal-view>
