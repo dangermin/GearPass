@@ -19,7 +19,6 @@ angular.module('starter')
 
         Parse.User.signUp(data.email, data.password, { email: data.email, first: data.first, last: data.last, street1: data.street1, street2: data.street2, city: data.city, state: data.state, zip: data.zip }).then(
             function() {
-                Parse.User.logOut();
                 $ionicLoading.hide();
             },
             function(err) {
