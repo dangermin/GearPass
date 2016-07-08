@@ -60,7 +60,7 @@
                 console.log(latLng);
                 var mapOptions = {
                     center: latLng,
-                    zoom: 11,
+                    zoom: 0,
                     disableDefaultUI: true,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
 

@@ -26,7 +26,15 @@
       scope: {
         ratingsObj: '=ratingsobj'
       },
-      link: function(scope, element, attrs) {
+      link: function(scope, element, attrs) { 
+
+        scope.$watch("ratingsObj.rating", function(value) {
+
+          scope.rating = scope.ratingsObj.rating;
+
+          scope.ratingsClicked(scope.rating);
+
+        });
 
         //Setting the default values, if they are not passed
         scope.iconOn = scope.ratingsObj.iconOn || 'ion-ios-star';
