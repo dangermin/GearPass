@@ -25,7 +25,10 @@
                 <ui-gmap-google-map bounds="map.bounds" center="map.center" zoom="map.zoom" options="options">
                     <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow" templateUrl="'windowContent.html'" templateParameter="windowParams">
                     </ui-gmap-window>
+                    <!--doCluster="map.doCluster"-->
+                    <ui-gmap-markers ng-if="map.showMarkers" doCluster="map.doCluster" models="searchResults.results" coords="'coords'" idkey="'key'" chunk="200"></ui-gmap-markers>
                 </ui-gmap-google-map>
+                <p>doCluster:{{map.doCluster}}</p>
             </div>
         </div>
     </ion-content>

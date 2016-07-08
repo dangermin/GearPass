@@ -1,24 +1,25 @@
 {
-    "name": "HelloIonic",
-    "private": "true",
-    "devDependencies": {
-        "ionic": "driftyco/ionic-bower#1.2.4",
-        "platform.js": "platform#~1.3.1"
-    },
-    "dependencies": {
-        "ngCordova": "^0.1.26-alpha",
-        "parse": "^1.8.5",
-        "ng-cordova-oauth": "^0.2.8",
-        "ion-google-place": "^0.0.1",
-        "toastr": "^2.1.2",
-        "angular-toastr": "^1.7.0",
-        "moment": "^2.13.0",
-        "ionic-ratings": "^0.2.0",
-        "ion-datetime-picker": "^0.3.0"
-    },
-    "resolutions": {
-        "angular-animate": "1.4.3",
-        "angular": "1.5.3",
-        "angular-sanitize": "1.5.3"
-    }
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.2.4",
+    "platform.js": "platform#~1.3.1"
+  },
+  "dependencies": {
+    "ngCordova": "^0.1.26-alpha",
+    "parse": "^1.8.5",
+    "ng-cordova-oauth": "^0.2.8",
+    "ion-google-place": "^0.0.1",
+    "toastr": "^2.1.2",
+    "angular-toastr": "^1.7.0",
+    "moment": "^2.13.0",
+    "ionic-ratings": "^0.2.0",
+    "ion-datetime-picker": "^0.3.0",
+    "ngmap": "^1.17.3"
+  },
+  "resolutions": {
+    "angular-animate": "1.4.3",
+    "angular": "1.5.3",
+    "angular-sanitize": "1.5.3"
+  }
 }

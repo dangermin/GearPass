@@ -15,17 +15,63 @@
             var markerPos = [];
         });
 
+
+
+        function CenterControl(controlDiv, map) {
+
+            // Set CSS for the control border.
+            var controlUI = document.createElement('div');
+            controlUI.style.backgroundColor = '#fff';
+            // controlUI.style.border = '1px solid #fff';
+            controlUI.style.borderRadius = '4px';
+            controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.marginBottom = '22px';
+            controlUI.style.textAlign = 'center';
+            controlUI.title = 'Click to recenter the map';
+            controlDiv.appendChild(controlUI);
+
+            // Set CSS for the control interior.
+            var controlText = document.createElement('div');
+            controlText.style.color = '#387EF5';
+            // controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+            controlText.style.fontSize = '25px';
+            controlText.style.fontWeight = 'bold';
+            controlText.style.lineHeight = '25px';
+            controlText.style.paddingLeft = '3px';
+            controlText.style.paddingRight = '3px';
+            controlText.innerHTML = "<span class='ion-pinpoint'></span>";
+            controlUI.appendChild(controlText);
+
+            controlUI.addEventListener('click', function() {
+                $cordovaGeolocation.getCurrentPosition().then(function(position) {
+                    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    $scope.map.setCenter(latLng);
+                    $scope.map.setZoom(11);
+                });
+            });
+
+        }
+
         function initMap() {
             var options = { timeout: 10000, enableHighAccuracy: true };
             $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
                 var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                console.log(latLng);
                 var mapOptions = {
                     center: latLng,
                     zoom: 11,
+                    disableDefaultUI: true,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
+
                 };
                 $scope.map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
                 //Wait till map is laoded
+                var centerControlDiv = document.createElement('div');
+                var centerControl = new CenterControl(centerControlDiv, options);
+                centerControlDiv.index = 1;
+                $scope.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv);
+
                 google.maps.event.addListenerOnce($scope.map, 'idle', function() {
                     loadMarkers();
                 });
@@ -59,8 +105,6 @@
                         var total = .2;
                         for (var i in avg) { total += avg[i] / len };
                         $scope.newObj.Rating = Math.round(total);
-                        console.log(total);
-                        console.log($scope.newObj.Rating);
                         $scope.newObj.Marker = new google.maps.LatLng(location._latitude, location._longitude).toString();
                         $scope.shops.push($scope.newObj);
 
@@ -71,7 +115,6 @@
 
                             shop.Rated = {
                                 rating: shop.Rating,
-                                // rating: Number.parseInt(shop.Rating.toString()),
                                 readOnly: true,
                             };
 
@@ -97,7 +140,6 @@
                                 '</div>';
 
                             var compiled = $compile(infoWindowContent)($scope);
-                            console.log(infoWindowContent);
                             var infoWindow = new google.maps.InfoWindow({
                                 content: compiled[0]
                             });

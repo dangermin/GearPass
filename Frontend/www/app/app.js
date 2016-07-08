@@ -6,8 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaOauth', 'ionic-ratings', 'ion-datetime-picker'])
-    //, 'uiGmapgoogle-maps'
-
+// 'ngMap'
 .run(function($ionicPlatform, APP_CONFIG) {
 
     Parse.initialize(APP_CONFIG.PARSE_APP_ID);
