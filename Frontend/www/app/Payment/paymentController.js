@@ -80,24 +80,32 @@ angular.module('starter')
     //Stripe configuration
     $scope.collectPaymentInformation = function() {
 
-        var cardInfo = {
-            // "city": $scope.paymentContactInfo.city,
-            // "state": $scope.paymentContactInfo.state,
-            "number": $scope.payment.cardNumber,
-            "month": $scope.payment.month,
-            "year": $scope.payment.year,
-            "cvc": $scope.payment.cvc
-        };
+        // var cardInfo = {
+        //     // "city": $scope.paymentContactInfo.city,
+        //     // "state": $scope.paymentContactInfo.state,
+        //     "number": $scope.payment.cardNumber,
+        //     "month": $scope.payment.month,
+        //     "year": $scope.payment.year,
+        //     "cvc": $scope.payment.cvc
+        // };
 
-        Parse.Cloud.run('collectPaymentInformation', cardInfo, {
-            success: function(customer) {
-                console.log("check");
-                console.log(customer);
+        // Parse.Cloud.run('collectPaymentInformation', cardInfo, {
+        //     success: function(customer) {
+        //         console.log("check");
+        //         console.log(customer);
+        //     },
+        //     error: function(err) {
+        //         console.log(err);
+        //     }
+        // });
+
+        Parse.Cloud.run('generateMembershipNumber',
+            function(data) {
+                console.log(data);
             },
-            error: function(err) {
+            function(err) {
                 console.log(err);
-            }
-        });
+            });
 
 
         $state.go('login');
