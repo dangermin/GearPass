@@ -1,36 +1,38 @@
 <ion-side-menus enable-menu-with-back-views="false">
     <ion-side-menu-content>
-        <ion-nav-bar class="bar-stable">
+        <ion-nav-bar class="bar">
             <ion-nav-back-button>
             </ion-nav-back-button>
             <ion-nav-buttons side="right">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+                <button class="button button-icon buttonTab ion-navicon" menu-toggle="right">
                 </button>
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="right">
-        <ion-header-bar class="bar-stable">
-            <h1 class="title">Menu</h1>
-            <button class="button button-icon button-clear icon ion-ios-arrow-right" id="ion-ios-arrow-right"  menu-toggle="right">
+        <ion-header-bar class="bar">
+            <h1 class="title titleBar">Menu</h1>
+            <button class="button button-icon buttonTab icon ion-ios-arrow-right" id="ion-ios-arrow-right"  menu-toggle="right">
                 </button>
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item menu-close ui-sref="tab.dash">
+                <ion-item id="menuList" menu-close ui-sref="tab.dash">
                     <span class="ion-map"> Map</span>
-                </ion-item>
-                <ion-item menu-close ui-sref="tab.history">
+                </ion-item id="menuList">
+                <ion-item id="menuList" menu-close ui-sref="tab.history">
                     <span class="ion-ios-list-outline"> History</span>
-                </ion-item>
-                <ion-item menu-close ui-sref="tab.profile">
+                </ion-item id="menuList">
+                <ion-item id="menuList" menu-close ui-sref="tab.profile">
                     <span class="ion-person"> Profile</span>
-                </ion-item>
-                <ion-item menu-close ui-sref="tab.partner">
+                </ion-item id="menuList">
+                <ion-item id="menuList" menu-close ui-sref="tab.partner">
                     <span class="ion-map"> Partner</span>
-                </ion-item>
+                </ion-item id="menuList">
             </ion-list>
+            <p id="paragraph">Adventure Pass is a passport to adventure. The strong relationships we nurture with our partner hire shops mean our members feel part of a privileged community where they can ski, bike & surf wherever they are for less hassle, less cost & like a local, bringing their adventures to life.</p>
+            <p id="paragraph">Statement Adventure Pass will make it cheaper for millions of people to learn new sports, improve on their skills and have new adventures all over the world.</p>
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>

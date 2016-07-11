@@ -5,6 +5,8 @@
     // HOME PAGE CONTROLLER
     .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator, $cordovaInAppBrowser, $timeout) {
 
+        $scope.nearMeShowing = false;
+        $scope.zoom = 0;
 
         $scope.$on('$ionicView.enter', function(e) {
 
@@ -26,7 +28,7 @@
             controlUI.style.borderRadius = '4px';
             controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
             controlUI.style.cursor = 'pointer';
-            controlUI.style.marginBottom = '22px';
+            controlUI.style.margin = '10px 10px 22px 0px';
             controlUI.style.textAlign = 'center';
             controlUI.title = 'Click to recenter the map';
             controlDiv.appendChild(controlUI);
@@ -38,8 +40,7 @@
             controlText.style.fontSize = '25px';
             controlText.style.fontWeight = 'bold';
             controlText.style.lineHeight = '25px';
-            controlText.style.paddingLeft = '3px';
-            controlText.style.paddingRight = '3px';
+            controlText.style.padding = '0px 3px';
             controlText.innerHTML = "<span class='ion-pinpoint'></span>";
             controlUI.appendChild(controlText);
 
@@ -48,6 +49,8 @@
                     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                     $scope.map.setCenter(latLng);
                     $scope.map.setZoom(11);
+                    $scope.nearMeShowing = true;
+                    $scope.zoom = 11;
                 });
             });
 
@@ -60,7 +63,7 @@
                 console.log(latLng);
                 var mapOptions = {
                     center: latLng,
-                    zoom: 11,
+                    zoom: $scope.zoom,
                     disableDefaultUI: true,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
 
@@ -70,7 +73,7 @@
                 var centerControlDiv = document.createElement('div');
                 var centerControl = new CenterControl(centerControlDiv, options);
                 centerControlDiv.index = 1;
-                $scope.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv);
+                $scope.map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv);
 
                 google.maps.event.addListenerOnce($scope.map, 'idle', function() {
                     loadMarkers();

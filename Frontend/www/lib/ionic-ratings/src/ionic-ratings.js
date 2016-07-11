@@ -39,8 +39,8 @@
         //Setting the default values, if they are not passed
         scope.iconOn = scope.ratingsObj.iconOn || 'ion-ios-star';
         scope.iconOff = scope.ratingsObj.iconOff || 'ion-ios-star-outline';
-        scope.iconOnColor = scope.ratingsObj.iconOnColor || 'rgb(200, 200, 100)';
-        scope.iconOffColor = scope.ratingsObj.iconOffColor || 'rgb(200, 100, 100)';
+        scope.iconOnColor = scope.ratingsObj.iconOnColor || 'rgb(38, 98, 138)';
+        scope.iconOffColor = scope.ratingsObj.iconOffColor || 'rgb(241, 89, 66)';
         scope.rating = scope.ratingsObj.rating || 1;
         scope.minRating = scope.ratingsObj.minRating || 1;
         scope.readOnly = scope.ratingsObj.readOnly || false;

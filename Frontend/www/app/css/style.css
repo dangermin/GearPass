@@ -1,5 +1,5 @@
 /********************************
-Login
+Login 68C5D3 light Blue, D9F1FA light, 3F404A gray, F15942 red, 26628A dark blue
 *********************************/
 
 .scroll {
@@ -74,11 +74,15 @@ Tab-History
     max-height: 50px;
 }
 
+#contentColor{
+    background: #D9F1FA;
+}
+
 #historyCardParent {
     height: 600px;
     overflow-y: scroll;
     overflow-x: hidden;
-    margin-right: -18px;
+    /*margin-right: -1px;*/
 }
 
 #historyCard {
@@ -91,15 +95,20 @@ Tab-History
 }
 
 #historyCompleted {
-    color: green;
-    font-size: 2em;
-    opacity: .5;
+    color: white;
+    font-size: 1em;
+    opacity: 1;
+    position: absolute;
+    bottom: 15px;
+
 }
 
 #historyNotCompleted {
-    color: red;
-    font-size: 2em;
-    opacity: .5;
+    color: white;
+    font-size: 1em;
+    opacity: 1;
+    position: absolute;
+    bottom: 15px;
 }
 
 #historyCaret {
@@ -113,7 +122,13 @@ Tab-Dash
 
 #map_canvas {
     width: 100%;
-    height: 460px;
+    height: 379px;
+    position: relative;
+}
+
+.worldMap {
+    width: 100%;
+    height: 250px !important;
     position: relative;
 }
 
@@ -123,6 +138,27 @@ Tab-Dash
 
  .ionic_ratings .read_only {
     pointer-events:none !important;
+  }
+
+  #tabParagraph p{
+    padding: 15px;
+    font-size: 1.5em !important;
+    color: #3F404A !important;
+    /*text-align: center;*/
+  }
+
+.ion-navicon{
+    color: #F15942 !important;
+}
+sup{
+    font-size: 40%;
+    /*position: absolute;*/
+}
+
+  #tabParagraph span{
+    color: #387EF5;
+    /*font-size: 2em !important;*/
+    font-weight: bold;
   }
 
 /*.angular-google-map-container {
@@ -201,6 +237,19 @@ a {
     padding-top: 12px;
 }
 
+#reqButton{
+    background: #26628A;
+    color: white;
+    height: 40px;
+    width: 50%;
+}
+
+#navButton{
+    background: #F15942;
+    color: white;
+    height: 40px;
+    width: 50%;
+}
 /********************************
 Tab-Profile
 *********************************/
@@ -208,16 +257,50 @@ Tab-Profile
     border-style: none;
 }
 
+#benefitCard{
+    color: #3F404A;
+    font-size: 1em;
+    padding: 15px;
+}
+
+.bar{
+    background: #68C5D3;
+}
+
+.buttonTab{
+    color: #F15942;
+}
+
+.buttonTab:hover{
+    color: #F15942;
+}
+
+#menuList{
+    color: #F15942;
+}
+
+#paragraph{
+    padding: 15px;
+}
+
+.titleBar{
+    color: #F15942;
+}
+
  #profileLogout{
     position: absolute;
     bottom: 10px;
     min-height: 30px;
+    background: #F15942;
+    color: white;
 }
 
 #profileUpdate{
     /*position: absolute;
     bottom: 10px;*/
-    min-height: 30px;
+    height: 40px;
+    background: #26628A;
+    color: white;
 }
 
 #modalUpdate{
