@@ -1,5 +1,5 @@
 <ion-view title='<img height=40px width=50px src="app/img/icon.png" alt="Logo" class="Logo">'>
-    <ion-content scroll="false">
+    <ion-content scroll="false"  id="contentColor">
         <div id="historyCardParent">
             <div class="card" ng-repeat="request in requests | orderBy:'-Created'">
                 <div ng-click="shopDetails=!shopDetails" id="historyCard" class="item item-divider row">
@@ -16,13 +16,13 @@
                 </div>
                 <div class="item row">
                     <div class="col col-50">
-                        <h3>{{request.Quantity}} <span>{{request.Gear}}</span></h3>
+                        <h4>{{request.Quantity}} <span>{{request.Gear}}</span></h4>
                         <h4>{{request.Date}}</h4>
                         <h4>{{request.Time}}</h4>
                     </div>
                     <div class="col col-50 text-center">
-                        <span ng-show="request.Completed" id="historyCompleted" class="ion-checkmark-circled"></span>
-                        <span ng-hide="request.Completed" id="historyNotCompleted" class="ion-close-circled"></span>
+                        <button disabled="disabled" ng-show="request.Completed" id="historyCompleted" class="button button-small" style="background: #26628A">Complete</button>
+                        <button disabled="disabled" ng-hide="request.Completed" id="historyNotCompleted" class="button button-energized button-small" style="background: #68C5D3">Pending</button>
                     </div>
                 </div>
             </div>
