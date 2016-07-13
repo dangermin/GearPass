@@ -20,15 +20,15 @@
             <li class="item">{{payment.year}}</li>
             <li class="item">{{payment.cvc}}</li>
         </ul>
-        <button class="button button-block button-light" ng-click="collectPaymentInformation()">Confirm Payment!</button>
+        <button id="applyButton" class="button button-block" style="height:35px" ng-click="collectPaymentInformation()">Confirm Payment!</button>
     </ion-content>
     <script id="templates/profileModal.html" type="text/ng-template">
         <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
+            <ion-header-bar class="bar">
                 <h1 class="title">Contact Information</h1>
-                <button class="button button-clear button-primary" ng-click="profileModal.hide()">Cancel</button>
+                <button class="button button-clear" ng-click="profileModal.hide()">Cancel</button>
             </ion-header-bar>
-            <ion-content class="padding">
+            <ion-content class="padding" id="contentColor">
                 <form name="profileInfoForm">
                     <div class="card" ng-hide="part2">
                         <label class="item item-input item-stacked-label text-left">
@@ -63,7 +63,7 @@
                             <span class="input-label">  Phone Number:</span>
                             <input required type="text" ng-model="data.phone">
                         </label>
-                        <button class="button button-block button-dark" ng-click="part2=true">continue</button>
+                        <button id="applyButton" style="height:35px" class="button button-block" ng-click="part2=true">continue</button>
                     </div>
                     <div class="card" ng-show="part2">
                         <label class="item item-input item-stacked-label text-left">
@@ -78,22 +78,22 @@
                             <span class="input-label">  Confirm Password:</span>
                             <input required type="password" placeholder=" Confirm Password" ng-model="data.confirmpassword">
                         </label>
-                        <button class="button button-block button-dark" ng-click="part2=false">back</button>
+                        <button class="button button-block" style="height:35px" ng-click="part2=false">back</button>
                     </div>
                 </form>
-                <button ng-show="part2" id="continueToPayment" class="button button-block button-dark" ng-click="continueToPayment()">continue</button>
+                <button ng-show="part2" id="applyButton" style="height:35px" class="button button-block" ng-click="continueToPayment()">continue</button>
             </ion-content>
         </ion-modal-view>
     </script>
     <script id="templates/paymentModal.html" type="text/ng-template">
         <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
+            <ion-header-bar class="bar">
                 <h1 class="title">Payment Information</h1>
-                <button class="button button-clear button-primary" ng-click="paymentModal.hide()">Cancel</button>
+                <button class="button button-clear" ng-click="paymentModal.hide()">Cancel</button>
             </ion-header-bar>
             <ion-content class="padding">
                 <div class="card">
-                    <button class="button button-block button-dark" ng-click="clearContactInfo()">Clear Billing Info</button>
+                    <button class="button button-block" id="redButton" ng-click="clearContactInfo()">Clear Billing Info</button>
                     <label class="item item-input item-stacked-label text-left">
                         <span class="input-label ">  First Name:</span>
                         <input required type="text" ng-model="payment.first">
@@ -149,7 +149,7 @@
                         <input type="text" placeholder=" 123" ng-model="payment.cvc">
                     </div>
                 </div>
-                <button class="button button-block button-dark" ng-click="continueToCheckout()">continue</button>
+                <button class="button button-block" id="applyButton" style="height:35px" ng-click="continueToCheckout()">continue</button>
             </ion-content>
         </ion-modal-view>
     </script>

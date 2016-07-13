@@ -24,7 +24,6 @@ angular.module('starter')
             function(err) {
                 $ionicLoading.hide();
                 $ionicPopup.alert({
-                    title: 'Username Taken',
                     template: 'Username taken, try another one.'
                 });
             }

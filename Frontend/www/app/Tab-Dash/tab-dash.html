@@ -37,11 +37,11 @@
     </ion-content>
     <script id="templates/modalContent.html" type="text/ng-template">
         <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
+            <ion-header-bar class="bar">
                 <h1 class="title">Request Gear</h1>
-                <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
+                <button class="button button-clear" style="color: #F15942" ng-click="closeModal()">Cancel</button>
             </ion-header-bar>
-            <ion-content class="padding">
+            <ion-content class="padding" id="contentColor">
                 <div class="item item-icon-left" ion-datetime-picker ng-model="request.date">
                     <i class="icon ion-ios-calendar-outline positive"></i>
                     <strong>{{request.date| date: "yyyy-MM-dd H:mm"}}</strong>
@@ -51,15 +51,15 @@
                         Select Gear
                     </div>
                     <select ng-model="request.gear">
-                        <option value="Surf Board(s)" selected>Surf Board</option>
-                        <option value="Bike(s)">Bike</option>
-                        <option value="Ski set(s)">Ski</option>
+                        <option value="Surf Board" selected>Surf</option>
+                        <option value="Bike">Bike</option>
+                        <option value="Ski set">Ski</option>
                     </select>
                 </label>
                 <label id="requestInput" class="item item-input item-select">
                     <textarea placeholder="Custom Message" rows="5" lose-focus-on-return ng-model="request.message"></textarea>
                 </label>
-                <button class="button button-full button-positive" ng-click="Confirm()">Confirm</button>
+                <button class="button button-block" id="applyButton" style="height:35px" ng-click="Confirm()">Confirm</button>
                 </div>
             </ion-content>
         </ion-modal-view>
