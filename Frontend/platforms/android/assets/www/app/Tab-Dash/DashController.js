@@ -7,6 +7,7 @@
 
         $scope.nearMeShowing = false;
         $scope.zoom = 0;
+        $scope.mapCenter = {};
 
         $scope.$on('$ionicView.enter', function(e) {
 
@@ -16,8 +17,6 @@
             initMap();
             var markerPos = [];
         });
-
-
 
         function CenterControl(controlDiv, map) {
 
@@ -48,6 +47,9 @@
                 $cordovaGeolocation.getCurrentPosition().then(function(position) {
                     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                     $scope.map.setCenter(latLng);
+                    console.log($scope.mapCenter);
+                    console.log(latLng);
+                    // $scope.map.setCenter($scope.mapCenter);
                     $scope.map.setZoom(11);
                     $scope.nearMeShowing = true;
                     $scope.zoom = 11;
@@ -87,8 +89,9 @@
         function loadMarkers() {
             Parse.GeoPoint.current({
                 success: function(point) {
+                    var myLatLng = { lat: 0, lng: 0 };
+                    var averageLoc = [];
                     var LatLng = [];
-                    var avgLoc = [];
                     var contentString = [];
                     var query = new Parse.Query(Parse.Object.extend("Shop"));
                     // query.setLimit(3);
@@ -116,6 +119,12 @@
                             var markerPos = new google.maps.LatLng($scope.shops[i].Location._latitude, $scope.shops[i].Location._longitude);
                             $scope.MarkerPos = markerPos;
 
+                            // Pushing each shop latLng into averageLoc Obj
+                            var lat = $scope.shops[i].Location._latitude;
+                            var lng = $scope.shops[i].Location._longitude;
+                            myLatLng = { lat: lat, lng: lng };
+                            averageLoc.push(myLatLng);
+
                             shop.Rated = {
                                 rating: shop.Rating,
                                 readOnly: true,
@@ -125,6 +134,7 @@
                                 map: $scope.map,
                                 animation: google.maps.Animation.DROP,
                                 position: markerPos,
+                                // center: $scope.map.setCenter(new google.maps.LatLng(latAvg, lngAvg)),
                             });
 
                             var infoWindowContent = '<div id="content">' +
@@ -149,6 +159,19 @@
 
                             addInfoWindow(marker, compiled[0], shop);
                         }
+                        //Sum of average LatLng (need to get average of shops near user)
+                        var latSum = 0;
+                        var lngSum = 0;
+                        console.log(averageLoc);
+                        for (i in averageLoc){
+                            latSum += averageLoc[i].lat;
+                            lngSum += averageLoc[i].lng;
+                        }
+                        var latAvg = latSum / (averageLoc.length);
+                        var lngAvg = lngSum / (averageLoc.length);
+                        console.log(latAvg, lngAvg);
+                        $scope.mapCenter = new google.maps.LatLng(latAvg, lngAvg);
+                        // console.log($scope.mapCenter);
                     });
                 }
             })
@@ -265,24 +288,9 @@
             })
 
             .catch(function(event) {
-                // error
+                console.log(err);
             });
         }
-
-        // Calculate average location
-        // console.log(avgLoc);
-        // var latSum = 0;
-        // var lngSum = 0;
-        // console.log("this");
-        // for (i in avgLoc){
-        //     latSum += avgLoc[i].lat;
-        //     lngSum += avgLoc[i].lng;
-        // }
-        // var latAvg = latSum / (avgLoc.length);
-        // var lngAvg = lngSum / (avgLoc.length);
-        // console.log("this");
-        // console.log(latAvg);
-        // map.setCenter(new google.maps.LatLng(latAvg, lngAvg));
 
     });
 })();

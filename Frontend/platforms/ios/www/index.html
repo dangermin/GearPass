@@ -10,13 +10,18 @@
     <link href="lib/ion-google-place/ion-google-place.css" rel="stylesheet">
     <!-- <link href="lib/angular-toastr/dist/angular-toastr.css" rel="stylesheet"> -->
     <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light|Great+Vibes' rel='stylesheet' type='text/css'>
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="lib/ion-datetime-picker/release/ion-datetime-picker.min.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above -->
+    <!-- <link href="css/ionic.app.css" rel="stylesheet"> -->
+    <!-- Map Icons -->
+    <!-- <link rel="stylesheet" type="text/css" href="../dist/css/map-icons.css">
+    <script type="text/javascript" src="../dist/js/map-icons.js"></script>
     -->
 </head>
 
-<body ng-app="starter">
+<body ng-app="starter" class="platform-ios platform-cordova platform-webview">
     <!-- ionic/angularjs js -->
+    <script src="lib/moment/moment.js"></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="app/sha1.js"></script>
@@ -26,13 +31,18 @@
     <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.js"></script>
     <script src="lib/parse/parse.min.js"></script>
     <script src="lib/ion-google-place/ion-google-place.js"></script>
+    <script src="lib/ngmap/build/scripts/ng-map.min.js"></script>
+    <script src="lib/ionic-ratings/src/ionic-ratings.js"></script>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/ion-datetime-picker/release/ion-datetime-picker.min.js"></script>
+
     <!-- <script scr="lib/lodash/dist/lodash.min.js"></script> -->
     <!-- <script src="lib/angular-simple-logger/dist/angular-simple-logger.js"></script> -->
     <!-- <script src="lib/angular-google-maps/dist/angular-google-maps.js"></script> -->
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
-    <ion-nav-bar class="bar-calm">
+    <ion-nav-bar class="bar-calm" style="color: blue;" >
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
@@ -51,9 +61,11 @@
     <script src="app/Splash/SplashController.js"></script>
     <script src="app/Tab/TabController.js"></script>
     <script src="app/Tab-Dash/DashController.js"></script>
+    <script src="app/Tab-Dash/NavigationFactory.js"></script>
     <script src="app/Tab-Profile/ProfileController.js"></script>
     <script src="app/Tab-History/HistoryController.js"></script>
     <script src="app/Tab-Partner/PartnerController.js"></script>
+    <script src="app/Tab-Partner/PartnerService.js"></script>
 </body>
 
 </html>

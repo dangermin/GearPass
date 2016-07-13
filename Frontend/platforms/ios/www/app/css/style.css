@@ -1,5 +1,5 @@
 /********************************
-Login
+Login 68C5D3 light Blue, D9F1FA light, 3F404A gray, F15942 red, 26628A dark blue
 *********************************/
 
 .scroll {
@@ -53,6 +53,7 @@ Login
 }
 
 
+
 /********************************
 Splash
 *********************************/
@@ -61,15 +62,58 @@ Splash
 /********************************
 Tab
 *********************************/
-
+#ion-ios-arrow-right{
+    font-size: 1px;
+}
 
 /********************************
 Tab-History
 *********************************/
-#avatar{
+
+#avatar {
     max-height: 50px;
 }
 
+#contentColor{
+    background: #D9F1FA;
+}
+
+#historyCardParent {
+    height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /*margin-right: -1px;*/
+}
+
+#historyCard {
+        white-space: normal;
+        padding-bottom: 15px;
+}
+
+#historyTime {
+    float: right;
+}
+
+#historyCompleted {
+    color: white;
+    font-size: 1em;
+    opacity: 1;
+    position: absolute;
+    bottom: 15px;
+
+}
+
+#historyNotCompleted {
+    color: white;
+    font-size: 1em;
+    opacity: 1;
+    position: absolute;
+    bottom: 15px;
+}
+
+#historyCaret {
+    opacity: .5;
+}
 
 
 /********************************
@@ -78,23 +122,53 @@ Tab-Dash
 
 #map_canvas {
     width: 100%;
-    height: 100%;
-    margin: 0;
+    height: 379px;
     position: relative;
 }
 
-.scroll {
-    height: 100%;
+.worldMap {
+    width: 100%;
+    height: 250px !important;
+    position: relative;
 }
 
-.angular-google-map-container {
+#requestBox {
+    margin-bottom: 35px !important;
+}
+
+ .ionic_ratings .read_only {
+    pointer-events:none !important;
+  }
+
+  #tabParagraph p{
+    padding: 15px;
+    font-size: 1.5em !important;
+    color: #3F404A !important;
+    /*text-align: center;*/
+  }
+
+.ion-navicon{
+    color: #F15942 !important;
+}
+sup{
+    font-size: 40%;
+    /*position: absolute;*/
+}
+
+  #tabParagraph span{
+    color: #387EF5;
+    /*font-size: 2em !important;*/
+    font-weight: bold;
+  }
+
+/*.angular-google-map-container {
     position: absolute;
     height: 100%;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-}
+}*/
 
 #content {
     max-height: 130px;
@@ -104,23 +178,179 @@ Tab-Dash
 #webLink {
     position: relative;
     bottom: auto;
+    color: blue;
+}
+
+p {
+    font-size: 12px;
+    margin: 0;
+}
+
+a {
+    font-size: 12px;
+    margin: 0;
+    /*color: black;*/
+    text-decoration: none;
 }
 
 .button {
-    line-height: 10px !important;
-    min-height: 20px !important;
-    padding: 2px;
-    font-weight: bold !important;
-    margin-left: 4px;
-    margin-right: 4px;
+    line-height: 20px;
+    min-height: 20px;
+    font-weight: bold;
     font-size: 13px;
 }
 
+#bottomButtons {
+    position: absolute;
+    bottom: 35px;
+}
 
+#topButtonsDash {
+    background-color: #0099ff;
+    opacity: .5;
+    position: relative;
+    top: 0;
+    margin-left: 2px;
+    height: 75px;
+    width: 100%;
+}
+
+#topButtonsTasks span {
+    color: white;
+}
+
+#centerDiv {
+    padding: 10px;
+}
+
+#bottomLeftButton {
+    font-size: 4em;
+    padding-top: 12px;
+}
+
+#bottomCenterButton {
+    font-size: 5em;
+}
+
+#bottomRightButton {
+    font-size: 3.8em;
+    padding-top: 12px;
+}
+
+#reqButton{
+    background: #26628A;
+    color: white;
+    height: 40px;
+    width: 50%;
+}
+
+#navButton{
+    background: #F15942;
+    color: white;
+    height: 40px;
+    width: 50%;
+}
 /********************************
 Tab-Profile
 *********************************/
-
 #profileCard {
     border-style: none;
 }
+
+#benefitCard{
+    color: #3F404A;
+    font-size: 1em;
+    padding: 15px;
+}
+
+.bar{
+    background: #68C5D3;
+}
+
+.buttonTab{
+    color: #F15942;
+}
+
+.buttonTab:hover{
+    color: #F15942;
+}
+
+#menuList{
+    color: #F15942;
+}
+
+#paragraph{
+    padding: 15px;
+}
+
+.titleBar{
+    color: #F15942;
+}
+
+ #profileLogout{
+    position: absolute;
+    bottom: 10px;
+    min-height: 30px;
+    background: #F15942;
+    color: white;
+}
+
+#profileUpdate{
+    /*position: absolute;
+    bottom: 10px;*/
+    height: 40px;
+    background: #26628A;
+    color: white;
+}
+
+#modalUpdate{
+    /*position: absolute;
+    bottom: 10px;*/
+    min-height: 30px;
+}
+
+#profileLogout{
+    position: absolute;
+    bottom: 10px;
+    min-height: 30px;
+} 
+
+/********************************
+Tab-Partner
+*********************************/
+#partnerTitle {
+    margin-bottom: 0px;
+}
+
+#partnerAdd {
+    margin-bottom: 10px;
+}
+
+#superUserContent {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(../img/indie.jpg);
+    background-size: cover;
+    padding: 10px;
+}
+
+#superUserContent .card {
+    padding:0 10px;
+}
+
+#superUserContent h2,h3 {
+    font-family: 'Great Vibes', cursive;
+    color:white;
+}
+
+#superUserContent input {
+    color:white;
+}
+
+#superUserContent .item-input{
+    background-color: rgba(0, 0, 0, 0);
+    margin: 0 10%;
+}
+
+#partnerWelcomeMessage {
+    margin-top: 50%;
+}
+

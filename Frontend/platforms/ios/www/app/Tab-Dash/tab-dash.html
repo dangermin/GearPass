@@ -1,64 +1,67 @@
-<ion-view view-title="Gear Pass">
-    <ion-content class="padding">
-        <div class="centerDiv">
-            <ion-pane>
-                <ion-content data-tap-disabled="true">
-                    <div class="item item-input controls">
-                        <i class="icon ion-search placeholder-icon"></i>
-                        <input id="shop-input" type="search" placeholder="Search Shops" data-tap-disabled="true" ng-model="search" ng-focus="searchFocused = true" ng-blur="searchFocused = false" ng-change="scrollTop()">
-                        <button class="button" ng-click="searchShops()">Search</button>
-                    </div>
-                    <div id="map_canvas">
-                        <ui-gmap-google-map bounds="map.bounds" center="map.center" zoom="map.zoom" options="options">
-                            <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow" templateUrl="'windowContent.html'" templateParameter="windowParams">
-                            </ui-gmap-window>
-                        </ui-gmap-google-map>
-                    </div>
-                </ion-content>
-            </ion-pane>
+<ion-view title='<img height=40px width=50px src="app/img/icon.png" alt="Logo" class="Logo">'>
+    <ion-content scroll="false" id="contentColor">
+        <div ng-show="nearMeShowing" id="centerDiv">
+            <div id="requestBox">
+                <p>
+                    <span ng-model="selected"><b>Name:</b> {{selected.Name}}</span>
+                    <ionic-ratings ng-model="selected.Rated" ratingsobj="{rating: selectedRating, readOnly: true}" style="float: right;"></ionic-ratings>
+                </p>
+                <p>
+                    <span ng-model="selected"><b>Address:</b> {{selected.Address}}</span>
+                </p>
+                <p><span><b>Phone:</b></span>
+                    <a ng-href="tel: {{selected.Numb}}" ng-model="selected"> {{selected.Numb}}</a>
+                </p>
+                <p>
+                    <span ng-model="selected"><b>Hours:</b> {{selected.Hrs}}</span>
+                </p>
+                <p>
+                    <span ng-model="selected"><b>Web:</b></span><span id="webLink" ng-click="openBrowser('http://' + selected.Web)">{{selected.Web}}</span>
+                </p>
+                <button class="button" id="navButton" ng-click="navigate(selected.Marker)" style="float:left">Take me there</button>
+                <button class="button" id="reqButton" ng-click="openModal(selected.Name, selected.Email)" style="float:right">Request</button>
+            </div>
         </div>
-        <script id="templates/modalContent.html" type="text/ng-template">
-            <ion-modal-view>
-                <ion-header-bar class="bar bar-header bar-positive">
-                    <h1 class="title">Request Gear</h1>
-                    <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
-                </ion-header-bar>
-                <ion-content class="padding">
-                    <h2>{{request.name}}</h2>
-                    <label id="requestInput" class="item item-input item-select">
-                        <div class="gear">
-                            Select Gear
-                        </div>
-                        <select ng-model="request.gear">
-                            <option value="Surf Board(s)" selected>Surf Board</option>
-                            <option value="Bike(s)">Bike</option>
-                            <option value="Ski set(s)">Ski</option>
-                        </select>
-                    </label>
-                    <label id="requestInput" class="item item-input item-select">
-                        <div class="quantity">
-                            Select Quantity
-                        </div>
-                        <select ng-model="request.quantity">
-                            <option value="1" selected>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </label>
-                    <label id="requestInput" class="item item-input item-select">
-                        <textarea placeholder="Custom Message" rows="5" lose-focus-on-return ng-model="request.message"></textarea>
-                    </label>
-                    <button class="button button-full button-positive" ng-click="Confirm()">Confirm</button>
-                    </div>
-                </ion-content>
-            </ion-modal-view>
-        </script>
+        <div ng-hide="nearMeShowing" id="worldMapTitle">
+            <img width=100% src="app/img/Logo.png" alt="Logo" class="Logo">
+        </div>
+        <div ng-class="{worldMap: !nearMeShowing }" id="map_canvas" class="item">
+            <ui-gmap-google-map bounds="map.bounds" center="map.center" zoom="map.zoom" options="options">
+                <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow" templateUrl="'windowContent.html'" templateParameter="windowParams">
+                </ui-gmap-window>
+            </ui-gmap-google-map>
+        </div>
+        <div id="tabParagraph" ng-hide="nearMeShowing">
+            <p>Welcome to Adventure Pass<sup>TM</sup>, your key to unlocking the world.  Take a look at all of our partner shops around the globe.  You can hon in on shops around you by pressing the pinpoint button <span class="ion-pinpoint"></span> in the top right of the map or navigate the app by pressing the menu button <span class="ion-navicon"></span></p>
+        </div>
     </ion-content>
+    <script id="templates/modalContent.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Request Gear</h1>
+                <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <div class="item item-icon-left" ion-datetime-picker ng-model="request.date">
+                    <i class="icon ion-ios-calendar-outline positive"></i>
+                    <strong>{{request.date| date: "yyyy-MM-dd H:mm"}}</strong>
+                </div>
+                <label id="requestInput" class="item item-input item-select">
+                    <div class="gear">
+                        Select Gear
+                    </div>
+                    <select ng-model="request.gear">
+                        <option value="Surf Board(s)" selected>Surf Board</option>
+                        <option value="Bike(s)">Bike</option>
+                        <option value="Ski set(s)">Ski</option>
+                    </select>
+                </label>
+                <label id="requestInput" class="item item-input item-select">
+                    <textarea placeholder="Custom Message" rows="5" lose-focus-on-return ng-model="request.message"></textarea>
+                </label>
+                <button class="button button-full button-positive" ng-click="Confirm()">Confirm</button>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
 </ion-view>

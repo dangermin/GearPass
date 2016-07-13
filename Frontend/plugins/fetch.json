@@ -1,15 +1,4 @@
 {
-    "phonegap-facebook-plugin": {
-        "source": {
-            "type": "local",
-            "path": "phonegap-facebook-plugin"
-        },
-        "is_top_level": true,
-        "variables": {
-            "APP_ID": "284143441935321",
-            "APP_NAME": "GearPass"
-        }
-    },
     "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",

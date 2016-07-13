@@ -1,24 +1,32 @@
-<ion-view view-title="Profile">
-    <ion-content>
-        <div class="card">
-            <div id="profileCard" class="item item-thumbnail-left">
-                <img src="app/img/surf.gif">
-                <h2><span ng-bind="profile.FirstName"></span> <span ng-bind="profile.LastName"></span></h2>
-                <p><span ng-bind="profile.Location"></span></p>
+<ion-view title='<img height=40px width=50px src="app/img/icon.png" alt="Logo" class="Logo">'>
+    <ion-content scroll="false" id="contentColor">
+            <div class="card">
+                <div id="profileCard" class="item item-thumbnail-left">
+                    <img src="app/img/surf.gif">
+                    <h2><span ng-bind="profile.FirstName"></span> <span ng-bind="profile.LastName"></span> <ionic-ratings style="float: right" ratingsobj='{rating: profile.Rating, readOnly: true}' style="float: left"></ionic-ratings></h2>
+                    <p><span ng-bind="profile.City"></span>, <span ng-bind="profile.State"></span></p>
+                    <p><b><span ng-bind="benefits.Tier"></span></b> Member since <span ng-bind="profile.Month"></span> <span ng-bind="profile.Year"></span></p>
+                   
+                </div>
+                <div id="profileCard">
+                    <div class="item item-divider">Contact Information:</div>
+                    <div class="item">Email: <span ng-bind="profile.Email"></span></div>
+                    <div class="item">Phone: <span ng-bind="profile.Phone"></span></div>
+                </div>
+                <div id="tierCard">
+                    <div class="item item-divider">Member Benefits</div>
+                    <h6 id="benefitCard"><span ng-bind="benefits.Benefit"> </span></h6>
+                    <!-- <div class="item"></div> -->
+                </div>
+                <button id="profileUpdate" class="button button-block" ng-click="profileModal.show()">Update Profile</button>
             </div>
-            <div id="profileCard">
-                <div class="item item-divider">Contact Information:</div>
-                <div class="item">Email:<span ng-bind="profile.Email"></span></div>
-            </div>
-            <button class="button button-block button-positive" ng-click="profileModal.show()">Update Profile</button>
-        </div>
-        <button class="button button-block button-positive" ng-click="logout()">Logout</button>
+            <button id="profileLogout" class="button button-block" ng-click="logout()">Logout</button>
     </ion-content>
     <script id="templates/profileModal.html" type="text/ng-template">
-        <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
+        <ion-modal-view id="contentColor">
+            <ion-header-bar class="bar bar-header">
                 <h1 class="title">Public Profile</h1>
-                <button class="button button-clear button-primary" ng-click="profileModal.hide()">Cancel</button>
+                <button class="button button-clear" style="color: #F15942" ng-click="profileModal.hide()">Cancel</button>
             </ion-header-bar>
             <ion-content class="padding">
                 <div class="list">
@@ -36,7 +44,8 @@
                     </label>
                 </div>
                 <button ng-hide="profile.value" class="button button-block button-positive" ng-click="createProfile()">Create</button>
-                <button ng-show="profile.value" class="button button-block button-positive" ng-click="updateProfile()">Update</button>
+                <button id="modalUpdate" ng-show="profile.value" class="button button-block button-positive" ng-click="updateProfile()">Update</button>
+                <button id="deleteAccount" ng-show="profile.value" class="button button-block button-assertive" ng-click="deleteAccount()">Delete Account</button>
             </ion-content>
         </ion-modal-view>
     </script>
