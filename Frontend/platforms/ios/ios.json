@@ -9,35 +9,7 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"ios-package\" value=\"FacebookConnectPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<plugin name=\"FacebookConnectPlugin\" value=\"FacebookConnectPlugin\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://m.facebook.com\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://graph.facebook.com\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://api.facebook.com\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://*.fbcdn.net\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://*.akamaihd.net\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "xml": "<feature name=\"ActionSheet\"><param name=\"ios-package\" value=\"ActionSheet\" /></feature>",
                             "count": 1
                         },
                         {
@@ -45,11 +17,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"ActionSheet\"><param name=\"ios-package\" value=\"ActionSheet\" /></feature>",
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
                         },
                         {
@@ -61,24 +33,6 @@
             },
             "*-Info.plist": {
                 "parents": {
-                    "FacebookAppID": [
-                        {
-                            "xml": "<string>284143441935321</string>",
-                            "count": 1
-                        }
-                    ],
-                    "FacebookDisplayName": [
-                        {
-                            "xml": "<string>GearPass</string>",
-                            "count": 1
-                        }
-                    ],
-                    "CFBundleURLTypes": [
-                        {
-                            "xml": "<array><dict><key>CFBundleURLSchemes</key><array><string>fb284143441935321</string></array></dict></array>",
-                            "count": 1
-                        }
-                    ],
                     "NSLocationWhenInUseUsageDescription": [
                         {
                             "xml": "<string />",
@@ -96,15 +50,7 @@
         }
     },
     "installed_plugins": {
-        "phonegap-facebook-plugin": {
-            "APP_ID": "284143441935321",
-            "APP_NAME": "GearPass",
-            "PACKAGE_NAME": "com.kitshare.gearpass"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.kitshare.gearpass"
-        },
-        "cordova-plugin-inappbrowser": {
+        "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
         "cordova-plugin-compat": {
@@ -113,10 +59,13 @@
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
-        "ionic-plugin-keyboard": {
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
-        "cordova-plugin-actionsheet": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.kitshare.gearpass"
+        },
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
         "uk.co.workingedge.phonegap.plugin.launchnavigator": {
@@ -126,20 +75,11 @@
     "dependent_plugins": {},
     "modules": [
         {
-            "file": "plugins/phonegap-facebook-plugin/facebookConnectPlugin.js",
-            "id": "phonegap-facebook-plugin.FacebookConnectPlugin",
-            "pluginId": "phonegap-facebook-plugin",
+            "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+            "id": "cordova-plugin-actionsheet.ActionSheet",
+            "pluginId": "cordova-plugin-actionsheet",
             "clobbers": [
-                "facebookConnectPlugin"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-            "id": "cordova-plugin-inappbrowser.inappbrowser",
-            "pluginId": "cordova-plugin-inappbrowser",
-            "clobbers": [
-                "cordova.InAppBrowser.open",
-                "window.open"
+                "window.plugins.actionsheet"
             ]
         },
         {
@@ -175,6 +115,15 @@
             ]
         },
         {
+            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+            "id": "cordova-plugin-inappbrowser.inappbrowser",
+            "pluginId": "cordova-plugin-inappbrowser",
+            "clobbers": [
+                "cordova.InAppBrowser.open",
+                "window.open"
+            ]
+        },
+        {
             "file": "plugins/ionic-plugin-keyboard/www/ios/keyboard.js",
             "id": "ionic-plugin-keyboard.keyboard",
             "pluginId": "ionic-plugin-keyboard",
@@ -182,14 +131,6 @@
                 "cordova.plugins.Keyboard"
             ],
             "runs": true
-        },
-        {
-            "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
-            "id": "cordova-plugin-actionsheet.ActionSheet",
-            "pluginId": "cordova-plugin-actionsheet",
-            "clobbers": [
-                "window.plugins.actionsheet"
-            ]
         },
         {
             "file": "plugins/uk.co.workingedge.phonegap.plugin.launchnavigator/www/common.js",
@@ -209,13 +150,12 @@
         }
     ],
     "plugin_metadata": {
-        "phonegap-facebook-plugin": "0.12.0",
-        "cordova-plugin-whitelist": "1.2.2",
-        "cordova-plugin-inappbrowser": "1.4.0",
+        "cordova-plugin-actionsheet": "2.2.2",
         "cordova-plugin-compat": "1.0.0",
         "cordova-plugin-geolocation": "2.2.0",
+        "cordova-plugin-inappbrowser": "1.4.0",
+        "cordova-plugin-whitelist": "1.2.2",
         "ionic-plugin-keyboard": "2.2.1",
-        "cordova-plugin-actionsheet": "2.2.2",
         "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.1.1"
     }
 }

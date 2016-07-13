@@ -7,18 +7,13 @@
         "files": {}
     },
     "installed_plugins": {
-        "phonegap-facebook-plugin": {
-            "APP_ID": "284143441935321",
-            "APP_NAME": "GearPass",
-            "PACKAGE_NAME": "com.kitshare.gearpass"
-        },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
-        "cordova-plugin-geolocation": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
         "ionic-plugin-keyboard": {
@@ -29,10 +24,10 @@
         }
     },
     "dependent_plugins": {
-        "cordova-plugin-compat": {
+        "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         },
-        "cordova-plugin-actionsheet": {
+        "cordova-plugin-compat": {
             "PACKAGE_NAME": "com.kitshare.gearpass"
         }
     }

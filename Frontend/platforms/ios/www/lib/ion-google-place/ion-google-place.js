@@ -24,7 +24,7 @@ angular.module('ion-google-place', [])
                                     '<i class="icon ion-ios7-search placeholder-icon"></i>',
                                     '<input class="google-place-search" type="search" ng-model="searchQuery" placeholder="Enter an address, place or ZIP code">',
                                 '</label>',
-                                '<button class="button button-clear">',
+                                '<button class="button button-clear" style="color: #F15942">',
                                     'Cancel',
                                 '</button>',
                             '</div>',

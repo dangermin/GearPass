@@ -5,9 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaOauth'])
-//, 'uiGmapgoogle-maps'
-
+angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaOauth', 'ionic-ratings', 'ion-datetime-picker'])
+// 'ngMap'
 .run(function($ionicPlatform, APP_CONFIG) {
 
     Parse.initialize(APP_CONFIG.PARSE_APP_ID);
@@ -28,16 +27,15 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider)
-//, uiGmapGoogleMapApiProvider
- {
-  // uiGmapGoogleMapApiProvider.configure({
-  //   key: 'AIzaSyC8hW8Oaabo6DjgqDFREUrqZnBtlytHgGQ',
-  //   v: '3.17',
-  //   libraries: 'weather,geometry,visualization',
-  //   language: 'en',
-  //   sensor: 'false',
-  // })
+.config(function($stateProvider, $urlRouterProvider) {
+    //, uiGmapGoogleMapApiProvider
+    // uiGmapGoogleMapApiProvider.configure({
+    //   key: 'AIzaSyC8hW8Oaabo6DjgqDFREUrqZnBtlytHgGQ',
+    //   v: '3.17',
+    //   libraries: 'weather,geometry,visualization',
+    //   language: 'en',
+    //   sensor: 'false',
+    // })
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -73,42 +71,30 @@ angular.module('starter', ['ionic', 'ion-google-place', 'ngCordova', 'ngCordovaO
 
     .state('tab.dash', {
         url: '/dash',
-        views: {
-            'tab-dash': {
-                templateUrl: 'app/Tab-Dash/tab-dash.html',
-                controller: 'DashController'
-            }
-        }
+        templateUrl: 'app/Tab-Dash/tab-dash.html',
+        controller: 'DashController'
+
     })
 
     .state('tab.history', {
         url: '/history',
-        views: {
-            'tab-history': {
-                templateUrl: 'app/Tab-History/tab-history.html',
-                controller: 'HistoryController' 
-            }
-        }
+        templateUrl: 'app/Tab-History/tab-history.html',
+        controller: 'HistoryController'
+
     })
 
     .state('tab.profile', {
         url: '/profile',
-        views: {
-            'tab-profile': {
-                templateUrl: 'app/Tab-Profile/tab-profile.html',
-                controller: 'ProfileController'
-            }
-        }
+        templateUrl: 'app/Tab-Profile/tab-profile.html',
+        controller: 'ProfileController'
+
     })
 
     .state('tab.partner', {
         url: '/partner',
-        views: {
-            'tab-partner': {
-                templateUrl: 'app/Tab-Partner/tab-partner.html',
-                controller: 'PartnerController'
-            }
-        }
+        templateUrl: 'app/Tab-Partner/tab-partner.html',
+        controller: 'PartnerController'
+
     });
 
 

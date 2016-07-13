@@ -31,6 +31,28 @@ angular.module('starter')
 
     }
 
+    // $scope.deleteAccount = function() {
+    //     var thisUser = Parse.User.current().id;
+    //     console.log(thisUser);
+    //     var uQ = = new Parse.Query("User");
+    //     uQ.equalTo('objectId', thisUser);
+    //     uQ.first({
+    //         success: function(obj) {
+    //             obj.distory({
+    //                 success: function(obj) {
+    //                     console.log('Delete');
+    //                 },
+    //                 error: function(err) {
+    //                     console.log('Not Deleted';)
+    //                 }
+    //             })
+    //         },
+    //         error: function(err) {
+    //             console.log('Deleted error');
+    //         }
+    //     })
+    // }
+
 
     $scope.createProfile = function() {
 
@@ -50,22 +72,49 @@ angular.module('starter')
         $scope.profileModal.hide();
     }
 
-    var query = new Parse.Query(Parse.Object.extend("PublicProfile"));
-    return query.each(function(profile) {
-        var user = profile.get('User');
-        if (user.id == $scope.currentUser.id) {
-            var First = profile.get('FirstName');
-            var Last = profile.get('LastName');
-            var Location = profile.get('Location');
-            var Email = profile.get('Email');
-            $scope.thisProfile = { "value": profile };
-            $scope.$apply(function() {
-                $scope.profile = { "FirstName": First, "LastName": Last, "Location": Location, "Email": Email, "value": true};
-            });
-            console.log($scope.partner);
-        } else {
-            console.log("attempting to find partner profile");
-        }
+    //User Profile
+    var profile = Parse.User.current();
+    var First = profile.get('first');
+    var Last = profile.get('last');
+    var City = profile.get('city');
+    var State = profile.get('state');
+    var Email = profile.get('email');
+    var Phone = profile.get('Phone');
+    var Tier = profile.get('MembershipTier');
+    var TierID = Tier.id;
+    var Created = profile.get('createdAt');
+    var Rating = profile.get('Rating');
 
+    $scope.benefits = {};
+    var tQ = new Parse.Query("Tier");
+    tQ.equalTo('objectId', TierID);
+    tQ.find({
+        success: function(obj) {
+            var tObj = obj;
+            var userTier = tObj[0].get('level');
+            var userBenefit = tObj[0].get('benefits');
+            var tObj = {
+                "Tier": userTier,
+                "Benefit": userBenefit
+            };
+
+            $scope.$apply(function() {
+                $scope.benefits = tObj;
+            });
+        },
+        error: function(err) {
+            console.log(err);
+        }
     });
+
+    var avg = Rating;
+    var len = Rating.length;
+    var total = .2;
+    for (var i in avg) { total += avg[i] / len };
+    var Rating = Math.round(total);
+
+    var Month = Created.toDateString().substring(4, 7);
+    var Year = Created.toDateString().substring(11, 15);
+
+    $scope.profile = { "FirstName": First, "LastName": Last, "City": City, "State": State, "Email": Email, "Phone": Phone, "value": true, "Rating": Rating, "Month": Month, "Year": Year };
 });

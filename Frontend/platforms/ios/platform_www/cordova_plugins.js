@@ -1,20 +1,11 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/phonegap-facebook-plugin/facebookConnectPlugin.js",
-        "id": "phonegap-facebook-plugin.FacebookConnectPlugin",
-        "pluginId": "phonegap-facebook-plugin",
+        "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+        "id": "cordova-plugin-actionsheet.ActionSheet",
+        "pluginId": "cordova-plugin-actionsheet",
         "clobbers": [
-            "facebookConnectPlugin"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-        "id": "cordova-plugin-inappbrowser.inappbrowser",
-        "pluginId": "cordova-plugin-inappbrowser",
-        "clobbers": [
-            "cordova.InAppBrowser.open",
-            "window.open"
+            "window.plugins.actionsheet"
         ]
     },
     {
@@ -50,6 +41,15 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "pluginId": "cordova-plugin-inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
+    },
+    {
         "file": "plugins/ionic-plugin-keyboard/www/ios/keyboard.js",
         "id": "ionic-plugin-keyboard.keyboard",
         "pluginId": "ionic-plugin-keyboard",
@@ -57,14 +57,6 @@ module.exports = [
             "cordova.plugins.Keyboard"
         ],
         "runs": true
-    },
-    {
-        "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
-        "id": "cordova-plugin-actionsheet.ActionSheet",
-        "pluginId": "cordova-plugin-actionsheet",
-        "clobbers": [
-            "window.plugins.actionsheet"
-        ]
     },
     {
         "file": "plugins/uk.co.workingedge.phonegap.plugin.launchnavigator/www/common.js",
@@ -86,13 +78,12 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "phonegap-facebook-plugin": "0.12.0",
-    "cordova-plugin-whitelist": "1.2.2",
-    "cordova-plugin-inappbrowser": "1.4.0",
+    "cordova-plugin-actionsheet": "2.2.2",
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-geolocation": "2.2.0",
+    "cordova-plugin-inappbrowser": "1.4.0",
+    "cordova-plugin-whitelist": "1.2.2",
     "ionic-plugin-keyboard": "2.2.1",
-    "cordova-plugin-actionsheet": "2.2.2",
     "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.1.1"
 }
 // BOTTOM OF METADATA
