@@ -44,8 +44,8 @@
                     </label>
                 </div>
                 <button ng-hide="profile.value" class="button button-block button-positive" ng-click="createProfile()">Create</button>
-                <button id="modalUpdate" ng-show="profile.value" class="button button-block button-positive" ng-click="updateProfile()">Update</button>
-                <button id="deleteAccount" ng-show="profile.value" class="button button-block button-assertive" ng-click="deleteAccount()">Delete Account</button>
+                <button id="applyButton" style="height:35px" ng-show="profile.value" class="button button-block" ng-click="updateProfile()">Update</button>
+                <button id="profileLogout" ng-show="profile.value" class="button button-block" ng-click="deleteAccount()">Delete Account</button>
             </ion-content>
         </ion-modal-view>
     </script>

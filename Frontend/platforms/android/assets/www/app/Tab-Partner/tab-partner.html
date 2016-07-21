@@ -34,7 +34,8 @@
         <div class="card" ng-show="userSearchResults">
             <h4>Member Name: {{thisUser.First}} {{thisUser.Last}}</h4>
             <h5>Email: {{thisUser.Email}}</h5>
-            <h5>Tier: {{thisUser.MembershipTier}}</h5>
+            <h5>Tier: {{thisUser.MembershipTier.Tier}}</h5>
+            <h5>Benefits: {{thisUser.MembershipTier.Benefit}}</h5>
             <a class="button button-block button-danger" ng-click="deleteMember()">delete member</a>
         </div>
     </ion-content>

@@ -83,17 +83,34 @@ angular.module('starter')
     var UserQuery = new Parse.Query('User');
 
     function SearchUsers(email) {
-
         UserQuery.equalTo('email', email);
         UserQuery.first({
             success: function(user) {
                 if (!user) {
                     console.log("coulcn't find user");
                 } else {
-                    thisUser.First = user.get('first');
-                    thisUser.Last = user.get('last');
-                    thisUser.Email = user.get('email');
-                    thisUser.MembershipTier = user.get('MembershipTier');
+                    var Tier = user.get('MembershipTier').id;
+                    console.log(Tier);
+                    var tQ = new Parse.Query("Tier");
+                    tQ.equalTo('objectId', Tier);
+                    tQ.find({
+                        success: function(obj) {
+                            var tObj = obj;
+                            var userTier = tObj[0].get('level');
+                            var userBenefit = tObj[0].get('benefits');
+                            var tObj = {
+                                "Tier": userTier,
+                                "Benefit": userBenefit
+                            };
+                            thisUser.First = user.get('first');
+                            thisUser.Last = user.get('last');
+                            thisUser.Email = user.get('email');
+                            thisUser.MembershipTier = tObj;
+                        },
+                        error: function(err) {
+                            console.log(err);
+                        }
+                    });
                 }
             },
             error: function(user, err) {

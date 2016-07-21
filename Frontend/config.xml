@@ -10,7 +10,7 @@
   <author email="christianmcfarland@gmail.com" href="http://www.gearpass.com/">
     Christian McFarland
   </author>
-  <content src="index.html"/>
+  <content src="http://192.168.0.2:8100" original-src="index.html"/>
   <access origin="*"/>
   <access origin="tel*" launch-external="yes"/>
   <preference name="webviewbounce" value="false"/>
