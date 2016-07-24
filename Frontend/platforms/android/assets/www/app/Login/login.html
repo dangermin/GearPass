@@ -39,6 +39,20 @@
                 <button class="button button-clear" style="color: #F15942" ng-click="applicationModal.hide()">Cancel</button>
             </ion-header-bar>
             <ion-content class="padding" id="contentColor">
+                <div id="freeCard" class="card">
+                    <div ng-show="freeCard" class="item item-divider text-left">
+                        <p id="memberApplyPrice">Free</p>
+                    </div>
+                    <div id="membershipSignUpFree" ng-click="chooseFree=!chooseFree" class="item item-text-wrap text-center">
+                        Free Membership
+                    </div>
+                    <div ng-show="chooseFree" class="item item-text-wrap text-left">
+                        <h4>Register for instant access and Andventure Pass updates.</h4>
+                    </div>
+                    <div ng-show="chooseFree" class="item item-divider text-right">
+                        <button id="signUpButton" class="button button-clear button-primary" ng-click="goToPayment('free')">Sign Up!</button>
+                    </div>
+                </div>
                 <div id="clubCard" class="card">
                     <div ng-show="chooseClub" class="item item-divider text-left">
                         <p id="memberApplyPrice">$9.99/mo.</p>
@@ -50,8 +64,11 @@
                         <h4>10% discount at all Partner locations</h4>
                         <h4>Free T-shirt</h4>
                     </div>
-                    <div ng-show="chooseClub" class="item item-divider text-right">
+                  <!--   <div ng-show="chooseClub" class="item item-divider text-right">
                         <button id="signUpButton" class="button button-clear button-primary" ng-click="goToPayment('club')">Sign Up!</button>
+                    </div> -->
+                    <div ng-show="chooseClub" class="item item-divider text-right">
+                        <button id="signUpButton" class="button button-clear button-primary" ng-click="comingSoon()">Sign Up!</button>
                     </div>
                 </div>
                 <div id="sportCard" style="background-color:#26628A" class="card">
@@ -66,7 +83,8 @@
                         <h4>Free T-shirt</h4>
                     </div>
                     <div ng-show="chooseSport" class="item item-divider text-right">
-                        <button id="signUpButton" class="button button-clear" ng-click="goToPayment('sport')">Sign Up!</button>
+                        <!-- <button id="signUpButton" class="button button-clear" ng-click="goToPayment('sport')">Sign Up!</button> -->
+                        <button id="signUpButton" class="button button-clear" ng-click="comingSoon()">Sign Up!</button>
                     </div>
                 </div>
                 <div id="premierCard" class="card">
@@ -82,7 +100,8 @@
                         <h4>Free T-shirt</h4>
                     </div>
                     <div ng-show="choosePremium" class="item item-divider text-right">
-                        <button id="signUpButton" class="button button-clear button-primary" ng-click="goToPayment('premium')">Sign Up!</button>
+                        <!-- <button id="signUpButton" class="button button-clear button-primary" ng-click="goToPayment('premium')">Sign Up!</button> -->
+                        <button id="signUpButton" class="button button-clear button-primary" ng-click="comingSoon()">Sign Up!</button>
                     </div>
                 </div>
             </ion-content>

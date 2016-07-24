@@ -1,7 +1,7 @@
 angular.module('starter')
 
 // LOGIN PAGE CONTROLLER
-.controller('LoginController', function($scope, $ionicModal, IonicLogin, $ionicLoading, $state, $cordovaOauth) {
+.controller('LoginController', function($scope, $ionicModal, IonicLogin, $ionicLoading, $state, $cordovaOauth, $ionicPopup, $timeout) {
 
     $scope.data = {};
 
@@ -30,6 +30,18 @@ angular.module('starter')
         IonicLogin.signUp($scope.data.email, $scope.data.password);
         $scope.applicationModal.hide();
 
+    }
+
+    $scope.comingSoon = function(){
+        var alertPopup = $ionicPopup.alert({
+            title: 'Coming Soon'
+        });
+        alertPopup.then(function(res){
+            console.log('Coming Soon');
+        });
+        $timeout(function() {
+            alertPopup.close();
+        }, 3000);
     }
 
 })
