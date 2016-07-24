@@ -124,6 +124,11 @@ Login 68C5D3 light Blue, D9F1FA light, 3F404A gray, F15942 red, 26628A dark blue
     height: 35px;
 }
 
+#freeCard .item {
+    background-color: white;
+    border: none;
+}
+
 
 /********************************
 Splash
