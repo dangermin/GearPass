@@ -3,7 +3,7 @@
     angular.module('starter')
 
     // HOME PAGE CONTROLLER
-    .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator, $cordovaInAppBrowser, $timeout) {
+    .controller('DashController', function($scope, $ionicModal, $state, $cordovaGeolocation, $ionicLoading, $compile, $cordovaLaunchNavigator, $cordovaInAppBrowser, $ionicPopup, $timeout) {
 
         $scope.nearMeShowing = false;
         $scope.zoom = 0;
@@ -163,7 +163,7 @@
                         var latSum = 0;
                         var lngSum = 0;
                         console.log(averageLoc);
-                        for (i in averageLoc){
+                        for (i in averageLoc) {
                             latSum += averageLoc[i].lat;
                             lngSum += averageLoc[i].lng;
                         }
@@ -291,6 +291,19 @@
                 console.log(err);
             });
         }
+
+        $scope.comingSoon = function() {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Coming Soon'
+            });
+            alertPopup.then(function(res) {
+                console.log('Coming Soon');
+            });
+            $timeout(function() {
+                alertPopup.close();
+            }, 3000);
+        }
+
 
     });
 })();
